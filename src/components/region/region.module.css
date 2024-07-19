@@ -1,0 +1,13 @@
+.regionCard{
+    position: relative;
+    
+    
+}
+
+
+.btn{
+    position: absolute;
+    top: 65%;
+    left: 15%;
+    z-index: 9999;
+}
