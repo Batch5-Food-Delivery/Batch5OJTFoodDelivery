@@ -1,7 +1,15 @@
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import LoginPage from "./page/LoginPage";
+
 
 function App() {
   return (
-    <h1>Food Delivery Web</h1>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+       <Route path='login' element={<LoginPage />}/>
+      </Route>
+    </Routes>
   );
 }
 
