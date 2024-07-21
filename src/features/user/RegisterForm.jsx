@@ -9,12 +9,15 @@ const RegisterForm = (props) => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onFirstNameInputChange = (e) => { setFirstName(e.target.value) }
   const onLastNameInputChange = (e) => { setLastName(e.target.value) }
   const onUserNameInputChange = (e) => { setUserName(e.target.value) }
   const onEmailInputChange = (e) => { setEmail(e.target.value) }
   const onPasswordInputChange = (e) => { setPassword(e.target.value) }
+  const onConfirmPasswordInputChange = (e) => { setConfirmPassword(e.target.value) }
+
 
     return (
         <Form className={props.className} onAnimationEnd={props.onAnimationEnd}> 
@@ -65,6 +68,20 @@ const RegisterForm = (props) => {
               placeholder="Password"
               value={password}
               onChange={onPasswordInputChange} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control 
+              type="password" 
+              placeholder="Repeat your Password"
+              value={confirmPassword}
+              onChange={onConfirmPasswordInputChange} />
+              {(password !== confirmPassword && (confirmPassword !== "")) && 
+                <Form.Text id="passwordHelpBlock" muted>
+                  <div style={{color: "red"}}>Passwords do not match!</div>
+                </Form.Text>
+              }
           </Form.Group>
           
           <Button variant="primary" type="submit">
