@@ -1,7 +1,14 @@
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/layouts/Layout';
+import ShopPage from './views/pages/ShopPage';
 
 function App() {
   return (
-    <h1>Food Delivery Web</h1>
+    <Routes>
+      <Route path="/" element={<Layout/>}>
+        <Route index element={<ShopPage/>} />
+      </Route>
+    </Routes>
   );
 }
 
