@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.3.3",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
 <<<<<<< HEAD
@@ -15,6 +16,7 @@
 >>>>>>> af2241ba7b2a765d6f840a29feb16e5fd6be1cf9
     "json-server": "^1.0.0-beta.1",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

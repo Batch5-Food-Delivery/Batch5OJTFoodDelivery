@@ -3,23 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
-<<<<<<< HEAD
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-=======
->>>>>>> af2241ba7b2a765d6f840a29feb16e5fd6be1cf9
+import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-   <Provider store={store}>
-   <Router>
-       <App />
+    <Router>
+      <App />
     </Router>
-   </Provider>
   </React.StrictMode>
 );
 
