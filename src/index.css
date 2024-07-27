@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Import Google Fonts (Lilita One, Oswald, Roboto) */
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Oswald:wght@200;300;400;500;600;700&display=swap");
@@ -115,3 +116,5 @@ a {
   background: transparent;
   border-color: var(--light-red);
 }
+=======
+>>>>>>> af2241ba7b2a765d6f840a29feb16e5fd6be1cf9

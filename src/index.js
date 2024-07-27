@@ -6,8 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+=======
+>>>>>>> af2241ba7b2a765d6f840a29feb16e5fd6be1cf9
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
