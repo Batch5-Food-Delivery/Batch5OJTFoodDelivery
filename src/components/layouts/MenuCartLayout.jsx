@@ -3,8 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import './menuCart.css';
 
 
-import FoodList from '../foods/FoodsList';
-import Cart from '../cart/Cart';
+import FoodList from '../../features/foods/FoodsList';
+import Cart from '../../features/cart/Cart';
 
 const MenuCartLayout = () => {
   return (
