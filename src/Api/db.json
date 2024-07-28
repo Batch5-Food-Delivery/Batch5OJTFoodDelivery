@@ -6,5 +6,28 @@
         {"id":"4", "name":"maymyo", "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2qIfSRyExjopkyYJ0gd34PT6CwHdacuS3_MABwBduv9UYuoGB_rZc5FpdLOWC-qRYWVk&usqp=CAU"},
         {"id":"5", "name":"myitkyina", "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTswbQwuemJtcmbujYZcX3Sk5JoEu1CUvbAWRJUGJ0hsDNYjzt9Rz5ra4l2bzTOYpHo0Es&usqp=CAU"},
         {"id":"6", "name":"Taungyi","image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-GJd21nk6GY9jvAsLhlJbaE4EzqTPOqU8t9Rm9tN6xZwOa-BzyQFt9VfPX3vE2e0V4I&usqp=CAU"}
+
+    ],
+
+   "menus":[
+        {"id":"1", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"2", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"3", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Him-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"5", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mont-Hin-Khar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mont-Hin-Khar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mont-Hin-Khar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mont-Hin-Khar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mont-Hin-Khar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"},
+        {"id":"4", "name":"Mote-Hin-Gar", "image":"https://qph.cf2.quoracdn.net/main-qimg-7b8d98c333fc208bb63db51ad03c774a-lq"}
     ]
 }
+
+

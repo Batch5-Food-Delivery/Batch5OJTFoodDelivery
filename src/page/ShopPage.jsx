@@ -1,5 +1,5 @@
 import React from 'react'
-import RegionList from '../../components/region/RegionList'
+import RegionList from '../features/region/RegionList'
 
 const ShopPage = () => {
   return (
