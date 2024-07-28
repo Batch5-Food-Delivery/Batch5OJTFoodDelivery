@@ -41,7 +41,7 @@ const regionSlice = createSlice({
         })
         .addCase(fetchAllRegions.rejected,(state,action) =>{
             state.status="failed";
-            state.error= "Fetching Regions failed";
+            state.error= action.payload;
          })
 
     }
