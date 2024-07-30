@@ -15,7 +15,8 @@ const Header = () => {
       </Navbar.Collapse>
     </Container>
   </Navbar>
+  
   )
 }
 
-export default Header
+export default Header;

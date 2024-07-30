@@ -1,0 +1,24 @@
+
+
+.card:hover{
+   
+    transform: translateY(-10px);
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+}
+
+.shopName{
+    color: coral;
+    margin-bottom: 20px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+.description{
+    color: dark;
+    margin-top: 10px;
+    font-weight: bold;
+}

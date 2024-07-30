@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Container, Row } from 'react-bootstrap'
+import {  Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllRegions, getAllRegions, getError, getStatus } from './regionSlice'
 import Region from './Region'
@@ -35,9 +35,7 @@ const FoodList = () => {
 
   return (
     <Container fluid className='p-0'>
-       <Card>
-           <Card.Img  style={{height:'30rem'}} variant="top" src="/images/home-cover.jpg" />
-       </Card>
+       
 
       <Container>
         <h4 className='text-dark text-center mt-5'>Browse Food From Fav Regions</h4>
@@ -49,4 +47,4 @@ const FoodList = () => {
   )
 }
 
-export default FoodList
+export default FoodList;
