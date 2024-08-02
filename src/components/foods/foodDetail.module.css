@@ -1,0 +1,41 @@
+.foodDetailWrapper {
+   /*  margin-top: 2rem; Adjust the value as needed */
+    display: flex;
+    justify-content: center;
+  }
+
+.foodDetailCard {
+    width: 30rem;
+    margin:auto;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .foodImage {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .foodTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .foodDescription {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #6c757d;
+  }
+  
+  .foodDetailItem {
+    font-size: 0.9rem;
+  }
+  
+  .addButton {
+    width: 100%;
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-top: 1rem;
+  }
+  

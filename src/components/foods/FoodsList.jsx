@@ -33,6 +33,7 @@ const FoodList = () => {
         content =  menus?.map(menu => (
             <Foods
               key={menu.id}
+              id={menu.id}
               image={menu.image}
               name={menu.name}
               
