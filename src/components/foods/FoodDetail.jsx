@@ -2,18 +2,21 @@ import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import classes from "./foodDetail.module.css";
 
-const FoodDetail = () => {
+
+const FoodDetail = ({food}) => {
+ 
+ 
   return (
 
     <div className={classes.foodDetailWrapper}>
     <Card className={classes.foodDetailCard}>
       <Card.Img
         variant="top"
-        src="https://images.deliveryhero.io/image/fd-mm/Products/1178591.jpg??width=400"
+        src={food.image}
         className={classes.foodImage}
       />
       <Card.Body>
-        <Card.Title className={classes.foodTitle}>Card Title</Card.Title>
+        <Card.Title className={classes.foodTitle}>{food.name}</Card.Title>
         <Card.Text className={classes.foodDescription}>
         A delightful plate of pasta with a rich tomato sauce, fresh basil, and parmesan cheese. Perfect for a quick meal or a fancy dinner.
         </Card.Text>
@@ -30,6 +33,7 @@ const FoodDetail = () => {
           Olive Oil, Garlic
         </ListGroup.Item>
       </ListGroup>
+      
       <Card.Body>
         <Button variant="primary" className={classes.addButton}>
           Add to Cart

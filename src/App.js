@@ -6,6 +6,7 @@ import ShopPage from './views/pages/ShopPage';
 import MenuCartLayout from './components/layouts/MenuCartLayout';
 import AddFoods from './components/foods/AddFoods';
 import FoodDetail from './components/foods/FoodDetail';
+import UpdateFoods from './components/foods/UpdateFoods';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route index element={<ShopPage/>} />
         <Route path="/menu" element={<MenuCartLayout/>} />
         <Route path="/menu/create" element={<AddFoods/>} />
-        <Route path="/menu-detail" element={<FoodDetail/>} />
+        <Route path="/menu-detail/:menuId" element={<FoodDetail/>} />
+        <Route path="/menu-update" element={<UpdateFoods/>} />
       </Route>
     </Routes>
 

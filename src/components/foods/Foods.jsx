@@ -7,21 +7,27 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../cart/cartSlice';
 
 
+
 const Foods = ({id,name,image}) => {
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
+  const [selectedFood, setSelectedFood] = useState(null);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setSelectedFood({ id, name, image });
+    setShow(true);
+  };
+ 
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, image, price: 20 }));
   }
 
 
-
+  
 
   return (
     <>
@@ -64,7 +70,7 @@ const Foods = ({id,name,image}) => {
          
         </Modal.Header>
         <Modal.Body>
-         <FoodDetail/>
+         <FoodDetail food={selectedFood}/>
         </Modal.Body>
         
       </Modal>
