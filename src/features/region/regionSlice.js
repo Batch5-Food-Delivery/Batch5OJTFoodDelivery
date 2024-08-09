@@ -60,23 +60,19 @@ export const updateRegion = createAsyncThunk('updateRegion' ,async (region) => {
     }
 });
 
-export const fetchAllRegions = createAsyncThunk('fetchAllRegions', async () => {
-    try{
-        const response = await axios.get(FETCH_URL)
-        if(response.status===200){
+export const fetchAllRegions = createAsyncThunk('fetchAllRegions', async (_, thunkAPI) => {
+    try {
+        const response = await axios.get(FETCH_URL);
+        if (response.status === 200) {
             console.log(response.data);
             return response.data;
-        }else{
-            throw Error("Fetching regions failed");
+        } else {
+            throw new Error("Fetching regions failed");
         }
-
-       
-
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
     }
-    catch(error){
-        console.error(error);
-    }
-})
+});
 
 const regionSlice = createSlice({
     name:"regionSlice",
