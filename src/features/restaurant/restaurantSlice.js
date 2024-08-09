@@ -62,7 +62,7 @@ export const createRestaurant = createAsyncThunk('createRestaurnt' ,async (resta
     }
 });
 
-export const fetchAllRestaurant = createAsyncThunk('fetchAllRestaurant', async () => {
+export const fetchAllRestaurant = createAsyncThunk('fetchAllRestaurant', async (_, thunkAPI) => {
     try{
         const response = await axios.get(FETCH_URL)
         if(response.status===200){
@@ -76,7 +76,7 @@ export const fetchAllRestaurant = createAsyncThunk('fetchAllRestaurant', async (
 
     }
     catch(error){
-        console.error(error);
+        return thunkAPI.rejectWithValue(error.message)
     }
 })
 
