@@ -10,7 +10,7 @@ import Update from "./features/restaurant/Update";
 import RegionRecords from "./features/region/RegionRecords";
 import CreateRegion from "./features/region/Create";
 import UpdateRegion from "./features/region/UpdateRegion";
-
+import DriverPage from "./page/DriverPage";
 import AddFoods from "./features/foods/AddFoods";
 import FoodDetail from "./features/foods/FoodDetail";
 import UpdateFoods from "./features/foods/UpdateFoods";
