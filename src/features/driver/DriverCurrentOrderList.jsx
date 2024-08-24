@@ -36,7 +36,9 @@ const DriverCurrentOrderList = () => {
   }
 
   if (status === "success") {
-    content = orders.map((order) => <DriverOrder order={order} />);
+    content = orders.map((order) => (
+      <DriverOrder order={order} key={order.id} />
+    ));
   }
 
   return content;

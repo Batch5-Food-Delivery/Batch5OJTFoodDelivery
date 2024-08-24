@@ -1,4 +1,29 @@
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+
 const DriverOrder = ({ order }) => {
+  const [status, setStatus] = useState(order.status);
+
+  let button = "";
+
+  if (status === "delivering") {
+    button = <Button varient="primary">Complete</Button>;
+  }
+  if (status === "loading") {
+    button = (
+      <Button varient="secondary" disabled>
+        Loading
+      </Button>
+    );
+  }
+  if (status === "completed") {
+    button = (
+      <Button varient="success" disabled>
+        Completed
+      </Button>
+    );
+  }
+
   return (
     <div className="card mb-3 rounded border-3">
       <h5 className="card-title mb-0 p-3">Order Id: {order.id}</h5>
@@ -25,6 +50,7 @@ const DriverOrder = ({ order }) => {
             </p>
             <p className="card-text">{order.user.address.additionalDetail}</p>
             <p className="card-text">{order.user.phoneNo}</p>
+            {button}
           </div>
         </div>
       </div>

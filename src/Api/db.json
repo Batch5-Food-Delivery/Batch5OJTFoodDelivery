@@ -144,7 +144,8 @@
           "additionalDetail": "Two floors white condo",
           "phoneNo": "09797767878"
         }
-      }
+      },
+      "status": "delivering"
     },
     {
       "id": 1,
@@ -165,7 +166,8 @@
           "additionalDetail": "Two floors white condo",
           "phoneNo": "09797767878"
         }
-      }
+      },
+      "status": "delivering"
     },
     {
       "id": 1,
@@ -186,7 +188,8 @@
           "additionalDetail": "Two floors white condo",
           "phoneNo": "09797767878"
         }
-      }
+      },
+      "status": "delivering"
     }
   ]
 }
