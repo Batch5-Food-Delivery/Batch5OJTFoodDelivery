@@ -11,9 +11,9 @@ import RegionRecords from "./features/region/RegionRecords";
 import CreateRegion from "./features/region/Create";
 import UpdateRegion from "./features/region/UpdateRegion";
 
-import AddFoods from "./components/foods/AddFoods";
-import FoodDetail from "./components/foods/FoodDetail";
-import UpdateFoods from "./components/foods/UpdateFoods";
+import AddFoods from "./features/foods/AddFoods";
+import FoodDetail from "./features/foods/FoodDetail";
+import UpdateFoods from "./features/foods/UpdateFoods";
 
 function App() {
   return (
