@@ -1,24 +1,17 @@
 import React from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import classes from "./cart.module.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart } from './cartSlice';
 
 const Cart = () => {
 
-    const cartItems = [
-        { id: 1, name: 'Pizza', price: 20, quantity: 1 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        { id: 2, name: 'Burger', price: 15, quantity: 2 },
-        
-        // Add more items as needed
-      ];
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (id) => {
+    dispatch(removeFromCart(id));
+  };
   return (
 
     <div className={classes.cartWrapper}>
@@ -34,10 +27,21 @@ const Cart = () => {
                 <h6>{item.name}</h6>
                 <p className="mb-0">${item.price} x {item.quantity}</p>
               </div>
+              
               <div>
                 <Button variant="outline-danger" size="sm" className={classes.button}>-</Button>
                 <Button variant="outline-primary" size="sm" className={classes.button}>+</Button>
               </div>
+              <div>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        className={classes.button}
+                        onClick={() => handleRemoveFromCart(item.id)}
+                      >
+                        Remove
+                      </Button>
+                    </div>
             </div>
           </ListGroup.Item>
         ))}

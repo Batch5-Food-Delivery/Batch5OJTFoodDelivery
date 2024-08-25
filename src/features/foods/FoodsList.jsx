@@ -29,10 +29,11 @@ const FoodList = () => {
      }
   
      if(status === "success"){
-        console.log(menus)
+        
         content =  menus?.map(menu => (
             <Foods
               key={menu.id}
+              id={menu.id}
               image={menu.image}
               name={menu.name}
               

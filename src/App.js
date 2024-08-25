@@ -11,26 +11,32 @@ import RegionRecords from "./features/region/RegionRecords";
 import CreateRegion from "./features/region/Create";
 import UpdateRegion from "./features/region/UpdateRegion";
 
+import AddFoods from "./components/foods/AddFoods";
+import FoodDetail from "./components/foods/FoodDetail";
+import UpdateFoods from "./components/foods/UpdateFoods";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-       <Route index element={<ShopPage/>} />
-       <Route path='login' element={<LoginPage />}/>
-       <Route path="menu" element={<MenuCartLayout/>} />
+        <Route index element={<ShopPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="menu" element={<MenuCartLayout />} />
       </Route>
-      <Route path="/admin" element={<AdminLayout/>} >
-        <Route path="restaurant"  >
-            <Route index element={<RestaurantRecords/>} />
-            <Route path="create" element={<Create/>} />
-            <Route path="update/:restaurantId" element={<Update/>} />
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="restaurant">
+          <Route index element={<RestaurantRecords />} />
+          <Route path="create" element={<Create />} />
+          <Route path="update/:restaurantId" element={<Update />} />
         </Route>
-        <Route path="region"  >
-            <Route index element={<RegionRecords/>} />
-            <Route path="create" element={<CreateRegion/>} />
-            <Route path="update/:regionId" element={<UpdateRegion/>} />
+        <Route path="region">
+          <Route index element={<RegionRecords />} />
+          <Route path="create" element={<CreateRegion />} />
+          <Route path="update/:regionId" element={<UpdateRegion />} />
         </Route>
+        <Route path="/menu/create" element={<AddFoods />} />
+        <Route path="/menu-detail/:menuId" element={<FoodDetail />} />
+        <Route path="/menu-update" element={<UpdateFoods />} />
       </Route>
     </Routes>
   );
