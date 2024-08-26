@@ -1,15 +1,40 @@
-import React from 'react'
-import { Card, Col } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Card, Col, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import classes from "./foods.module.css";
+import FoodDetail from './FoodDetail';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../cart/cartSlice';
+
 
 
 const Foods = ({id,name,image}) => {
+  const dispatch = useDispatch();
+
+  const [show, setShow] = useState(false);
+  const [selectedFood, setSelectedFood] = useState(null);
+
+  
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setSelectedFood({ id, name, image });
+    setShow(true);
+  };
+ 
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, image, price: 20 }));
+  }
+
+
+  
+
   return (
-    <Col sm={6} lg={4} xl={3} className="mb-4" >
+    <>
+    <Col sm={6} lg={4} xl={3} className="mb-4">
       <Card className={`overflow-hidden ${classes.card}`}>
         <div className="overflow-hidden">
-          <Card.Img variant="top" src={image} className={classes.cardImgTop}/>
+          <Card.Img variant="top" src={image} className={classes.cardImgTop} onClick={handleShow}/>
         </div>
         <Card.Body>
           <div className="d-flex align-items-center justify-content-between">
@@ -31,7 +56,7 @@ const Foods = ({id,name,image}) => {
            }
             
             <div className={classes.add_to_card}>
-              <Link to="/" className={classes.a}>
+              <Link to="" className={classes.a} onClick={handleAddToCart}>
               <i class="bi bi-bag-fill"></i>
                 
               </Link>
@@ -40,6 +65,16 @@ const Foods = ({id,name,image}) => {
         </Card.Body>
       </Card>
     </Col>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+         
+        </Modal.Header>
+        <Modal.Body>
+         <FoodDetail food={selectedFood}/>
+        </Modal.Body>
+        
+      </Modal>
+    </>
   )
 }
 
