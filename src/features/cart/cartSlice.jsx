@@ -1,9 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
+import localStorage from "redux-persist/es/storage";
 
-const initialState = {
-  items: [],
+const loadCartFromLocalStorage = () => {
+  try {
+    const serializedCart = localStorage.getItem("cartItems")?JSON.parse(localStorage.getItem("cartItems")):[]
+    console.log("Loaded cart from localStorage:", serializedCart);
+    
+    return serializedCart;
+  } catch (e) {
+    console.error("Could not load cart data from localStorage:", e);
+    return []; // Fallback to an empty array on error
+  }
 };
 
+const saveCartToLocalStorage = (cartItems) => {
+  try {
+    const serializedCart = JSON.stringify(cartItems);
+    localStorage.setItem("cartItems", serializedCart);
+    console.log("Saved cart to localStorage:", serializedCart); // Debugging line
+  } catch (e) {
+    console.error("Could not save cart data to localStorage:", e);
+  }
+};
+
+const initialState = {
+  items: loadCartFromLocalStorage(),
+};
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -19,13 +41,16 @@ const cartSlice = createSlice({
         console.log("Item not in cart. Adding new item.");
         state.items.push({ ...item, quantity: 1 });
       }
+      saveCartToLocalStorage(state.items);
     },
     removeFromCart: (state, action) => {
       const itemId = action.payload;
       state.items = state.items.filter((item) => item.id !== itemId);
+      saveCartToLocalStorage(state.items);
     },
     clearCart: (state) => {
       state.items = [];
+      localStorage.removeItem("cartItems");
     },
   },
 });

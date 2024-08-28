@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Col, Modal } from 'react-bootstrap'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router-dom'
 import classes from "./foods.module.css";
 import FoodDetail from './FoodDetail';

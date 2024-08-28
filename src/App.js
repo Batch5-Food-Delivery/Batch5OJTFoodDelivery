@@ -34,9 +34,10 @@ function App() {
           <Route path="create" element={<CreateRegion />} />
           <Route path="update/:regionId" element={<UpdateRegion />} />
         </Route>
-        <Route path="/menu/create" element={<AddFoods />} />
-        <Route path="/menu-detail/:menuId" element={<FoodDetail />} />
-        <Route path="/menu-update" element={<UpdateFoods />} />
+        <Route path="menu"></Route>
+        <Route path="create" element={<AddFoods />} />
+        <Route path="menu-detail/:menuId" element={<FoodDetail />} />
+        <Route path="menu-update" element={<UpdateFoods />} />
       </Route>
     </Routes>
   );
