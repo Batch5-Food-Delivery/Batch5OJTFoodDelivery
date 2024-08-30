@@ -10,5 +10,6 @@ export const store = configureStore({
     menus: menuSlice,
     cart: cartSlice,
     restaurants: restaurantSlice,
+    
   },
 });

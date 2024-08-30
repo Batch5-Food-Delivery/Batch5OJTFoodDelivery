@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import localStorage from "redux-persist/es/storage";
+
 
 const loadCartFromLocalStorage = () => {
   try {
-    const serializedCart = localStorage.getItem("cartItems")?JSON.parse(localStorage.getItem("cartItems")):[]
-    console.log("Loaded cart from localStorage:", serializedCart);
-    
-    return serializedCart;
+    const serializedCart = localStorage.getItem("cartItems"); // Retrieve from localStorage
+    if (serializedCart === null) {
+      return []; // Return an empty array if no data is found
+    }
+    return JSON.parse(serializedCart); // Parse the JSON string back to an object
   } catch (e) {
-    console.error("Could not load cart data from localStorage:", e);
-    return []; // Fallback to an empty array on error
+    console.error("Could not load cart data from localStorage:", e); // Handle errors
+    return []; // Return an empty array on error
   }
 };
 
@@ -41,6 +42,8 @@ const cartSlice = createSlice({
         console.log("Item not in cart. Adding new item.");
         state.items.push({ ...item, quantity: 1 });
       }
+      
+      console.log(state.items)
       saveCartToLocalStorage(state.items);
     },
     removeFromCart: (state, action) => {
