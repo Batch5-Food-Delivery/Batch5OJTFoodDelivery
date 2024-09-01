@@ -1,31 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const FETCH_URL = "http://localhost:8000/driverorders";
+import { DRIVER_URL } from "../config/baseURL";
+import { token } from "../auth/getToken";
 
 const initialState = {
-  currentOrders: {
+  currentDeliveries: {
     items: [],
     status: "idle",
     error: false, // 'idle', 'loading', 'succeeded', 'failed'
   },
-  completedOrders: {
+  completedDeliveries: {
     items: [],
     status: "idle",
     error: false, // 'idle', 'loading', 'succeeded', 'failed'
   },
 };
 
-export const fetchAllCurrentOrders = createAsyncThunk(
-  "fetchAllCurrentOrders",
+export const fetchAllCurrentDeliveries = createAsyncThunk(
+  "fetchAllCurrentDeliveries",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(FETCH_URL);
+      const response = await axios.get(`${DRIVER_URL}/deliveries`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
       if (response.status === 200) {
         console.log(response.data);
         return response.data;
       } else {
-        throw new Error("Fetching current orders failed");
+        throw new Error("Fetching current deliveries failed");
       }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -34,28 +39,30 @@ export const fetchAllCurrentOrders = createAsyncThunk(
 );
 
 const driverSlice = createSlice({
-  name: "driververSlice",
+  name: "driverSlice",
   initialState,
   reducers: {},
 
   extraReducers(builder) {
     builder
-      .addCase(fetchAllCurrentOrders.pending, (state) => {
-        state.currentOrders.status = "loading";
+      .addCase(fetchAllCurrentDeliveries.pending, (state) => {
+        state.currentDeliveries.status = "loading";
       })
-      .addCase(fetchAllCurrentOrders.fulfilled, (state, action) => {
-        state.currentOrders.items = action.payload;
-        state.currentOrders.status = "success";
+      .addCase(fetchAllCurrentDeliveries.fulfilled, (state, action) => {
+        state.currentDeliveries.items = action.payload;
+        state.currentDeliveries.status = "success";
       })
-      .addCase(fetchAllCurrentOrders.rejected, (state, action) => {
-        state.currentOrders.status = "failed";
-        state.currentOrders.error = action.payload;
+      .addCase(fetchAllCurrentDeliveries.rejected, (state, action) => {
+        state.currentDeliveries.status = "failed";
+        state.currentDeliveries.error = action.payload;
       });
   },
 });
 
 export default driverSlice.reducer;
-export const getAllCurrentOrders = (state) => state.driver.currentOrders.items;
-export const getCurrentOrderStatus = (state) =>
-  state.driver.currentOrders.status;
-export const getCurrentOrderError = (state) => state.driver.currentOrders.error;
+export const getAllCurrentDeliveries = (state) =>
+  state.driver.currentDeliveries.items;
+export const getCurrentDeliveryStatus = (state) =>
+  state.driver.currentDeliveries.status;
+export const getCurrentDeliveryError = (state) =>
+  state.driver.currentDeliveries.error;

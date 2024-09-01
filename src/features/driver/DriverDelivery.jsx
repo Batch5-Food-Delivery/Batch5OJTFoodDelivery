@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-const DriverOrder = ({ order }) => {
-  const [status, setStatus] = useState(order.status);
+const DriverOrder = ({ delivery }) => {
+  const [status, setStatus] = useState(delivery.status);
 
   let button = "";
 
@@ -26,30 +26,30 @@ const DriverOrder = ({ order }) => {
 
   return (
     <div className="card mb-3 rounded border-3">
-      <h5 className="card-title mb-0 p-3">Order Id: {order.id}</h5>
+      <h5 className="card-title mb-0 p-3">Order Id: {delivery.id}</h5>
 
       <div className="card-body">
         <div className="row no-gutters">
           <div className="col-md-6">
             <p className="card-text">From:</p>
-            <p className="card-text">{order.restaurant.name}</p>
+            <p className="card-text">{delivery.restaurant.name}</p>
             <p className="card-text">
-              {order.restaurant.address.township}:{" "}
-              {order.restaurant.address.street}
+              {delivery.restaurantAddress.township}:{" "}
+              {delivery.restaurantAddress.street}
             </p>
             <p className="card-text">
-              {order.restaurant.address.additionalDetail}
+              {delivery.restaurantAddress.additionalDetails}
             </p>
-            <p className="card-text">{order.restaurant.phoneNo}</p>
           </div>
           <div className="col-md-6">
             <p className="card-text">To:</p>
-            <p className="card-text">{order.user.name}</p>
+            <p className="card-text">{delivery.customer.name}</p>
             <p className="card-text">
-              {order.user.address.township}: {order.user.address.street}
+              {delivery.destination.township}: {delivery.destination.street}
             </p>
-            <p className="card-text">{order.user.address.additionalDetail}</p>
-            <p className="card-text">{order.user.phoneNo}</p>
+            <p className="card-text">
+              {delivery.destination.additionalDetails}
+            </p>
             {button}
           </div>
         </div>

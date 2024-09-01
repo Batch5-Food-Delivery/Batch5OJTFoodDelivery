@@ -39,6 +39,7 @@ function App() {
         <Route path="menu-detail/:menuId" element={<FoodDetail />} />
         <Route path="menu-update" element={<UpdateFoods />} />
       </Route>
+      <Route path="driver" element={<DriverPage />} />
     </Routes>
   );
 }

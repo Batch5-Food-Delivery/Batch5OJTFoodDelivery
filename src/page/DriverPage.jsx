@@ -1,28 +1,30 @@
 import React, { useState } from "react";
-import DriverCurrentOrderList from "../features/driver/DriverCurrentOrderList";
+import DriverCurrentDeliveryList from "../features/driver/DriverCurrentDeliveryList";
 import { Button, ButtonGroup, Container } from "react-bootstrap";
 
 const DriverPage = () => {
-  const [pageState, setPageState] = useState("currentOrders");
+  const [pageState, setPageState] = useState("currentDeliveries");
 
   return (
     <div className="d-flex flex-column align-items-center w-100 mt-3">
       <ButtonGroup className="w-50">
         <Button
-          variant={pageState === "currentOrders" ? "primary" : "secondary"}
-          onClick={() => setPageState("currentOrders")}
+          variant={pageState === "currentDeliveries" ? "primary" : "secondary"}
+          onClick={() => setPageState("currentDeliveries")}
         >
           Current
         </Button>
         <Button
-          variant={pageState === "completedOrders" ? "primary" : "secondary"}
-          onClick={() => setPageState("completedOrders")}
+          variant={
+            pageState === "completedDeliveries" ? "primary" : "secondary"
+          }
+          onClick={() => setPageState("completedDeliveries")}
         >
           Completed
         </Button>
       </ButtonGroup>
       <Container className="p-3 w-100">
-        <DriverCurrentOrderList />
+        <DriverCurrentDeliveryList />
       </Container>
     </div>
   );
