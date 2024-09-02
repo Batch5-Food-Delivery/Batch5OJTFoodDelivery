@@ -1,9 +1,28 @@
-import React, { useState } from "react";
-import DriverCurrentDeliveryList from "../features/driver/DriverCurrentDeliveryList";
+import React, { useEffect, useState } from "react";
+import DeliveryList from "../features/delivery/DeliveryList";
 import { Button, ButtonGroup, Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllCurrentDeliveriesForDriver,
+  getAllCurrentDeliveriesForDriver,
+  getCurrentDeliveryError,
+  getCurrentDeliveryStatusForDriver,
+} from "../features/delivery/DeliverySlice";
 
 const DriverPage = () => {
   const [pageState, setPageState] = useState("currentDeliveries");
+
+  const deliveries = useSelector(getAllCurrentDeliveriesForDriver);
+  const status = useSelector(getCurrentDeliveryStatusForDriver);
+  const error = useSelector(getCurrentDeliveryError);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchAllCurrentDeliveriesForDriver());
+    }
+  }, [status, dispatch]);
 
   return (
     <div className="d-flex flex-column align-items-center w-100 mt-3">
@@ -24,7 +43,12 @@ const DriverPage = () => {
         </Button>
       </ButtonGroup>
       <Container className="p-3 w-100">
-        <DriverCurrentDeliveryList />
+        <DeliveryList
+          deliveries={deliveries}
+          status={status}
+          error={error}
+          canComplete={true}
+        />
       </Container>
     </div>
   );
