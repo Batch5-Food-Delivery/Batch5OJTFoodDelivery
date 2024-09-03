@@ -12,7 +12,7 @@ export const deliverySlice = apiSlice.injectEndpoints({
         method: "PATCH",
       }),
       onQueryStarted(deliveryId, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
+        dispatch(
           deliverySlice.util.updateQueryData(
             "currentDeliveriesForDriver",
             undefined,
@@ -33,6 +33,19 @@ export const deliverySlice = apiSlice.injectEndpoints({
       query: () => "/driver/deliveries/history",
       providesTags: ["DriverDeliveries"],
     }),
+    currentDeliveriesForUser: build.query({
+      query: () => "user/deliveries",
+    }),
+    completedDeliveriesForUser: build.query({
+      query: () => "user/deliveries/history",
+    }),
+    currentDeliveriesForRestaurant: build.query({
+      query: (restaurantId) => `myRestaurant/${restaurantId}/deliveries`,
+    }),
+    completedDeliveriesForRestaurant: build.query({
+      query: (restaurantId) =>
+        `myRestaurant/${restaurantId}/deliveries/history`,
+    }),
   }),
   overrideExisting: false,
 });
@@ -41,4 +54,16 @@ export const {
   useCurrentDeliveriesForDriverQuery,
   useCompleteDeliveryMutation,
   useCompletedDeliveriesForDriverQuery,
+  useCurrentDeliveriesForUserQuery,
+  useCompletedDeliveriesForUserQuery,
+  useCurrentDeliveriesForRestaurantQuery,
+  useCompletedDeliveriesForRestaurantQuery,
 } = deliverySlice;
+
+/*
+const {data, isFetching, isSuccess, isError, error} = useCurrentDeliveriesForUserQuery()
+const {data, isFetching, isSuccess, isError, error} = useCompletedDeliveriesForUserQuery()
+const {data, isFetching, isSuccess, isError, error} = useCurrentDeliveriesForRestaurantQuery()
+const {data, isFetching, isSuccess, isError, error} = useCompletedDeliveriesForRestaurantQuery()
+
+*/
