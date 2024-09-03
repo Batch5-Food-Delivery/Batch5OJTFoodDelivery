@@ -4,7 +4,7 @@ import menuSlice from "../features/foods/foodSlice";
 import cartSlice from "../features/cart/cartSlice";
 import restaurantSlice from "../features/restaurant/restaurantSlice";
 import authSlice from "../features/auth/authSlice";
-import deliverySlice from "../features/delivery/DeliverySlice";
+import { apiSlice } from "../features/api/ApiSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +13,8 @@ export const store = configureStore({
     cart: cartSlice,
     restaurants: restaurantSlice,
     auth: authSlice,
-    delivery: deliverySlice,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });

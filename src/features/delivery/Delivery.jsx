@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { completeDelivery, removeDelivery } from "./DeliverySlice";
 import classes from "./delivery.module.css";
 
 const Delivery = ({ delivery, canComplete }) => {
@@ -10,7 +9,7 @@ const Delivery = ({ delivery, canComplete }) => {
   let button = "";
 
   const onComplete = (deliveryId) => {
-    dispatch(completeDelivery(deliveryId));
+    //dispatch(completeDelivery(deliveryId));
   };
 
   if (!delivery.completed) {
@@ -38,7 +37,7 @@ const Delivery = ({ delivery, canComplete }) => {
   if (delivery.completed && canComplete) {
     cardClass = `mb-3 rounded border-3 bg-success ${classes.move_right_fade_out}`;
     onCardAnimationEnd = () => {
-      dispatch(removeDelivery(delivery.id));
+      //dispatch(removeDelivery(delivery.id));
     };
   }
 
