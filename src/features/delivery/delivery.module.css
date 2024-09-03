@@ -1,0 +1,14 @@
+@keyframes moveRightFadeOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100px); /* Move to the right by 100px */
+    opacity: 0; /* Fade out */
+  }
+}
+
+.move_right_fade_out {
+  animation: moveRightFadeOut 5s forwards; /* 1s duration, forwards to keep the state at 100% */
+}

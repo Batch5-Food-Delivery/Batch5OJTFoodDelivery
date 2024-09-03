@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { completeDelivery } from "./DeliverySlice";
+import { completeDelivery, removeDelivery } from "./DeliverySlice";
+import classes from "./delivery.module.css";
 
 const Delivery = ({ delivery, canComplete }) => {
   const dispatch = useDispatch();
@@ -28,13 +29,21 @@ const Delivery = ({ delivery, canComplete }) => {
     );
   }
 
-  const cardClass =
-    delivery.completed && canComplete
-      ? "mb-3 rounded border-3 bg-success"
-      : "mb-3 rounded border-3 bg-primary";
+  let cardClass = delivery.completed
+    ? "mb-3 rounded border-3 bg-success"
+    : "mb-3 rounded border-3 bg-primary";
+
+  let onCardAnimationEnd = () => {};
+
+  if (delivery.completed && canComplete) {
+    cardClass = `mb-3 rounded border-3 bg-success ${classes.move_right_fade_out}`;
+    onCardAnimationEnd = () => {
+      dispatch(removeDelivery(delivery.id));
+    };
+  }
 
   return (
-    <Card className={cardClass}>
+    <Card className={cardClass} onAnimationEnd={onCardAnimationEnd}>
       <Card.Header as="h5" className="p-3 text-white">
         Order Id: {delivery.id}
       </Card.Header>
