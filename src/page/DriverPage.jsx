@@ -3,20 +3,27 @@ import DeliveryList from "../features/delivery/DeliveryList";
 import { Button, ButtonGroup, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useCurrentDeliveriesForDriverQuery } from "../features/delivery/DeliverySlice";
+import {
+  useCompletedDeliveriesForDriverQuery,
+  useCurrentDeliveriesForDriverQuery,
+} from "../features/delivery/DeliverySlice";
 
 const DriverPage = () => {
   const [pageState, setPageState] = useState("currentDeliveries");
 
   const dispatch = useDispatch();
 
-  const {
+  /*const {
     data: currentDeliveries,
     isFetching: fetchingCurrent,
     isSuccess: currentDeliveriesFetched,
     isError: currentDeliveriesFailed,
     error: currentDeliveriesError,
   } = useCurrentDeliveriesForDriverQuery();
+  */
+
+  const currentDeliveries = useCurrentDeliveriesForDriverQuery();
+  const completedDeliveries = useCompletedDeliveriesForDriverQuery();
 
   return (
     <div className="d-flex flex-column align-items-center w-100 mt-3">
@@ -41,16 +48,9 @@ const DriverPage = () => {
       </ButtonGroup>
       <Container className="p-3 w-100">
         {pageState === "currentDeliveries" ? (
-          <DeliveryList
-            deliveries={currentDeliveries}
-            loading={fetchingCurrent}
-            success={currentDeliveriesFetched}
-            failed={currentDeliveriesFailed}
-            error={currentDeliveriesError}
-            canComplete={true}
-          />
+          <DeliveryList query={currentDeliveries} canComplete={true} />
         ) : (
-          <></>
+          <DeliveryList query={completedDeliveries} canComplete={false} />
         )}
       </Container>
     </div>

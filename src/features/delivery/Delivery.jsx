@@ -2,14 +2,18 @@ import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import classes from "./delivery.module.css";
+import { useCompleteDeliveryMutation, deliverySlice } from "./DeliverySlice";
 
 const Delivery = ({ delivery, canComplete }) => {
   const dispatch = useDispatch();
 
+  const [completeDelivery, { isLoading: isCompleting }] =
+    useCompleteDeliveryMutation();
+
   let button = "";
 
   const onComplete = (deliveryId) => {
-    //dispatch(completeDelivery(deliveryId));
+    completeDelivery(deliveryId);
   };
 
   if (!delivery.completed) {
@@ -37,7 +41,7 @@ const Delivery = ({ delivery, canComplete }) => {
   if (delivery.completed && canComplete) {
     cardClass = `mb-3 rounded border-3 bg-success ${classes.move_right_fade_out}`;
     onCardAnimationEnd = () => {
-      //dispatch(removeDelivery(delivery.id));
+      dispatch(deliverySlice.util.invalidateTags(["DriverDeliveries"]));
     };
   }
 

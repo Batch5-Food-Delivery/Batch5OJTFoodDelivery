@@ -1,25 +1,18 @@
 import Delivery from "./Delivery";
 
-const DeliveryList = ({
-  deliveries,
-  loading,
-  success,
-  failed,
-  error,
-  canComplete,
-}) => {
+const DeliveryList = ({ query, canComplete }) => {
   let content = "";
 
-  if (loading) {
+  if (query.isFetching) {
     content = <p>Your deliveries are loading...</p>;
   }
 
-  if (failed) {
-    content = <p>{error}</p>;
+  if (query.isError) {
+    content = <p>There is an error</p>;
   }
 
-  if (success) {
-    content = deliveries.map((delivery) => (
+  if (query.isSuccess) {
+    content = query.data.map((delivery) => (
       <Delivery
         delivery={delivery}
         key={delivery.id}

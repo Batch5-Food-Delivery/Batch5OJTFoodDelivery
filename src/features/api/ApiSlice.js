@@ -13,4 +13,5 @@ export const apiSlice = createApi({
     },
   }),
   endpoints: (builder) => ({}),
+  tagTypes: ["DriverDeliveries"],
 });
