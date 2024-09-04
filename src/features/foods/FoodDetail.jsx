@@ -2,12 +2,8 @@ import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import classes from "./foodDetail.module.css";
 
-
-const FoodDetail = ({food}) => {
- 
- 
+const FoodDetail = ({ food, handleAddToCart }) => {
   return (
-
     <div className={classes.foodDetailWrapper}>
     <Card className={classes.foodDetailCard}>
       <Card.Img
