@@ -1,0 +1,95 @@
+/* General Table Styling */
+.tableContainer {
+    margin: 20px 0;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Sticky Header */
+.stickyHeader {
+    background-color: #343a40;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Row Hover Effect */
+.tableRow:hover {
+    background-color: #f1f1f1;
+}
+
+/* Image Styling */
+.menuImg {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.menuImg:hover {
+    transform: scale(1.1);
+}
+
+/* Update Button Styling */
+.updateButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.updateButton i {
+    margin-right: 5px;
+    background: none;
+}
+
+.updateButton:hover {
+    background-color: #0056b3;
+}
+
+.updateButton:focus {
+    outline: none;
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        padding: 10px;
+    }
+
+    .menuImg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .updateButton {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}

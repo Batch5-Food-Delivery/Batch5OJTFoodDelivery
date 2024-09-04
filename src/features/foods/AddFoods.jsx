@@ -6,21 +6,27 @@ import { createNewMenu } from './foodSlice'
 const AddFoods = () => {
 
 
-    const [name,setName] = useState('')
-        const [image,setImageName] = useState('')
+        const [name,setName] = useState('')
+        const [picture,setImageName] = useState('')
+        const [price,setPrice] = useState('')
+        const [description,setDescription] = useState('')
+        const [avaliable,setAvaliable] = useState('')
         
       
         const [canRequest,setCanRequest] = useState(true)
         const disptch = useDispatch()
         const onNameInputChange = (e) => {setName(e.target.value)}
         const onImageNameInputChange = (e) => {setImageName(e.target.value)}
+        const onPriceChange = (e) => {setPrice(e.target.value)}
+        const onDescriptionChange = (e) => {setDescription(e.target.value)}
+        const onAvaliableChange = (e) => {setAvaliable(e.target.value)}
         
         
        
         
         
     
-        const canCreate = [name,image,canRequest].every(Boolean)
+        const canCreate = [name,picture,price,description,avaliable,canRequest].every(Boolean)
     
         const onSubmit = (event) => {
     
@@ -29,13 +35,19 @@ const AddFoods = () => {
     
             if (canCreate) {
                 setCanRequest(false)
-                const menu = {
+                const food = {
                     name,
-                    image
+                    picture,
+                    price,
+                    description,
+                    avaliable
                 }
-                disptch(createNewMenu(menu))
+                disptch(createNewMenu(food))
                 setName('')
                 setImageName('')
+                setPrice('')
+                setDescription('')
+                setAvaliable('')
                 
                 setCanRequest(true)
     
@@ -69,13 +81,47 @@ const AddFoods = () => {
                                 <Form.Control 
                                 
                                 type='url'
-                                value={image}
+                                value={picture}
                                 onChange={onImageNameInputChange}
                                 required
                                 />
                             
                         </Form.Group>
 
+                        <Form.Group>
+                            <Form.Label>Price</Form.Label>
+                                <Form.Control 
+                                
+                                type='text'
+                                value={price}
+                                onChange={onPriceChange}
+                                required
+                                />
+                            
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Description</Form.Label>
+                                <Form.Control 
+                                
+                                type='text'
+                                value={description}
+                                onChange={onDescriptionChange}
+                                required
+                                />
+                            
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Avaliable</Form.Label>
+                                <Form.Control 
+                                
+                                type='text'
+                                value={avaliable}
+                                onChange={onAvaliableChange}
+                                required
+                                />
+                            
+                        </Form.Group>
 
 
                         <Button variant='primary' type='submit' disabled={!canCreate} >Create</Button>

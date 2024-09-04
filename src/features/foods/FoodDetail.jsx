@@ -12,7 +12,7 @@ const FoodDetail = ({food}) => {
     <Card className={classes.foodDetailCard}>
       <Card.Img
         variant="top"
-        src={food.image}
+        src={food.picture}
         className={classes.foodImage}
       />
       <Card.Body>

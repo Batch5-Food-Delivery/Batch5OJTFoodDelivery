@@ -34,7 +34,7 @@ const FoodList = () => {
             <Foods
               key={menu.id}
               id={menu.id}
-              image={menu.image}
+              picture={menu.picture}
               name={menu.name}
               
             />

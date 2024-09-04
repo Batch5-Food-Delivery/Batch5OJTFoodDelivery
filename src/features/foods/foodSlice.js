@@ -2,7 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-const BASE_URL= "http://localhost:8000/menus"
+const BASE_URL= "http://localhost:8686/food"
+const FETCH_URL = `${BASE_URL}/all`
+const CREATE_URL = `${BASE_URL}/create`
+const UPDATE_URL = `${BASE_URL}/update`
 
 
 const initialState={
@@ -13,7 +16,7 @@ const initialState={
 
 export const fetchAllMenus = createAsyncThunk('fetchAllMenus', async () => {
     try{
-        const response = await axios.get(BASE_URL)
+        const response = await axios.get(FETCH_URL)
         if(response.status===200){
             console.log(response.data);
             return response.data;
@@ -29,12 +32,12 @@ export const fetchAllMenus = createAsyncThunk('fetchAllMenus', async () => {
     }
 })
 
-export const createNewMenu = createAsyncThunk('createNewMenu',async (menu) => {
+export const createNewMenu = createAsyncThunk('createNewMenu',async (food) => {
 
     try {
         const response = await axios.post(
-            BASE_URL,
-            menu,
+            CREATE_URL,
+            food,
             {
                 headers : {
                     'Content-Type':'application/json',
@@ -55,7 +58,7 @@ export const updateMenu = createAsyncThunk('updateMenu',async (menu) => {
 
     try {
         const response = await axios.put(
-            BASE_URL,
+            UPDATE_URL,
             menu,
             {
                 headers : {
@@ -65,6 +68,24 @@ export const updateMenu = createAsyncThunk('updateMenu',async (menu) => {
         )
         if(response.status === 200){
             console.log('successfullt successfully updated')
+        }
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+  
+})
+
+export const deleteFood = createAsyncThunk('deleteFood',async (menuId) => {
+
+    try {
+        const response = await axios.delete(
+            `${BASE_URL}/${menuId}/delete`,
+            
+            
+        )
+        if(response.status === 200){
+            console.log(' successfully deleted')
         }
         return response.data
     } catch (error) {
@@ -98,7 +119,7 @@ const menuSlice = createSlice({
         .addCase(updateMenu.fulfilled,(state,action) =>{
             const updatedMenu = action.payload
             const filteredMenus = state.menus.filter(p => p.id !== updatedMenu.id)
-            state.products = [updatedMenu,...filteredMenus]
+            state.menus = [updatedMenu,...filteredMenus]
         })
 
     }
