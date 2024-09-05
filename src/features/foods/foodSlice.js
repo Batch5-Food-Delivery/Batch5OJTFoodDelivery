@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+/*import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
@@ -112,3 +112,4 @@ export const getStatus = state => state.menus.status;;
 export const getError = state => state.menus.error;
 export const getMenuById = (state,menuId) => state.menus.menus.find(menu => menu.id === Number(menuId))
 
+*/

@@ -5,62 +5,39 @@ import { Container, Row } from "react-bootstrap";
 import Foods from "./Foods";
 import { useEffect } from "react";
 import classes from "./foods.module.css";
+import { useRestaurantMenusQuery } from "../menu/menuSlice";
+import Menu from "../menu/Menu";
 
+const FoodList = ({ restaurantId }) => {
+  const {
+    data: menus,
+    isSuccess,
+    isFetching,
+    isError,
+    error,
+  } = useRestaurantMenusQuery(restaurantId);
 
-const FoodList = () => {
-  
-    const menus = useSelector(getAllMenus);
-    const status = useSelector(getStatus);
-    const error = useSelector(getError);
-    const dispatch = useDispatch();
-  
-    console.log(menus);
-  
-    useEffect(() => {
-      if(status === "idle"){
-        dispatch(fetchAllMenus());
-      }
-    },[status,dispatch])
-  
-    let content = "";
-  
-    if(status==='loading'){
-      content =<p> Loading...... </p>
-     }
-  
-     if(status === "success"){
-        
-        content =  menus?.map(menu => (
-            <Foods
-              key={menu.id}
-              id={menu.id}
-              image={menu.image}
-              name={menu.name}
-              
-            />
+  let content = "";
 
-          ));
-     }
-    
-  
-     if(status === "failed"){
-      content = <p> {error} </p>
-     }
+  if (isFetching) {
+    content = <p>Loading Foods</p>;
+  }
 
+  if (isError) {
+    content = <p>There is an error</p>;
+  }
 
+  if (isSuccess) {
+    content = menus?.map((menu) => <Menu menu={menu} />);
+  }
 
-return (
+  return (
     <section className={classes.menu_section}>
       <Container>
-       
-        <Row>
-            {content}
-            
-          
-        </Row>
-        </Container>
-        </section>
-    )
-}
+        <Row>{content}</Row>
+      </Container>
+    </section>
+  );
+};
 
-    export default FoodList
+export default FoodList;
