@@ -16,9 +16,9 @@ const Layout = () => {
 
        <div className={classes.form}>
        <h6 className={classes.welcome}>Welcome Customer</h6>
-        <form class="d-flex bg-warning " role="search">
-          <input class="form-control me-2" type="search" placeholder="Search Your Fav Restaurant Here" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form className="d-flex bg-warning " role="search">
+          <input className="form-control me-2" type="search" placeholder="Search Your Fav Restaurant Here" aria-label="Search" />
+          <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
 
        </div>

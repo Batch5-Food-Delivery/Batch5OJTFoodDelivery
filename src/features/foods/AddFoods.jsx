@@ -10,7 +10,9 @@ const AddFoods = () => {
         const [picture,setImageName] = useState('')
         const [price,setPrice] = useState('')
         const [description,setDescription] = useState('')
-        const [avaliable,setAvaliable] = useState('')
+        const [category,setCategory] = useState('')
+        const [discount,setDiscount] = useState('')
+        const [available,setAvaliable] = useState(true)
         
       
         const [canRequest,setCanRequest] = useState(true)
@@ -19,14 +21,16 @@ const AddFoods = () => {
         const onImageNameInputChange = (e) => {setImageName(e.target.value)}
         const onPriceChange = (e) => {setPrice(e.target.value)}
         const onDescriptionChange = (e) => {setDescription(e.target.value)}
-        const onAvaliableChange = (e) => {setAvaliable(e.target.value)}
+        const onCategoryChange = (e) => {setCategory(e.target.value)}
+        const onDiscountChange = (e) => {setDiscount(e.target.value)}
+        const onAvailableChange = (e) => {setAvaliable(e.target.value === 'true')}
         
         
        
         
         
     
-        const canCreate = [name,picture,price,description,avaliable,canRequest].every(Boolean)
+        const canCreate = [name,picture,price,description,category,discount,canRequest].every(Boolean)
     
         const onSubmit = (event) => {
     
@@ -40,14 +44,18 @@ const AddFoods = () => {
                     picture,
                     price,
                     description,
-                    avaliable
+                    category,
+                    discount,
+                    available
                 }
                 disptch(createNewMenu(food))
                 setName('')
                 setImageName('')
                 setPrice('')
                 setDescription('')
-                setAvaliable('')
+                setCategory('')
+                setDiscount('')
+                setAvaliable(true)
                 
                 setCanRequest(true)
     
@@ -109,19 +117,54 @@ const AddFoods = () => {
                                 onChange={onDescriptionChange}
                                 required
                                 />
-                            
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Avaliable</Form.Label>
+                            <Form.Label>Category</Form.Label>
                                 <Form.Control 
                                 
                                 type='text'
-                                value={avaliable}
-                                onChange={onAvaliableChange}
+                                value={category}
+                                onChange={onCategoryChange}
+                                required
+                                />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Discount</Form.Label>
+                                <Form.Control 
+                                
+                                type='text'
+                                value={discount}
+                                onChange={onDiscountChange}
                                 required
                                 />
                             
                         </Form.Group>
+                            
+                        
+                        <Form.Group>
+              <Form.Label>Availability</Form.Label>
+              <div>
+                <Form.Check
+                  type='radio'
+                  label='Available'
+                  value={true}
+                  checked={available === true}
+                  onChange={onAvailableChange}
+                  name='availability'
+                  required
+                />
+                <Form.Check
+                  type='radio'
+                  label='Unavailable'
+                  value={false}
+                  checked={available === false}
+                  onChange={onAvailableChange}
+                  name='availability'
+                  required
+                />
+              </div>
+            </Form.Group>
 
 
                         <Button variant='primary' type='submit' disabled={!canCreate} >Create</Button>

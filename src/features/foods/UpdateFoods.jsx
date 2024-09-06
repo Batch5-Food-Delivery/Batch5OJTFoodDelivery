@@ -13,7 +13,9 @@ const UpdateFoods = () => {
     const [picture,setPicture] = useState(menu?.picture)
     const [name,setName] = useState(menu?.name)
     const [price,setPrice] = useState(menu?.price)
+    const [discount,setDiscount] = useState(menu?.discount)
     const [description,setDescription] = useState(menu?.description)
+    const [available, setAvailable] = useState(menu?.available || true);
     
     const [canRequest,setCanRequest] = useState(true)
     const disptch = useDispatch()
@@ -22,12 +24,14 @@ const UpdateFoods = () => {
     const onPictureInputChange = (e) => {setPicture(e.target.value)}
     const onNameInputChange = (e) => {setName(e.target.value)}
     const onPriceChange = (e) => {setPrice(e.target.value)}
+    const onDiscountChange = (e) => {setDiscount(e.target.value)}
     const onDescriptionChange = (e) => {setDescription(e.target.value)}
+    const onAvailableChange = (e) => setAvailable(e.target.value === 'true');
  
     
     
 
-    const canUpdate = [picture,name,price,description,canRequest].every(Boolean)
+    const canUpdate = [picture,name,price,discount,description,canRequest].every(Boolean)
 
     const onSubmit = (event) => {
 
@@ -41,7 +45,9 @@ const UpdateFoods = () => {
                 picture,
                 name,
                 price,
-                description
+                discount,
+                description,
+                available
                
             }
             disptch(updateMenu(menu))
@@ -98,6 +104,17 @@ const UpdateFoods = () => {
                                 />
                             
                         </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Discount</Form.Label>
+                                <Form.Control 
+                                
+                                type='text'
+                                value={discount}
+                                onChange={onDiscountChange}
+                                required
+                                />
+                            
+                        </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Description</Form.Label>
@@ -110,6 +127,30 @@ const UpdateFoods = () => {
                                 />
                             
                         </Form.Group>
+
+                        <Form.Group>
+              <Form.Label>Availability</Form.Label>
+              <div>
+                <Form.Check
+                  type='radio'
+                  label='Available'
+                  value={true}
+                  checked={available === true}
+                  onChange={onAvailableChange}
+                  name='availability'
+                  required
+                />
+                <Form.Check
+                  type='radio'
+                  label='Unavailable'
+                  value={false}
+                  checked={available === false}
+                  onChange={onAvailableChange}
+                  name='availability'
+                  required
+                />
+              </div>
+            </Form.Group>
 
                        
 

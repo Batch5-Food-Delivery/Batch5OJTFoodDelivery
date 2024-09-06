@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteFood, fetchAllMenus, getAllMenus, getError, getStatus } from "../../features/foods/foodSlice";
 import classes from './adminFoodList.module.css'
-import ConfirmModel from "../ui/ConfirmModel";
+
 
 const AdminFoodList = () => {
   const menus = useSelector(getAllMenus);
@@ -13,8 +13,7 @@ const AdminFoodList = () => {
   const error = useSelector(getError);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const { menuId} = useParams()
-  const [showModal,setShowModal] = useState(false)
+  
 
   
   const onDelete = (id) => {
@@ -42,14 +41,20 @@ const AdminFoodList = () => {
         <td>{menu.name}</td>
         <td>
         <Button
-            className={classes.updateButton}
+            className={`${classes.button} ${classes.updateButton}`}
             onClick={() => handleUpdate(menu.id)}>
              <i className="bi bi-pencil"></i>
         </Button>
-        <Button variant="danger" onClick={onDelete(menu.id)}>delete</Button>
-        </td>
+        <Button
+            className={`${classes.button} ${classes.deleteButton}`} 
+              onClick={() => onDelete(menu.id)}
+                style={{ marginLeft: '10px' }}
+          >
+                <i className="bi bi-trash"></i> Delete
+         </Button>
         
-      </tr>
+        </td>
+        </tr>
     ));
   }
 
@@ -76,7 +81,7 @@ const AdminFoodList = () => {
                     </tr>
             </thead>
             <tbody>
-                        {content}
+               {content}
              </tbody>
                 </Table>
             </div>

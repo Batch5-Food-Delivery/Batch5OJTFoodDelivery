@@ -121,6 +121,11 @@ const menuSlice = createSlice({
             const filteredMenus = state.menus.filter(p => p.id !== updatedMenu.id)
             state.menus = [updatedMenu,...filteredMenus]
         })
+        .addCase(deleteFood.fulfilled,(state,action) => {
+            const deletedId = action.payload
+            const filteredFoods = state.menus.filter(p => p.id !== deletedId)
+            state.menus = filteredFoods
+        })
 
     }
 
