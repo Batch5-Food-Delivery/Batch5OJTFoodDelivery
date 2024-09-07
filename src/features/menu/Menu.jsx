@@ -7,6 +7,7 @@ const Menu = ({ menu }) => {
       {menu.foods?.map((food) => (
         <Foods key={food.id} id={food.id} image={food.image} name={food.name} />
       ))}
+      <hr></hr>
     </>
   );
 };

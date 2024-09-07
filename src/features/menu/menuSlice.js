@@ -8,8 +8,20 @@ export const menuSlice = apiSlice.injectEndpoints({
         { type: "RestaurantMenus", id: restaurantId },
       ],
     }),
+    createMenu: build.mutation({
+      query: (newMenu) => ({
+        url: `/menu/create`,
+        method: "POST",
+        body: newMenu,
+      }),
+      invalidatesTags: (
+        result,
+        error,
+        { restaurant: { id: restaurantId } }
+      ) => [{ type: "RestaurantMenus", id: restaurantId }],
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useRestaurantMenusQuery } = menuSlice;
+export const { useRestaurantMenusQuery, useCreateMenuMutation } = menuSlice;
