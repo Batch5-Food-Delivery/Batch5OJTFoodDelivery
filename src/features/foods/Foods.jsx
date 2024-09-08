@@ -1,62 +1,81 @@
-import React, { useState } from "react";
-import { Card, Col, Modal } from "react-bootstrap";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Button, Card, Col, Modal } from 'react-bootstrap'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { Link, useNavigate } from 'react-router-dom'
 import classes from "./foods.module.css";
 import FoodDetail from "./FoodDetail";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../cart/cartSlice";
 
-const Foods = ({ id, name, image }) => {
+
+
+const Foods = ({id,name,picture,price,discount,description,available}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [show, setShow] = useState(false);
   const [selectedFood, setSelectedFood] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    setSelectedFood({ id, name, image });
+    setSelectedFood({ id, name, picture,discount });
     setShow(true);
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ id, name, image, price: 20 }));
-    setShow(false);
-  };
+    dispatch(addToCart({ id, name, picture, price: finalPrice}));
+  }
+
+
+  const finalPrice = discount ? price - (price * (discount / 100)) : price;
+
+ 
 
   return (
     <>
-      <Col sm={6} lg={4} xl={3} className="mb-4">
-        <Card className={`overflow-hidden ${classes.card}`}>
-          <div className="overflow-hidden">
-            <Card.Img
-              variant="top"
-              src={image}
-              className={classes.cardImgTop}
-              onClick={handleShow}
-            />
-          </div>
-          <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
-              {/*<div className="item_rating">{renderRatingIcons(rating)}</div> */}
-              <div className={classes.wishlist}>
-                <i class="bi bi-heart"></i>
+    <Col sm={6} lg={4} xl={3} className="mb-4">
+      <Card className={`overflow-hidden ${classes.card}`}>
+        <div className={`overflow-hidden ${available ? '' : classes.dimmed}`}>
+          <Card.Img variant="top" src={picture} className={classes.cardImgTop} onClick={handleShow}/>
+          {discount > 0 && (
+            <div className={classes.discountBadge}>
+              <span className={classes.discountText}>{discount}% OFF</span>
+            </div>
+          )}
+        </div>
+        <Card.Body>
+          <div className="d-flex align-items-center justify-content-between">
+          <Card.Title className={classes.cardTitle}>{name}</Card.Title>
+            
+          <div className="d-flex align-items-center">
+                <div className={classes.wishlist}>
+                  <i className="bi bi-heart"></i> 
+                </div>
+               
               </div>
+          </div>
+          
+            <div className="d-flex align-items-center justify-content-between">
+            <div className="menu_price">
+            {discount ? (
+               <>
+                   <small className={classes.originalPrice}>${price.toFixed(2)}</small>
+                   <h5 className="mb-0 finalPrice">${finalPrice.toFixed(2)}</h5>
+               </>
+               ) : (
+                  <h5 className="mb-0">${price.toFixed(2)}</h5>
+                   )}
+                      
             </div>
 
-            <Card.Title>{name}</Card.Title>
-
-            <div className="d-flex align-items-center justify-content-between">
-              {
-                <div className="menu_price">
-                  <h5 className="mb-0">$20</h5>
-                </div>
-              }
-
               <div className={classes.add_to_card}>
-                <Link to="" className={classes.a} onClick={handleAddToCart}>
-                  <i class="bi bi-bag-fill"></i>
-                </Link>
+              {available ? (
+                  <Link to="" className={classes.a} onClick={handleAddToCart}>
+                    <i className="bi bi-bag-fill"></i>
+                  </Link>
+                ) : (
+                  <span className={classes.availabilityBadge}>Unavailable</span>
+                )}
               </div>
             </div>
           </Card.Body>

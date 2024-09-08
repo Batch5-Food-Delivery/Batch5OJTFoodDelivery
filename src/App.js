@@ -14,6 +14,7 @@ import DriverPage from "./page/DriverPage";
 import AddFoods from "./features/foods/AddFoods";
 import FoodDetail from "./features/foods/FoodDetail";
 import UpdateFoods from "./features/foods/UpdateFoods";
+import AdminFoodList from "./components/adminLayouts/AdminFoodList";
 
 function App() {
   return (
@@ -34,10 +35,12 @@ function App() {
           <Route path="create" element={<CreateRegion />} />
           <Route path="update/:regionId" element={<UpdateRegion />} />
         </Route>
+
         <Route path="menu"></Route>
+        <Route path="foods" element={<AdminFoodList />} />
         <Route path="create" element={<AddFoods />} />
         <Route path="menu-detail/:menuId" element={<FoodDetail />} />
-        <Route path="menu-update" element={<UpdateFoods />} />
+        <Route path="menu-update/:menuId" element={<UpdateFoods />} />
       </Route>
       <Route path="driver" element={<DriverPage />} />
     </Routes>
