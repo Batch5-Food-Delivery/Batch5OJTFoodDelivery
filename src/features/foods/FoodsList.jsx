@@ -1,22 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllMenus, getAllMenus, getError, getStatus } from "./foodSlice";
-import { Button, Container, Row } from "react-bootstrap";
-import Foods from "./Foods";
 import { useEffect, useState } from "react";
+import { Button, Container, Row } from "react-bootstrap";
+import { useRestaurantMenusQuery } from "../menu/menuSlice";
+import Menu from "../menu/Menu";
+import NewMenuFormModal from "../menu/NewMenuFormModal";
 import classes from "./foods.module.css";
 
-const FoodList = () => {
-  const dispatch = useDispatch();
-
-  const uniqueCategories = new Set(menus.map((menu) => menu.category));
-  const categories = [...uniqueCategories];
-
-  const [filteredMenu, setFilteredMenu] = useState([]);
-  const [activeCategory, setActiveCategory] = useState("ALL");
-
-  const [showModal, setShowModal] = useState(false);
-  const handleCloseModal = () => setShowModal(false);
-
+const FoodList = ({ restaurantId }) => {
   const {
     data: menus,
     isSuccess,
@@ -25,58 +14,60 @@ const FoodList = () => {
     error,
   } = useRestaurantMenusQuery(restaurantId);
 
+  const [filteredMenu, setFilteredMenu] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("ALL");
+  const [categories, setCategories] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => setShowModal(false);
+
+  // Update categories and filtered menu when menus are successfully fetched
+  useEffect(() => {
+    if (isSuccess && menus) {
+      // Extract categories from the menus data
+      const uniqueCategories = new Set(
+        menus
+          .map((menu) => menu.foods.map((food) => food.category))
+          .reduce((acc, categories) => acc.concat(categories), [])
+      );
+      setCategories([...uniqueCategories]);
+
+      // Initially set the filtered menu to all menus
+      setFilteredMenu(menus);
+    }
+  }, [isSuccess, menus]);
+
+  // Handle category filtering
   const onFilter = (category) => {
-    // Map through each menu to keep outer structure intact
     const filteredMenus = menus.map((menu) => {
-      // Filter items based on the category, but keep the menu intact
-      const filteredItems = menu.items.filter(
+      const filteredItems = menu.foods.filter(
         (item) => item.category === category
       );
-
-      // Return the menu with filtered items (even if filteredItems is empty)
-      return { ...menu, items: filteredItems };
+      return { ...menu, foods: filteredItems };
     });
-
-    // Update the state with all the menus, but with filtered items
+    console.log("Hey I filtered");
+    console.log(filteredMenus);
     setFilteredMenu(filteredMenus);
-
-    // Set the active category
     setActiveCategory(category);
   };
 
+  // Reset filter to show all menus
   const onNotFilter = () => {
     setFilteredMenu(menus);
     setActiveCategory("ALL");
   };
 
   let content = "";
-
   if (isFetching) {
     content = <p>Loading......</p>;
   }
 
-  if (status === "success") {
-    content = filteredMenu?.map((menu) => (
-      <Foods
-        key={menu.id}
-        id={menu.id}
-        picture={menu.picture}
-        name={menu.name}
-        price={menu.price}
-        discount={menu.discount}
-        description={menu.description}
-        category={menu.category}
-        available={menu.available}
-      />
-    ));
-  }
-
   if (isSuccess) {
-    content = menus?.map((menu) => <Menu menu={menu} />);
+    content = filteredMenu?.map((menu) => <Menu key={menu.id} menu={menu} />);
   }
 
-  if (status === "failed") {
-    content = <p>{error}</p>;
+  if (isError) {
+    content = <p>{error?.data?.message || "Error fetching data"}</p>;
   }
 
   return (
@@ -109,6 +100,14 @@ const FoodList = () => {
         </Row>
         <Row>{content}</Row>
       </Container>
+      <Button className="btn-primary" onClick={() => setShowModal(true)}>
+        New Menu
+      </Button>
+      <NewMenuFormModal
+        show={showModal}
+        handleClose={handleCloseModal}
+        restaurantId={restaurantId}
+      />
     </section>
   );
 };
