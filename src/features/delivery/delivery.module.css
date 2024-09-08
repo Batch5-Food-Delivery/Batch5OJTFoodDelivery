@@ -2,13 +2,20 @@
   0% {
     transform: translateX(0);
     opacity: 1;
+    max-height: 500px;
+  }
+  50% {
+    transform: translateX(100px); /* Move to the right by 100px */
+    opacity: 0;
+    max-height: 500px;
   }
   100% {
-    transform: translateX(100px); /* Move to the right by 100px */
-    opacity: 0; /* Fade out */
+    transform: translateX(100px);
+    opacity: 0;
+    max-height: 50px;
   }
 }
 
 .move_right_fade_out {
-  animation: moveRightFadeOut 5s forwards; /* 1s duration, forwards to keep the state at 100% */
+  animation: moveRightFadeOut 2s forwards; /* 1s duration, forwards to keep the state at 100% */
 }
