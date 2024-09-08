@@ -7,21 +7,41 @@ import { useCompleteDeliveryMutation, deliverySlice } from "./DeliverySlice";
 const Delivery = ({ delivery, canComplete }) => {
   const dispatch = useDispatch();
 
-  const [completeDelivery, { isLoading: isCompleting }] =
-    useCompleteDeliveryMutation();
+  const [
+    completeDelivery,
+    { isLoading: isCompleting, isError, isSuccess, reset },
+  ] = useCompleteDeliveryMutation();
 
   let button = "";
+  let cardClass = "";
+  let onCardAnimationEnd = () => {};
 
   const onComplete = (deliveryId) => {
     completeDelivery(deliveryId);
   };
 
-  if (!delivery.completed) {
+  if (!delivery.completed && canComplete) {
     button = (
       <Button varient="primary" onClick={() => onComplete(delivery.id)}>
         Complete
       </Button>
     );
+
+    cardClass = "mb-3 rounded border-3 bg-primary";
+  }
+
+  if (isSuccess) {
+    console.log("handling success");
+    cardClass = `mb-3 rounded border-3 bg-success ${classes.move_right_fade_out}`;
+    onCardAnimationEnd = () => {
+      dispatch(deliverySlice.util.invalidateTags(["DriverDeliveries"]));
+      reset();
+    };
+  }
+
+  if (isError) {
+    dispatch(deliverySlice.util.invalidateTags(["DriverDeliveries"]));
+    reset();
   }
 
   if (delivery.completed) {
@@ -30,23 +50,12 @@ const Delivery = ({ delivery, canComplete }) => {
         Completed
       </Button>
     );
-  }
 
-  let cardClass = delivery.completed
-    ? "mb-3 rounded border-3 bg-success"
-    : "mb-3 rounded border-3 bg-primary";
-
-  let onCardAnimationEnd = () => {};
-
-  if (delivery.completed && canComplete) {
-    cardClass = `mb-3 rounded border-3 bg-success ${classes.move_right_fade_out}`;
-    onCardAnimationEnd = () => {
-      dispatch(deliverySlice.util.invalidateTags(["DriverDeliveries"]));
-    };
+    cardClass = "mb-3 rounded border-3 bg-success";
   }
 
   return (
-    <Card className={cardClass} onAnimationEnd={onCardAnimationEnd}>
+    <Card className={cardClass} onAnimationEnd={() => onCardAnimationEnd()}>
       <Card.Header as="h5" className="p-3 text-white">
         Order Id: {delivery.id}
       </Card.Header>

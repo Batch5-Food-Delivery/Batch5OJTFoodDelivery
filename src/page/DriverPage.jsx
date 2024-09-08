@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DeliveryList from "../features/delivery/DeliveryList";
 import { Button, ButtonGroup, Container } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   useCompletedDeliveriesForDriverQuery,
@@ -10,8 +9,6 @@ import {
 
 const DriverPage = () => {
   const [pageState, setPageState] = useState("currentDeliveries");
-
-  const dispatch = useDispatch();
 
   /*const {
     data: currentDeliveries,

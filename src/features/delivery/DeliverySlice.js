@@ -3,7 +3,7 @@ import { apiSlice } from "../api/ApiSlice";
 export const deliverySlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     currentDeliveriesForDriver: build.query({
-      query: () => "/driver/deliveries",
+      query: () => "/driver/myDeliveries",
       providesTags: ["DriverDeliveries"],
     }),
     completeDelivery: build.mutation({
@@ -11,26 +11,9 @@ export const deliverySlice = apiSlice.injectEndpoints({
         url: `driver/deliveries/complete/${deliveryId}`,
         method: "PATCH",
       }),
-      onQueryStarted(deliveryId, { dispatch, queryFulfilled }) {
-        dispatch(
-          deliverySlice.util.updateQueryData(
-            "currentDeliveriesForDriver",
-            undefined,
-            (draft) => {
-              const delivery = draft.find(
-                (delivery) => delivery.id === deliveryId
-              );
-              delivery.completed = true;
-            }
-          )
-        );
-        queryFulfilled.catch(
-          dispatch(deliverySlice.util.invalidateTags(["DriverDeliveries"]))
-        );
-      },
     }),
     completedDeliveriesForDriver: build.query({
-      query: () => "/driver/deliveries/history",
+      query: () => "/driver/myDeliveries/history",
       providesTags: ["DriverDeliveries"],
     }),
     currentDeliveriesForUser: build.query({
