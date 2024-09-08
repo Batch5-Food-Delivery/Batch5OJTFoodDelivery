@@ -64,7 +64,10 @@ const AdminFoodList = () => {
 
   return (
     <Container className="my-4">
+      <div>
       <h2 className="mb-4">Admin Food List</h2>
+      <Button variant="primary" onClick={() => { navigate('/create') }}>Create</Button>
+      </div>
       <div className={classes.tableContainer}>
         <Table className={classes.table}>
             <thead className={classes.stickyHeader}>

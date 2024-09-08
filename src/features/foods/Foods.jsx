@@ -44,14 +44,9 @@ const Foods = ({id,name,picture}) => {
             </div>
           </div>
           
-           <Button variant="secondary" onClick={() => { navigate(`/admin/menu-update/${id}`) }} >Update</Button>
+           
             
-            <div className={classes.add_to_card}>
-              <Link to="" className={classes.a} onClick={handleAddToCart}>
-              <i class="bi bi-bag-fill"></i>
-                
-              </Link>
-            </div>
+           
 
             <Card.Title>{name}</Card.Title>
 
