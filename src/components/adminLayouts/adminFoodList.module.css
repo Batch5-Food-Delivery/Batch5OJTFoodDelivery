@@ -48,20 +48,18 @@
     transform: scale(1.1);
 }
 
-/* Update Button Styling */
-.updateButton {
-    display: flex;
+.button {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #007bff;
-    color: white;
     padding: 8px 12px;
+    font-size: 14px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+/* Update Button Styling */
 
 .updateButton i {
     margin-right: 5px;
@@ -74,6 +72,25 @@
 
 .updateButton:focus {
     outline: none;
+}
+
+
+.deleteButton i {
+    margin-right: 5px;
+    background: none;
+}
+
+.deleteButton:hover {
+    background-color: #c82333; /* Darker shade for hover effect */
+}
+
+.deleteButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5);
+}
+
+.deleteButton:active {
+    background-color: #bd2130; /* Even darker shade for active state */
 }
 
 /* Mobile Responsive Styling */
@@ -93,3 +110,5 @@
         padding: 6px 10px;
     }
 }
+
+

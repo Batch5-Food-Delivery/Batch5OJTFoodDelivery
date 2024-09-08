@@ -10,6 +10,17 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
+  const calculateDiscountedPrice = (price, discount) => {
+    return discount ? price - (price * (discount / 100)) : price;
+  };
+
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => {
+      const discountedPrice = calculateDiscountedPrice(item.price, item.discount);
+      return total + discountedPrice * item.quantity;
+    }, 0);
+  };
+
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -41,7 +52,12 @@ const Cart = () => {
             <div className="d-flex justify-content-between align-items-center">
               <div>
                 <h6>{item.name}</h6>
-                <p className="mb-0">${item.price} x {item.quantity}</p>
+                <p className="mb-0">
+                        ${calculateDiscountedPrice(item.price, item.discount).toFixed(2)} x {item.quantity}
+                      </p>
+                      {item.discount > 0 && (
+                        <p className="mb-0 text-success">Discount: {item.discount}%</p>
+                      )}
               </div>
               
               <div>
@@ -65,7 +81,7 @@ const Cart = () => {
       </div>
       <div className="d-flex justify-content-between mt-3">
         <h5>Total:</h5>
-        <h5>${cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}</h5>
+        <h5>${calculateTotalPrice().toFixed(2)}</h5>
       </div>
       <Button variant="primary" className="mt-3 w-100" onClick={handleCheckout}>Checkout</Button>
     </Card.Body>
