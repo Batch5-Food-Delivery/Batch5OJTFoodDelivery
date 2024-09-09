@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { token } from "../auth/getToken";
 
 const BASE_URL = "http://localhost:8686/food";
 const FETCH_URL = `${BASE_URL}/all`;
@@ -14,7 +15,11 @@ const initialState = {
 
 export const fetchAllMenus = createAsyncThunk("fetchAllMenus", async () => {
   try {
-    const response = await axios.get(BASE_URL);
+    const response = await axios.get(FETCH_URL, {
+      headers: {
+        Authorization: token,
+      },
+    });
     if (response.status === 200) {
       console.log(response.data);
       return response.data;
@@ -30,6 +35,7 @@ export const createNewMenu = createAsyncThunk("createNewMenu", async (food) => {
   try {
     const response = await axios.post(CREATE_URL, food, {
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
     });
@@ -46,6 +52,7 @@ export const updateMenu = createAsyncThunk("updateMenu", async (menu) => {
   try {
     const response = await axios.put(UPDATE_URL, menu, {
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
     });
@@ -60,7 +67,11 @@ export const updateMenu = createAsyncThunk("updateMenu", async (menu) => {
 
 export const deleteFood = createAsyncThunk("deleteFood", async (menuId) => {
   try {
-    const response = await axios.delete(`${BASE_URL}/${menuId}/delete`);
+    const response = await axios.delete(`${BASE_URL}/${menuId}/delete`, {
+      headers: {
+        Authorization: token,
+      },
+    });
     if (response.status === 200) {
       console.log(" successfully deleted");
     }
