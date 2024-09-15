@@ -1,9 +1,18 @@
+import { useState } from "react";
 import Foods from "../foods/Foods";
+import AddFoodModal from "../foods/AddFoodModal";
 
 const Menu = ({ menu }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
-      <h3>{menu.name}</h3>
+      <h4>
+        {menu.name} <span onClick={() => setShowModal(true)}>+</span>{" "}
+      </h4>
       {menu.foods?.map((food) => (
         <Foods
           key={food.id}
@@ -17,6 +26,12 @@ const Menu = ({ menu }) => {
         />
       ))}
       <hr></hr>
+      <AddFoodModal
+        show={showModal}
+        handleClose={handleClose}
+        menuId={menu.id}
+        restaurantId={menu.restaurant.id}
+      />
     </>
   );
 };
