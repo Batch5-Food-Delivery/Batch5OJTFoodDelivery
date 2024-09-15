@@ -6,7 +6,7 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -19,7 +19,7 @@ const Sidebar = () => {
             <CDBSidebarMenuItem className='text-start px-2'  >  &#9865;  Restaurant</CDBSidebarMenuItem>
             <CDBSidebarMenuItem className='text-start px-2' > &#9865;  Region</CDBSidebarMenuItem>
             <CDBSidebarMenuItem className='text-start px-2'   >
-            &#9865; Menu
+            &#9865;  <Link to="/foods" style={{ textDecoration: 'none', color: '#333' }}>Menu</Link>
             </CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>

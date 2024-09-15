@@ -23,6 +23,7 @@ function App() {
         <Route index element={<ShopPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="restaurant/:restaurantId" element={<MenuCartLayout />} />
+        <Route path="foods" element={<AdminFoodList />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="restaurant">
@@ -37,7 +38,7 @@ function App() {
         </Route>
 
         <Route path="menu"></Route>
-        <Route path="foods" element={<AdminFoodList />} />
+        
         <Route path="create" element={<AddFoods />} />
         <Route path="menu-detail/:menuId" element={<FoodDetail />} />
         <Route path="menu-update/:menuId" element={<UpdateFoods />} />
