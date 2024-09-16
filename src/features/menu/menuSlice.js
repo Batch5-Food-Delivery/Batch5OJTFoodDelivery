@@ -35,13 +35,12 @@ export const menuSlice = apiSlice.injectEndpoints({
     uploadFoodImage: build.mutation({
       query: ({ image, foodId }) => {
         const formData = new FormData();
-        formData.append("file", image); // The field name "file" matches your backend
+        formData.append("file", image);
 
         return {
-          url: `/food/uploadImage/${foodId}`, // Dynamically insert foodId
+          url: `/food/uploadImage/${foodId}`,
           method: "POST",
-          body: formData, // Let the browser handle the multipart form-data content type
-          // No need for the headers or formData: true
+          body: formData,
         };
       },
     }),

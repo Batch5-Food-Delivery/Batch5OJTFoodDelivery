@@ -35,14 +35,24 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
   ] = useUploadFoodImageMutation();
 
   const [name, setName] = useState("");
-  const [foodImage, setFoodImage] = useState(null); // To store the selected file
+  const [foodImage, setFoodImage] = useState(null);
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [discount, setDiscount] = useState("");
   const [available, setAvailable] = useState(true);
-
   const [previewImage, setPreviewImage] = useState("");
+
+  const resetModal = () => {
+    setPrice("");
+    setDescription("");
+    setCategory("");
+    setDiscount("");
+    setName("");
+    setAvailable(true);
+    setFoodImage("");
+    setPreviewImage("");
+  };
 
   let foodUploadStatus = "";
   let imageUploadStatus = "";
@@ -56,29 +66,24 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
     );
   }
   if (foodUploadSuccess) {
-    foodUploadStatus = (
-      <Container variant="success">Food upload Success</Container>
-    );
-
     console.log(foodData);
     foodUploadReset();
-    uploadFoodImage({ image: foodImage, foodId: foodData.id });
+
+    if (foodImage !== null) {
+      foodUploadStatus = (
+        <Container variant="success">
+          Food upload Success, now uploading image
+        </Container>
+      );
+      uploadFoodImage({ image: foodImage, foodId: foodData.id });
+    }
   }
 
   if (foodImageUploadSuccess) {
     resetFoodImageUpload();
     setTimeout(() => refetch(), 3000);
-    refetch();
     handleClose();
-
-    setPrice("");
-    setDescription("");
-    setCategory("");
-    setDiscount("");
-    setName("");
-    setAvailable(true);
-    setFoodImage("");
-    setPreviewImage("");
+    resetModal();
   }
 
   const onSubmitFood = (e) => {
@@ -109,7 +114,7 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>Form Modal</Modal.Title>
+        <Modal.Title>Create new food</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Row>
