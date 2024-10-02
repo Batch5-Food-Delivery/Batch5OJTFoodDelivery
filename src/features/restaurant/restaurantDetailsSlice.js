@@ -6,8 +6,13 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
       query: (restaurantId) => `/restaurant/${restaurantId}`,
       providesTags: ["RestaurantDetails"],
     }),
+    isRestaurantOwner: build.query({
+      query: (restaurantId) => `/restaurant/${restaurantId}/isOwner`,
+      providesTags: ["RestaurantDetails"],
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useRestaurantDetailsQuery } = restaurantDetailsSlice;
+export const { useRestaurantDetailsQuery, useIsRestaurantOwnerQuery } =
+  restaurantDetailsSlice;

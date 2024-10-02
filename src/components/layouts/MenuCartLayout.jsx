@@ -5,7 +5,10 @@ import "./menuCart.css";
 import FoodList from "../../features/foods/FoodsList";
 import Cart from "../../features/cart/Cart";
 import { useParams } from "react-router-dom";
-import { useRestaurantDetailsQuery } from "../../features/restaurant/restaurantDetailsSlice";
+import {
+  useIsRestaurantOwnerQuery,
+  useRestaurantDetailsQuery,
+} from "../../features/restaurant/restaurantDetailsSlice";
 import Menu from "../../features/menu/Menu";
 
 const MenuCartLayout = () => {
@@ -16,6 +19,9 @@ const MenuCartLayout = () => {
     isError,
     isSuccess,
   } = useRestaurantDetailsQuery(restaurantId);
+
+  const { data: isOwner, isSuccess: fetchingOwnerSuccess } =
+    useIsRestaurantOwnerQuery(restaurantId);
 
   let content = "";
 

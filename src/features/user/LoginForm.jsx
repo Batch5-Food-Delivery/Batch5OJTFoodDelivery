@@ -3,6 +3,7 @@ import { getLoginStatus, login } from "../auth/authSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { apiSlice } from "../api/ApiSlice";
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ const LoginForm = (props) => {
         password: password,
       })
     );
+    dispatch(apiSlice.util.resetApiState());
   };
 
   const onSubmit = (event) => {

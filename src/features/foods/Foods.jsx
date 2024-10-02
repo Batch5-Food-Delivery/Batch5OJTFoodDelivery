@@ -24,12 +24,13 @@ const Foods = ({
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    setSelectedFood({ id, name, picture, discount });
+    setSelectedFood({ id, name, picture, discount, description, price });
     setShow(true);
   };
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, picture, price: finalPrice }));
+    setShow(false);
   };
 
   const finalPrice = discount ? price - price * (discount / 100) : price;

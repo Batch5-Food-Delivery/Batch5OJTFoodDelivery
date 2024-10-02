@@ -7,11 +7,10 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}`,
     prepareHeaders: (headers) => {
-      const jwtToken = token;
-      headers.set("Authorization", `${jwtToken}`);
+      headers.set("Authorization", localStorage.getItem("token"));
       return headers;
     },
   }),
   endpoints: (builder) => ({}),
-  tagTypes: ["DriverDeliveries"],
+  tagTypes: ["DriverDeliveries", "Delivery"],
 });

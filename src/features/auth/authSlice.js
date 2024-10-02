@@ -18,7 +18,7 @@ export const login = createAsyncThunk("login", async (loginRequest) => {
 
 const initialState = {
   user: {},
-  roles: {},
+  roles: [],
   status: "idle",
 };
 

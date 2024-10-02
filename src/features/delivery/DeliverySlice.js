@@ -4,7 +4,7 @@ export const deliverySlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     currentDeliveriesForDriver: build.query({
       query: () => "/driver/myDeliveries",
-      providesTags: ["DriverDeliveries"],
+      providesTags: ["DriverDeliveries", "Delivery"],
     }),
     completeDelivery: build.mutation({
       query: (deliveryId) => ({
@@ -14,7 +14,7 @@ export const deliverySlice = apiSlice.injectEndpoints({
     }),
     completedDeliveriesForDriver: build.query({
       query: () => "/driver/myDeliveries/history",
-      providesTags: ["DriverDeliveries"],
+      providesTags: ["DriverDeliveries", "Delivery"],
     }),
     currentDeliveriesForUser: build.query({
       query: () => "user/deliveries",

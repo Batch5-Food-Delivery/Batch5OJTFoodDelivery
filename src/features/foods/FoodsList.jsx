@@ -4,6 +4,7 @@ import { useRestaurantMenusQuery } from "../menu/menuSlice";
 import Menu from "../menu/Menu";
 import NewMenuFormModal from "../menu/NewMenuFormModal";
 import classes from "./foods.module.css";
+import { useIsRestaurantOwnerQuery } from "../restaurant/restaurantDetailsSlice";
 
 const FoodList = ({ restaurantId }) => {
   const {
@@ -13,6 +14,14 @@ const FoodList = ({ restaurantId }) => {
     isError,
     error,
   } = useRestaurantMenusQuery(restaurantId);
+
+  let editable = false;
+  const { data: isOwner, isSuccess: fetchingOwnerSuccess } =
+    useIsRestaurantOwnerQuery(restaurantId);
+
+  if (fetchingOwnerSuccess) {
+    editable = isOwner;
+  }
 
   const [filteredMenu, setFilteredMenu] = useState([]);
   const [activeCategory, setActiveCategory] = useState("ALL");
@@ -100,9 +109,14 @@ const FoodList = ({ restaurantId }) => {
         </Row>
         <Row>{content}</Row>
       </Container>
-      <Button className="btn-primary" onClick={() => setShowModal(true)}>
-        New Menu
-      </Button>
+      {editable && (
+        <>
+          <Button className="btn-primary" onClick={() => setShowModal(true)}>
+            New Menu
+          </Button>
+        </>
+      )}
+
       <NewMenuFormModal
         show={showModal}
         handleClose={handleCloseModal}
