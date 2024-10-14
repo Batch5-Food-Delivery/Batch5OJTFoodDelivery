@@ -1,0 +1,74 @@
+.placeorder {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin: 100px 100px;
+}
+
+.placeorderleft {
+  background: white;
+  width: 100%;
+  max-width: max(40%, 500px);
+  border: 1px solid #c5c5c5;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: white;
+}
+.placeorderleft .title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.placeorderleft input {
+  margin-bottom: 15px;
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #c5c5c5;
+  border-radius: 4px;
+  outline-color: #0277bd;
+}
+
+.placeorderleft .multifields {
+  display: flex;
+  gap: 20px;
+}
+
+.placeorderleft button {
+  border: none;
+  color: white;
+  background-color: chocolate;
+  width: 200px;
+  padding: 12px 0px;
+  border-radius: 4px;
+}
+
+.placeorderright {
+  background: white;
+  width: 100%;
+  max-width: max(40%, 500px);
+  border: 1px solid #c5c5c5;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.placeorderright .orderdetail {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 2fr 0fr;
+  justify-content: space-between;
+  color: #c5c5c5;
+}
+
+.placeorderright .total {
+  display: grid;
+  grid-template-columns: 2fr 0fr;
+  justify-content: space-between;
+}
+
+.placeorderright button {
+  border: none;
+  color: white;
+  background-color: chocolate;
+  width: 200px;
+  padding: 12px 0px;
+  border-radius: 4px;
+}

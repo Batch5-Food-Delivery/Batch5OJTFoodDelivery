@@ -15,6 +15,7 @@ import AddFoods from "./features/foods/AddFoods";
 import FoodDetail from "./features/foods/FoodDetail";
 import UpdateFoods from "./features/foods/UpdateFoods";
 import AdminFoodList from "./components/adminLayouts/AdminFoodList";
+import OrderPage from "./page/OrderPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route index element={<ShopPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="restaurant/:restaurantId" element={<MenuCartLayout />} />
+        <Route path="orderCheckout" element={<OrderPage />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="restaurant">
