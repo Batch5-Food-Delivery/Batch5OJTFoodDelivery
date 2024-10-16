@@ -3,6 +3,12 @@ import classes from "./orderPage.module.css";
 import OrderConfirmModal from "../features/order/OrderConfirmModal";
 import OrderBackdrop from "../features/order/OrderBackdrop";
 import { useState } from "react";
+import {
+  useGetUserAddressesQuery,
+  useCreateAddressMutation,
+} from "../features/address/addressSlice";
+import AddressCard from "../features/address/AddressCard";
+import { Row } from "react-bootstrap";
 
 const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
   const [isModalShow, setIsModalShow] = useState(false);
@@ -19,26 +25,87 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
     setIsModalShow(false);
   }
 
+  // Address Api Management
+  // Address Selection
+  const [selectedAddressId, setSelectedAddressId] = useState();
+  const { data: addresses, isSuccess: fetchAddressesSuccess } =
+    useGetUserAddressesQuery();
+
+  let addressCardDataList = [];
+  if (fetchAddressesSuccess) {
+    addressCardDataList = addresses;
+  }
+
+  const changeAddressCardSelection = (addressId) => {
+    setSelectedAddressId(addressId);
+  };
+
+  // Address Creation
+  const [township, setTownship] = useState();
+  const [street, setStreet] = useState();
+  const [additional, setAdditional] = useState();
+  const [createAddress, { isSuccess: createAddressSuccess }] =
+    useCreateAddressMutation();
+
+  const onTownshipChange = (e) => {
+    setTownship(e.target.value);
+  };
+  const onStreetChange = (e) => {
+    setStreet(e.target.value);
+  };
+  const onAdditionalChange = (e) => {
+    setAdditional(e.target.value);
+  };
+
+  const createNewAddress = () => {
+    createAddress({ township, street, additionalDetails: additional });
+  };
+
+  const onAddressSubmit = (e) => {
+    e.preventDefault();
+    createNewAddress();
+
+    setTownship("");
+    setStreet("");
+    setAdditional("");
+  };
+
   return (
     <>
       <div className={classes.placeorder}>
-        <form className={classes.placeorderleft}>
+        <form className={classes.placeorderleft} onSubmit={onAddressSubmit}>
           <p className={classes.title}>Delivery Information</p>
-          <div className={classes.multifields}>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-          </div>
-          <input type="text" placeholder="Street" />
-          <input type="text" placeholder="Township" />
-          <div className={classes.multifields}>
-            <input type="text" placeholder="City" />
-            <input type="text" placeholder="Region" />
-          </div>
-          <div>
-            <input type="text" placeholder="Phone" />
-          </div>
-          <input type="textarea" placeholder="Add Note" />
-          <button>Confirm</button>
+          <Row xs={1} md={2} className="g-4">
+            {addressCardDataList?.map((address) => (
+              <AddressCard
+                key={address.id}
+                address={address}
+                selected={address.id === selectedAddressId}
+                onClick={() => changeAddressCardSelection(address.id)}
+              ></AddressCard>
+            ))}
+          </Row>
+          <hr></hr>
+          <p className={classes.title}>New Delivery Address</p>
+          <input
+            type="text"
+            placeholder="Township"
+            onChange={onTownshipChange}
+            value={township}
+          />
+          <input
+            type="text"
+            placeholder="Street"
+            onChange={onStreetChange}
+            value={street}
+          />
+          <input
+            type="textarea"
+            placeholder="Additional Details"
+            onChange={onAdditionalChange}
+            value={additional}
+          />
+          <button>Create</button>
         </form>
 
         <div className={classes.placeorderright}>
