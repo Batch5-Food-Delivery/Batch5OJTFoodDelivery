@@ -35,10 +35,13 @@ const MenuCartLayout = () => {
 
   if (isSuccess) {
     content = (
-      <div>
+      <div style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}>
         <Row
           className="mt-3 align-items-center"
-          style={{ paddingLeft: "20px", paddingRight: "20px" }}
+          style={{
+            paddingLeft: "20px",
+            paddingRight: "20px",
+          }}
         >
           <Col md={3}>
             <div>
@@ -108,7 +111,7 @@ const MenuCartLayout = () => {
             <FoodList restaurantId={restaurant.id} />
           </Col>
           <Col lg={4}>
-            <Cart />
+            <Cart restaurantId={restaurant.id} />
           </Col>
         </Row>
       </div>

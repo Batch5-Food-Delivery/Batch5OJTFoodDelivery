@@ -43,6 +43,7 @@ const Menu = ({ menu }) => {
           discount={food.discount}
           description={food.description}
           available={food.available}
+          restaurantId={food.restaurant.id}
         />
       ))}
       <hr></hr>

@@ -9,6 +9,10 @@ import {
 } from "../features/address/addressSlice";
 import AddressCard from "../features/address/AddressCard";
 import { Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useRestaurantDetailsQuery } from "../features/restaurant/restaurantDetailsSlice";
+import { cartItemsByRestaurant } from "../features/cart/cartSlice";
 
 const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
   const [isModalShow, setIsModalShow] = useState(false);
@@ -70,6 +74,16 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
     setAdditional("");
   };
 
+  //Restaurant Details
+  const { restaurantId } = useParams();
+  const { data: restaurantDetails, isSuccess: restaurantDetailsFetchSuccess } =
+    useRestaurantDetailsQuery(restaurantId);
+
+  // Cart items
+  const cartItems = useSelector((state) =>
+    cartItemsByRestaurant(state, parseInt(restaurantId))
+  );
+
   return (
     <>
       <div className={classes.placeorder}>
@@ -110,7 +124,18 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
 
         <div className={classes.placeorderright}>
           <h3>Your Order From</h3>
-          <p>{restaurantName}</p>
+          <p>
+            {restaurantDetailsFetchSuccess ? restaurantDetails.name : "Loading"}
+          </p>
+          {cartItems.map((item) => (
+            <div className={classes.orderdetail}>
+              <p>{item.name}</p>
+              <p>
+                {item.price} x {item.quantity}
+              </p>
+              <p>{item.price * item.quantity}</p>
+            </div>
+          ))}
           <div className={classes.orderdetail}>
             <p>{quantity}</p>
             <p>x</p>

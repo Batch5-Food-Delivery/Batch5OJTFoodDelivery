@@ -15,6 +15,7 @@ const Foods = ({
   discount,
   description,
   available,
+  restaurantId,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,12 +25,20 @@ const Foods = ({
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    setSelectedFood({ id, name, picture, discount, description, price });
+    setSelectedFood({
+      id,
+      name,
+      picture,
+      discount,
+      description,
+      price,
+      restaurantId,
+    });
     setShow(true);
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ id, name, picture, price: finalPrice }));
+    dispatch(addToCart({ id, name, picture, price: finalPrice, restaurantId }));
     setShow(false);
   };
 

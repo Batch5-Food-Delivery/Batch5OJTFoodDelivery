@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const loadCartFromLocalStorage = () => {
   try {
     const serializedCart = localStorage.getItem("cartItems"); // Retrieve from localStorage
@@ -42,8 +41,8 @@ const cartSlice = createSlice({
         console.log("Item not in cart. Adding new item.");
         state.items.push({ ...item, quantity: 1 });
       }
-      
-      console.log(state.items)
+
+      console.log(state.items);
       saveCartToLocalStorage(state.items);
     },
     removeFromCart: (state, action) => {
@@ -57,6 +56,10 @@ const cartSlice = createSlice({
     },
   },
 });
+
+export const cartItemsByRestaurant = (state, restaurantId) => {
+  return state.cart.items.filter((item) => item.restaurantId === restaurantId);
+};
 
 export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
