@@ -2,24 +2,21 @@ import React from "react";
 import classes from "./orderPage.module.css";
 import OrderConfirmModal from "../features/order/OrderConfirmModal";
 import OrderBackdrop from "../features/order/OrderBackdrop";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useGetUserAddressesQuery,
   useCreateAddressMutation,
 } from "../features/address/addressSlice";
 import AddressCard from "../features/address/AddressCard";
-import { Row } from "react-bootstrap";
+import { Row, Toast, ToastContainer } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useRestaurantDetailsQuery } from "../features/restaurant/restaurantDetailsSlice";
 import { cartItemsByRestaurant } from "../features/cart/cartSlice";
+import { useCreateOrderMutation } from "../features/order/orderSlice";
 
 const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
   const [isModalShow, setIsModalShow] = useState(false);
-
-  function placeOrderHandler() {
-    setIsModalShow(true);
-  }
 
   function backdropHandler() {
     setIsModalShow(false);
@@ -83,6 +80,52 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
   const cartItems = useSelector((state) =>
     cartItemsByRestaurant(state, parseInt(restaurantId))
   );
+
+  // Post Order
+  const [showToast, setShowToast] = useState(false);
+  const [toastTitle, setToastTitle] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastBg, setToastBg] = useState("");
+  const [
+    createOrder,
+    {
+      isSuccess: createOrderSuccess,
+      isError: createOrderError,
+      isLoading: orderCreating,
+      error: orderError,
+      data: orderData,
+    },
+  ] = useCreateOrderMutation();
+
+  useEffect(() => {
+    if (createOrderError) {
+      setShowToast(true);
+      setToastTitle("Error");
+      setToastMessage(
+        orderError?.data ? orderError.data : "Something went wrong"
+      );
+      setToastBg("danger");
+    } else if (createOrderSuccess) {
+      setShowToast(true);
+      setToastTitle("Success");
+      setToastMessage(
+        "Your order is successfully created. Redirecting you back to the shop page"
+      );
+      setToastBg("");
+      console.log(orderData);
+    }
+  }, [createOrderError, createOrderSuccess, orderError]);
+
+  function placeOrderHandler() {
+    createOrder({
+      restaurant: { id: restaurantId },
+      destination: { id: selectedAddressId },
+      items: cartItems.map((item) => ({
+        food: { id: item.id },
+        quantity: item.quantity,
+      })),
+    });
+  }
 
   return (
     <>
@@ -163,6 +206,25 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
       </div>
       {isModalShow && <OrderBackdrop onBackdrop={backdropHandler} />}
       {isModalShow && <OrderConfirmModal onOk={okHandler} />}
+
+      <ToastContainer position="middle-center" className="p-3" bg={toastBg}>
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">{toastTitle}</strong>
+          </Toast.Header>
+          <Toast.Body>{toastMessage}</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </>
   );
 };
