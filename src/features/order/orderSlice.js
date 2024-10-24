@@ -10,8 +10,24 @@ export const orderSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["UserOrders"],
     }),
+    getRestaurantOrders: build.query({
+      query: (restaurantId) => `/order/restaurant/${restaurantId}/current`,
+      providesTags: (result, error, restaurantId) => [
+        { type: "RestaurantOrders", id: restaurantId },
+      ],
+    }),
+    getRestaurantOrderHistory: build.query({
+      query: (restaurantId) => `/order/restaurant/${restaurantId}/history`,
+      providesTags: (result, error, restaurantId) => [
+        { type: "RestaurantOrders", id: restaurantId },
+      ],
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useCreateOrderMutation } = orderSlice;
+export const {
+  useCreateOrderMutation,
+  useGetRestaurantOrdersQuery,
+  useGetRestaurantOrderHistoryQuery,
+} = orderSlice;

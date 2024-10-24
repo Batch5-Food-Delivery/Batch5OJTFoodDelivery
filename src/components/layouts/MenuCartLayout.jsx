@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./menuCart.css";
 
@@ -20,8 +20,15 @@ const MenuCartLayout = () => {
     isSuccess,
   } = useRestaurantDetailsQuery(restaurantId);
 
+  const [showOrders, setShowOrders] = useState(false);
   const { data: isOwner, isSuccess: fetchingOwnerSuccess } =
     useIsRestaurantOwnerQuery(restaurantId);
+
+  useEffect(() => {
+    if (fetchingOwnerSuccess) {
+      setShowOrders(isOwner);
+    }
+  }, [fetchingOwnerSuccess, isOwner]);
 
   let content = "";
 
@@ -95,14 +102,11 @@ const MenuCartLayout = () => {
               <p>{restaurant.description}</p>
             </div>
 
-            <button className="btn-btn float-end">
-              <div className="btn-text">
-                <span>
-                  <i class="bi bi-heart"></i>
-                </span>{" "}
-                Add to favourites
-              </div>
-            </button>
+            {showOrders && (
+              <button className="btn-btn float-end">
+                <div className="btn-text">Orders</div>
+              </button>
+            )}
           </Col>
         </Row>
 
