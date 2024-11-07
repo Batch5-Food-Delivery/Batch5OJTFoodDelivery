@@ -1,0 +1,19 @@
+.dashboard {
+  display: flex;
+  background-color: #f4f4f4; /* Soft gray background */
+  min-height: 100vh;
+}
+
+.content {
+  margin-left: 260px; /* Sidebar width */
+  padding: 20px;
+  flex-grow: 1;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.content:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}

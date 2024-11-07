@@ -1,0 +1,26 @@
+.navbar {
+    background-color: #007bff; /* Vibrant blue */
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.brand {
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #ffffff;
+    font-size: 16px;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffd700; /* Gold color for hover */
+}
+
+.nav-link svg {
+    margin-right: 5px;
+}
