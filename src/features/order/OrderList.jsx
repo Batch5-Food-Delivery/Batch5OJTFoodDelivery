@@ -17,7 +17,7 @@ const OrderList = ({ query, canComplete }) => {
 
   if (query.isSuccess) {
     content = query.data.map((order) => (
-      <OrderCard order={order} canComplete={canComplete} />
+      <OrderCard order={order} canComplete={canComplete} key={order.id} />
     ));
   }
 

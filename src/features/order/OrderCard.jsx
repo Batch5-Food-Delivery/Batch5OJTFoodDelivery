@@ -1,10 +1,13 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Row, Col, Button } from "react-bootstrap";
 import classes from "./OrderCard.module.css";
+import OrderDriverContainer from "./OrderDriverContainer";
 
 const OrderCard = ({ order, canComplete }) => {
+  const [showDrivers, setShowDrivers] = useState(false);
+
   return (
-    <Card className="mb-3 w-100 p-2">
+    <Card className={"mb-3 w-100 p-2"}>
       <Card.Body>
         <Card.Title>Order #{order.id}</Card.Title>
         <Card.Text>
@@ -46,7 +49,21 @@ const OrderCard = ({ order, canComplete }) => {
               {new Date(order.completedAt).toLocaleString()}
             </span>
           )}
+          <Row className="mt-3">
+            <Col className="d-flex justify-content-end">
+              {canComplete && !order.completed && (
+                <Button
+                  variant="primary"
+                  onClick={() => setShowDrivers(!showDrivers)}
+                >
+                  Complete
+                </Button>
+              )}
+            </Col>
+          </Row>
+          <hr></hr>
         </Card.Text>
+        {showDrivers && <OrderDriverContainer orderId={order.id} />}
       </Card.Body>
     </Card>
   );

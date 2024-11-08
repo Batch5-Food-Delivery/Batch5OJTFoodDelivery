@@ -22,6 +22,18 @@ export const orderSlice = apiSlice.injectEndpoints({
         { type: "RestaurantOrders", id: restaurantId },
       ],
     }),
+    getAvailableDrivers: build.query({
+      query: () => `/user/availableDrivers`,
+      keepUnusedDataFor: 10,
+    }),
+    completeOrder: build.mutation({
+      query: (order) => ({
+        url: "/order/completeOrder",
+        method: "POST",
+        body: order,
+      }),
+      invalidatesTags: ["RestaurantOrders"],
+    }),
   }),
   overrideExisting: false,
 });
@@ -30,4 +42,6 @@ export const {
   useCreateOrderMutation,
   useGetRestaurantOrdersQuery,
   useGetRestaurantOrderHistoryQuery,
+  useGetAvailableDriversQuery,
+  useCompleteOrderMutation,
 } = orderSlice;

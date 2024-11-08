@@ -11,3 +11,22 @@
   gap: 10px;
   margin-top: 5px;
 }
+
+@keyframes fadeOutShrink {
+  0% {
+    opacity: 1;
+    max-height: fit-content;
+  }
+  50% {
+    opacity: 0;
+    max-height: fit-content;
+  }
+  100% {
+    opacity: 0;
+    max-height: 50px; /* Reduce height after opacity goes to 0 */
+  }
+}
+
+.successAnimation {
+  animation: fadeOutShrink 2s forwards;
+}
