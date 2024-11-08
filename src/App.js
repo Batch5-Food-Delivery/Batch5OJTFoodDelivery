@@ -17,10 +17,12 @@ import UpdateFoods from "./features/foods/UpdateFoods";
 import AdminFoodList from "./components/adminLayouts/AdminFoodList";
 import OrderPage from "./page/OrderPage";
 import RestaurantOrdersPage from "./page/RestaurantOrdersPage";
+import RestaurantList from "./features/restaurant/RestaurantList";
 
 function App() {
   return (
     <Routes>
+      {/* Public routes */}
       <Route path="/" element={<Layout />}>
         <Route index element={<ShopPage />} />
         <Route path="login" element={<LoginPage />} />
@@ -33,25 +35,33 @@ function App() {
           path="restaurant/:restaurantId/orders"
           element={<RestaurantOrdersPage />}
         />
+        {/* Admin food list for public view */}
+        <Route path="foods" element={<AdminFoodList />} />
+        <Route path="RestaurantList" element={<RestaurantList />} />
       </Route>
+
+      {/* Admin routes */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="restaurant">
           <Route index element={<RestaurantRecords />} />
           <Route path="create" element={<Create />} />
           <Route path="update/:restaurantId" element={<Update />} />
         </Route>
+
         <Route path="region">
           <Route index element={<RegionRecords />} />
           <Route path="create" element={<CreateRegion />} />
           <Route path="update/:regionId" element={<UpdateRegion />} />
         </Route>
 
-        <Route path="menu"></Route>
+        {/* Menu management */}
         <Route path="foods" element={<AdminFoodList />} />
         <Route path="create" element={<AddFoods />} />
         <Route path="menu-detail/:menuId" element={<FoodDetail />} />
         <Route path="menu-update/:menuId" element={<UpdateFoods />} />
       </Route>
+
+      {/* Driver route */}
       <Route path="driver" element={<DriverPage />} />
     </Routes>
   );

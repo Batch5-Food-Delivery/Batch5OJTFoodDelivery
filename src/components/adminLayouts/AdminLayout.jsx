@@ -1,26 +1,25 @@
 import React from 'react'
-import AdminHeader from '../ui/AdminHeader'
-import Sidebar from './Sidebar'
-import { Col, Container, Row } from 'react-bootstrap'
-import { Outlet } from 'react-router-dom'
+import classes from './adminLayout.module.css'
+import AdminNavbar from './AdminNavbar';
+import AdminSidebar from './AdminSidebar';
+import { Outlet } from 'react-router-dom';
+
 
 
 const AdminLayout = () => {
   return (
-    <Container fluid className='p-0'>
-         <Row className='p-0 w-100'>
-          <Col lg={1} className="p-0" ><Sidebar></Sidebar></Col>
-            <Col lg={11} className='p-0'>
+    <>
+      <AdminNavbar />
+      <div className={classes.dashboard}>
+        <AdminSidebar />
+        <div className={classes.content}>
+        <Outlet/>
+        </div>
 
-            <AdminHeader></AdminHeader>
-            <main>
-               <Outlet></Outlet>
-            </main>
-
-            </Col>
-        </Row>
-    </Container>
-  )
+      </div>
+    </>
+);
+  
 }
 
 export default AdminLayout
