@@ -207,7 +207,11 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
       {isModalShow && <OrderBackdrop onBackdrop={backdropHandler} />}
       {isModalShow && <OrderConfirmModal onOk={okHandler} />}
 
-      <ToastContainer position="middle-center" className="p-3" bg={toastBg}>
+      <ToastContainer
+        position="middle-center"
+        className={classes.toast_middle_center}
+        bg={toastBg}
+      >
         <Toast
           onClose={() => setShowToast(false)}
           show={showToast}

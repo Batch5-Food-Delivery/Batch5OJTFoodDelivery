@@ -10,18 +10,6 @@ const Layout = () => {
     <Container fluid className="p-0">
       <Header />
 
-      <CarouselComponent />
-      <div className={classes.searchContainer}>
-        <form className={classes.searchForm}>
-          <input
-            type="text"
-            className={classes.searchInput}
-            placeholder="Search for food or restaurants"
-          />
-          <button className={classes.searchButton}>Search</button>
-        </form>
-      </div>
-
       <main>
         <Outlet />
       </main>

@@ -60,31 +60,6 @@ const MenuCartLayout = () => {
             </div>
           </Col>
           <Col md={9}>
-            <nav className="bds-c-breadcrumbs">
-              <ol className="bds-c-breadcrumbs__list">
-                <li className="bds-c-breadcrumbs__list__item">
-                  <a className="bds-c-link" href="/city/yangon">
-                    Yangon
-                  </a>
-                  <div className="bds-c-breadcrumbs__arrow">/</div>
-                </li>
-                <li className="bds-c-breadcrumbs__list__item">
-                  <a
-                    className="bds-c-link"
-                    href="/restaurants/new?lat=16.8482009&lng=96.1336254&expedition=delivery&vertical=restaurants"
-                  >
-                    Restaurant List
-                  </a>
-                  <div className="bds-c-breadcrumbs__arrow">/</div>
-                </li>
-                <li
-                  aria-current="page"
-                  className="bds-c-breadcrumbs__list__item bds-c-breadcrumbs__list__item--is-current-page"
-                >
-                  {restaurant.name}
-                </li>
-              </ol>
-            </nav>
             <ul className="main-info__characteristics">
               <li>Italian</li>
               <li>Pizza</li>
