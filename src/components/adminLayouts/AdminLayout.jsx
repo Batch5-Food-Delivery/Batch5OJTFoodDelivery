@@ -1,10 +1,8 @@
-import React from 'react'
-import classes from './adminLayout.module.css'
+import React from 'react';
+import classes from './adminLayout.module.css';
 import AdminNavbar from './AdminNavbar';
 import AdminSidebar from './AdminSidebar';
 import { Outlet } from 'react-router-dom';
-
-
 
 const AdminLayout = () => {
   return (
@@ -13,13 +11,11 @@ const AdminLayout = () => {
       <div className={classes.dashboard}>
         <AdminSidebar />
         <div className={classes.content}>
-        <Outlet/>
+          <Outlet />
         </div>
-
       </div>
     </>
-);
-  
+  );
 }
 
-export default AdminLayout
+export default AdminLayout;
