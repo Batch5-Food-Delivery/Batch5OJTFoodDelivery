@@ -44,7 +44,7 @@ const NewMenuFormModal = ({ show, handleClose, restaurantId }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal className="fade" show={show} onHide={handleClose} role="dialog">
       <Modal.Header closeButton>
         <Modal.Title>Create New Menu</Modal.Title>
       </Modal.Header>
@@ -61,9 +61,11 @@ const NewMenuFormModal = ({ show, handleClose, restaurantId }) => {
               required
             />
           </Form.Group>
-          <Button variant="primary" type="submit" className="mt-3">
-            Submit
-          </Button>
+          <div className="d-flex justify-content-end mt-3">
+            <Button variant="primary" type="submit">
+              Create
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

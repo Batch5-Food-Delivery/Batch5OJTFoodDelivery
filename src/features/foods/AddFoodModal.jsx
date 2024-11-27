@@ -112,7 +112,13 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} size="lg">
+    <Modal
+      show={show}
+      onHide={handleClose}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>Create new food</Modal.Title>
       </Modal.Header>
@@ -124,7 +130,7 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
                 <Image src={previewImage} alt="Image of your food" />
               </Ratio>
               <Form.Group>
-                <Form.Label>Image</Form.Label>
+                <Form.Label style={{ "text-align": "left" }}>Image</Form.Label>
                 <Form.Control
                   type="file"
                   accept="image/*" // Restrict file type to images
@@ -206,9 +212,11 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
                   />
                 </div>
               </Form.Group>
-              <Button variant="primary" type="submit">
-                Create
-              </Button>
+              <div className="d-flex justify-content-end mt-3">
+                <Button variant="primary" type="submit">
+                  Create
+                </Button>
+              </div>
             </Form>
           </Col>
         </Row>

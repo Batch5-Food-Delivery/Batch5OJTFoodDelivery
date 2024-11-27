@@ -42,23 +42,20 @@ code {
 }
 
 .modal {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 1rem;
-  background-color: white;
-  padding: 1rem;
+  box-shadow: 0 1px 4px #00000033;
   text-align: center;
-  width: 30rem;
-  z-index: 10;
-  position: fixed;
-  top: 20vh;
-  left: calc(50% - 15rem);
+  padding: 2rem;
+}
+
+.modal form {
+  text-align: left;
 }
 
 .modal button {
   color: chocolate;
   background-color: white;
-  width: 5rem;
-  padding: 0.5rem 0rem;
+  width: auto;
+  padding: 4px;
   border-radius: 1rem;
 }
 
