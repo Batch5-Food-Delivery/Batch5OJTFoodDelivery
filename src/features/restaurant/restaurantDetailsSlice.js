@@ -10,9 +10,33 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
       query: (restaurantId) => `/restaurant/${restaurantId}/isOwner`,
       providesTags: ["RestaurantDetails"],
     }),
+    createRestaurant: build.mutation({
+      query: (restaurant) => ({
+        url: `/restaurant/create`,
+        method: "POST",
+        body: restaurant,
+      }),
+    }),
+    uploadRestaurantImage: build.mutation({
+      query: ({ image, restaurantId }) => {
+        const formData = new FormData();
+        formData.append("file", image);
+
+        return {
+          url: `/restaurant/uploadImage/${restaurantId}`,
+          method: "POST",
+          body: formData,
+        };
+      },
+    }),
   }),
+
   overrideExisting: false,
 });
 
-export const { useRestaurantDetailsQuery, useIsRestaurantOwnerQuery } =
-  restaurantDetailsSlice;
+export const {
+  useRestaurantDetailsQuery,
+  useIsRestaurantOwnerQuery,
+  useCreateRestaurantMutation,
+  useUploadRestaurantImageMutation,
+} = restaurantDetailsSlice;

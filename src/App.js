@@ -18,6 +18,7 @@ import AdminFoodList from "./components/adminLayouts/AdminFoodList";
 import OrderPage from "./page/OrderPage";
 import RestaurantOrdersPage from "./page/RestaurantOrdersPage";
 import RestaurantList from "./features/restaurant/RestaurantList";
+import AdditionalFormsPage from "./page/AdditionalFormsPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           path="restaurant/:restaurantId/orderCheckout"
           element={<OrderPage />}
         />
+        <Route path="additionalForms" element={<AdditionalFormsPage />} />
         <Route
           path="restaurant/:restaurantId/orders"
           element={<RestaurantOrdersPage />}
