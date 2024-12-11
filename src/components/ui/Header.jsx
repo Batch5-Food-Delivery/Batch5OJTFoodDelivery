@@ -100,6 +100,9 @@ const Header = () => {
                 <Dropdown.Item as={Link} to="/login">
                   Login
                 </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/additionalForms">
+                  Additional Forms
+                </Dropdown.Item>
                 <Dropdown.Item href="#">Orders</Dropdown.Item>
                 <Dropdown.Item href="#">Deliveries</Dropdown.Item>
               </Dropdown.Menu>

@@ -5,7 +5,7 @@ import {
   useUploadRestaurantImageMutation,
 } from "./restaurantDetailsSlice";
 
-const RestaurantForm = ({ onSubmit }) => {
+const RestaurantForm = () => {
   const [message, setMessage] = useState();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import RestaurantForm from "../features/restaurant/RestaurantForm";
+import DriverForm from "../features/user/DriverForm";
 
 const AdditionalFormsPage = () => {
   const [activeForm, setActiveForm] = useState("restaurant");
@@ -8,7 +9,9 @@ const AdditionalFormsPage = () => {
   const renderForm = () => {
     switch (activeForm) {
       case "restaurant":
-        return <RestaurantForm onSubmit={(data) => console.log(data)} />;
+        return <RestaurantForm />;
+      case "driver":
+        return <DriverForm />;
       default:
         return <div>Select a form to display</div>;
     }
@@ -17,7 +20,7 @@ const AdditionalFormsPage = () => {
   return (
     <Container fluid>
       <Row>
-        <Col sm={2} className="bg-light vh-100">
+        <Col md={2} className="bg-light vh-100">
           <h4 className="mt-3">Additional Forms</h4>
           <Nav
             variant="pills"
@@ -28,9 +31,12 @@ const AdditionalFormsPage = () => {
             <Nav.Item>
               <Nav.Link eventKey="restaurant">Restaurant Form</Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="driver">Driver Form</Nav.Link>
+            </Nav.Item>
           </Nav>
         </Col>
-        <Col sm={10} className="p-4">
+        <Col md={10} className="p-4">
           {renderForm()}
         </Col>
       </Row>

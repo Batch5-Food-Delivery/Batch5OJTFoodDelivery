@@ -50,6 +50,9 @@ const authSlice = createSlice({
       state.user = {};
       localStorage.clear();
     },
+    setRoles: (state, action) => {
+      state.roles = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -90,7 +93,7 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { logout } = authSlice.actions;
+export const { logout, setRoles } = authSlice.actions;
 export const getLoginStatus = (state) => state.auth.loginStatus;
 export const getRegisterStatus = (state) => state.auth.registerStatus;
 export const getUser = (state) => state.auth.user;
