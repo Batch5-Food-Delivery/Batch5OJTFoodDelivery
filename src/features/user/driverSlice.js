@@ -8,8 +8,15 @@ export const driverSlice = apiSlice.injectEndpoints({
         method: "PUT",
       }),
     }),
+    switchAvailable: build.mutation({
+      query: (available) => ({
+        url: `/user/availableStatus?available=${available}`,
+        method: "PUT",
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useApplyDriverMutation } = driverSlice;
+export const { useApplyDriverMutation, useSwitchAvailableMutation } =
+  driverSlice;

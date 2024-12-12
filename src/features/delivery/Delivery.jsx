@@ -74,9 +74,9 @@ const Delivery = ({ delivery, canComplete }) => {
   return (
     <Card className={cardClass} onAnimationEnd={() => onCardAnimationEnd()}>
       <Card.Header as="h5" className="p-3 text-white">
-        Order Id: {delivery.id}
+        Delivery Id: {delivery.id}
       </Card.Header>
-      <Card.Body>
+      <Card.Body className="bg-white">
         <Row className="g-0">
           {" "}
           {/* Ensures no gutters between columns */}
