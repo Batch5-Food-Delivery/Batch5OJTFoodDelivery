@@ -1,0 +1,114 @@
+/* General Table Styling */
+.tableContainer {
+    margin: 20px 0;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Sticky Header */
+.stickyHeader {
+    background-color: #343a40;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Row Hover Effect */
+.tableRow:hover {
+    background-color: #f1f1f1;
+}
+
+/* Image Styling */
+.menuImg {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.menuImg:hover {
+    transform: scale(1.1);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* Update Button Styling */
+
+.updateButton i {
+    margin-right: 5px;
+    background: none;
+}
+
+.updateButton:hover {
+    background-color: #0056b3;
+}
+
+.updateButton:focus {
+    outline: none;
+}
+
+
+.deleteButton i {
+    margin-right: 5px;
+    background: none;
+}
+
+.deleteButton:hover {
+    background-color: #c82333; /* Darker shade for hover effect */
+}
+
+.deleteButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5);
+}
+
+.deleteButton:active {
+    background-color: #bd2130; /* Even darker shade for active state */
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+    .table th,
+    .table td {
+        padding: 10px;
+    }
+
+    .menuImg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .updateButton {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+

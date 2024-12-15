@@ -18,6 +18,7 @@ import AdminFoodList from "./components/adminLayouts/AdminFoodList";
 import OrderPage from "./page/OrderPage";
 import RestaurantOrdersPage from "./page/RestaurantOrdersPage";
 import RestaurantList from "./features/restaurant/RestaurantList";
+import AdminManageRes from "./components/adminLayouts/AdminManageRes";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
 
         {/* Menu management */}
         <Route path="foods" element={<AdminFoodList />} />
+        <Route path="AdminRestaurant" element={<AdminManageRes/>} />
         <Route path="create" element={<AddFoods />} />
         <Route path="menu-detail/:menuId" element={<FoodDetail />} />
         <Route path="menu-update/:menuId" element={<UpdateFoods />} />
