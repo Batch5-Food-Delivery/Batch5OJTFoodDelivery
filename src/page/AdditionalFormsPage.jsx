@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import RestaurantForm from "../features/restaurant/RestaurantForm";
 import DriverForm from "../features/user/DriverForm";
+import CreateRestaurant from "../features/restaurant/CreateRestaurant";
 
 const AdditionalFormsPage = () => {
   const [activeForm, setActiveForm] = useState("restaurant");
@@ -9,7 +10,7 @@ const AdditionalFormsPage = () => {
   const renderForm = () => {
     switch (activeForm) {
       case "restaurant":
-        return <RestaurantForm />;
+        return <CreateRestaurant />;
       case "driver":
         return <DriverForm />;
       default:

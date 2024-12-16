@@ -11,11 +11,19 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
       providesTags: ["RestaurantDetails"],
     }),
     createRestaurant: build.mutation({
-      query: (restaurant) => ({
-        url: `/restaurant/create`,
-        method: "POST",
-        body: restaurant,
-      }),
+      query: (reqBody) => {
+        const { restaurant, image } = reqBody;
+
+        const formData = new FormData();
+        formData.append("restaurant", JSON.stringify(restaurant));
+        formData.append("image", image);
+
+        return {
+          url: `/restaurant/create`,
+          method: "POST",
+          body: formData,
+        };
+      },
     }),
     uploadRestaurantImage: build.mutation({
       query: ({ image, restaurantId }) => {

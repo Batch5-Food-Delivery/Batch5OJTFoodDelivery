@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
-import {
-  useCreateRestaurantMutation,
-  useUploadRestaurantImageMutation,
-} from "./restaurantDetailsSlice";
 
-const RestaurantForm = () => {
-  const [message, setMessage] = useState();
+const RestaurantForm = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [profile, setProfile] = useState(null);
@@ -16,21 +11,6 @@ const RestaurantForm = () => {
     additionalDetails: "",
   });
 
-  const [
-    createRestaurant,
-    {
-      data: resData,
-      isSuccess: resUploadSuccess,
-      isLoading: resUploading,
-      isError: resUploadFailed,
-      Error: resError,
-      reset: resUploadReset,
-    },
-  ] = useCreateRestaurantMutation();
-
-  const [uploadRestaurantImage, { isSuccess: imageUploadSuccess }] =
-    useUploadRestaurantImageMutation();
-
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setAddress((prev) => ({ ...prev, [name]: value }));
@@ -38,33 +18,17 @@ const RestaurantForm = () => {
 
   const onResDataSubmit = (e) => {
     e.preventDefault();
-    createRestaurant({
+    onSubmit({
       name,
       description,
       address: address,
+      profile,
     });
   };
 
-  if (resUploadSuccess) {
-    resUploadReset();
-    if (profile !== null) {
-      uploadRestaurantImage({ image: profile, restaurantId: resData.id });
-    }
-  }
-
-  if (imageUploadSuccess) {
-    alert("success");
-    setMessage(
-      <Container className="bg-success">
-        <p>Form uploaded successfully</p>
-      </Container>
-    );
-  }
-
   return (
-    <Container style={{ "background-color": "rgba(255, 255, 255, 0.9)" }}>
+    <>
       <Row className="mb-4">
-        <h3>Restaurant Application Form</h3>
         <Col md={8}>
           <Form>
             <Form.Group controlId="formRestaurantName" className="mb-3">
@@ -140,14 +104,13 @@ const RestaurantForm = () => {
               />
             </Form.Group>
           </Form>
-          {message}
         </Col>
       </Row>
 
       <Button variant="primary" onClick={onResDataSubmit}>
         Submit
       </Button>
-    </Container>
+    </>
   );
 };
 
