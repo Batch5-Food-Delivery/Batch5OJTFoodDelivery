@@ -41,6 +41,7 @@ const Menu = ({ menu }) => {
           picture={food.picture}
           price={food.price}
           discount={food.discount}
+          category={food.category}
           description={food.description}
           available={food.available}
           restaurantId={food.restaurant.id}

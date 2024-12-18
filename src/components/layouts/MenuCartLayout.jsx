@@ -29,7 +29,7 @@ const MenuCartLayout = () => {
   }, [fetchingOwnerSuccess, isOwner]);
 
   let content = "";
-  let picture = `http://localhost:8686/food/image/${restaurant?.profile}`;
+  let picture = `http://localhost:8686/restaurant/image/${restaurant?.profile}`;
 
   if (isFetching) {
     content = (

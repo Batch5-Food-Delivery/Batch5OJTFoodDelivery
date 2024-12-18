@@ -10,15 +10,17 @@ import {
   Container,
 } from "react-bootstrap";
 
-const FoodForm = ({ onSubmit }) => {
-  const [name, setName] = useState("");
+const FoodForm = ({ onSubmit, ogFood }) => {
+  const [name, setName] = useState(ogFood?.name ?? "");
   const [foodImage, setFoodImage] = useState(null);
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [discount, setDiscount] = useState("");
-  const [available, setAvailable] = useState(true);
-  const [previewImage, setPreviewImage] = useState("");
+  const [price, setPrice] = useState(ogFood?.price ?? "");
+  const [description, setDescription] = useState(ogFood?.description ?? "");
+  const [category, setCategory] = useState(ogFood?.category ?? "");
+  const [discount, setDiscount] = useState(ogFood?.discount ?? "");
+  const [available, setAvailable] = useState(
+    ogFood?.available !== undefined ? ogFood.available : false
+  );
+  const [previewImage, setPreviewImage] = useState(ogFood?.picture ?? "");
 
   const resetModal = () => {
     setPrice("");
