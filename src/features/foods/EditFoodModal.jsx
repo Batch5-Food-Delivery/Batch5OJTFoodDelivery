@@ -59,6 +59,7 @@ const EditFoodModal = ({ show, handleClose, food }) => {
     foodUploadStatus = (
       <Container variant="success">Food Delete Success</Container>
     );
+    refetch();
     handleClose();
   }
 
