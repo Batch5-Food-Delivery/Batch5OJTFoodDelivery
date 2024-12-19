@@ -2,6 +2,22 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { USER_URL } from "../config/baseURL";
 
+const loadRoles = () => {
+  const roles = localStorage.getItem("roles");
+  if (roles === null) {
+    return [];
+  }
+  return JSON.parse(roles);
+};
+
+const loadUser = () => {
+  const user = localStorage.getItem("user");
+  if (user === null) {
+    return {};
+  }
+  return JSON.parse(user);
+};
+
 export const login = createAsyncThunk("login", async (loginRequest) => {
   const response = await axios.post(`${USER_URL}/login`, loginRequest, {
     headers: {
@@ -34,8 +50,8 @@ export const register = createAsyncThunk(
 );
 
 const initialState = {
-  user: {},
-  roles: [],
+  user: loadUser(),
+  roles: loadRoles(),
   loginStatus: "idle",
   registerStatus: "idle",
 };
@@ -52,9 +68,14 @@ const authSlice = createSlice({
     },
     setRoles: (state, action) => {
       state.roles = action.payload;
+      localStorage.setItem("roles", JSON.stringify(action.payload));
     },
     setAvailable: (state, action) => {
       state.user.available = action.payload;
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...state.user, available: action.payload })
+      );
     },
   },
   extraReducers(builder) {
@@ -68,6 +89,8 @@ const authSlice = createSlice({
           state.user = data.user;
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.user.id);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("roles", JSON.stringify(data.roles));
         }
       })
       .addCase(login.rejected, (state, action) => {
