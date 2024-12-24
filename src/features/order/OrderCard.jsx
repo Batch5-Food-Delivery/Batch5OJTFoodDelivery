@@ -23,7 +23,7 @@ const OrderCard = ({ order, canComplete }) => {
           </div>
           {order.items.map((item) => (
             <div key={item.id} className={classes.orderItemGrid}>
-              <div>{item.food.name}</div>
+              <div>{item.name}</div>
               <div>${item.price.toFixed(2)}</div>
               <div>{item.quantity}</div>
               <div>${(item.price * item.quantity).toFixed(2)}</div>

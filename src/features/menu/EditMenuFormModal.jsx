@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Container } from "react-bootstrap";
-import { useCreateMenuMutation } from "./menuSlice";
+import { useUpdateMenuMutation } from "./menuSlice";
 
-const NewMenuFormModal = ({ show, handleClose, restaurantId }) => {
-  const [menuName, setMenuName] = useState("");
+const EditMenuFormModal = ({ show, handleClose, menu }) => {
+  const [menuName, setMenuName] = useState(menu.name);
 
-  const [createMenu, { isError, isLoading, isSuccess, error, reset }] =
-    useCreateMenuMutation();
+  const [updateMenu, { isError, isLoading, isSuccess, error, reset }] =
+    useUpdateMenuMutation();
 
   let message = "";
   if (isError) {
@@ -19,7 +19,7 @@ const NewMenuFormModal = ({ show, handleClose, restaurantId }) => {
   if (isLoading) {
     message = (
       <>
-        <Container className="container-danger">"Creating new Menu"</Container>
+        <Container className="container-danger">"Updating Menu"</Container>
       </>
     );
   }
@@ -31,22 +31,19 @@ const NewMenuFormModal = ({ show, handleClose, restaurantId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("New Menu Submitted:", menuName);
 
-    let menu = {
+    let updatedMenu = {
+      ...menu,
       name: menuName,
-      restaurant: {
-        id: restaurantId,
-      },
     };
 
-    createMenu(menu);
+    updateMenu(updatedMenu);
   };
 
   return (
     <Modal className="fade" show={show} onHide={handleClose} role="dialog">
       <Modal.Header closeButton>
-        <Modal.Title>Create New Menu</Modal.Title>
+        <Modal.Title>Edit Menu</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {message}
@@ -72,4 +69,4 @@ const NewMenuFormModal = ({ show, handleClose, restaurantId }) => {
   );
 };
 
-export default NewMenuFormModal;
+export default EditMenuFormModal;

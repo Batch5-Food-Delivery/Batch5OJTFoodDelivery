@@ -2,11 +2,17 @@ import { useState } from "react";
 import Foods from "../foods/Foods";
 import AddFoodModal from "../foods/AddFoodModal";
 import { useIsRestaurantOwnerQuery } from "../restaurant/restaurantDetailsSlice";
+import EditMenuFormModal from "./EditMenuFormModal";
 
 const Menu = ({ menu }) => {
-  const [showModal, setShowModal] = useState(false);
-  const handleClose = () => {
-    setShowModal(false);
+  const [showFoodModal, setShowFoodModal] = useState(false);
+  const [showMenuModal, setShowMenuModal] = useState(false);
+  const handleFoodClose = () => {
+    setShowFoodModal(false);
+  };
+
+  const handleMenuClose = () => {
+    setShowMenuModal(false);
   };
 
   let editable = false;
@@ -26,9 +32,15 @@ const Menu = ({ menu }) => {
         {editable && (
           <>
             <i
-              onClick={() => setShowModal(true)}
-              style={{ cursor: "pointer" }}
+              onClick={() => setShowFoodModal(true)}
+              style={{ cursor: "pointer", "margin-right": "15px" }}
               class="fa fa-plus-circle"
+            ></i>
+
+            <i
+              onClick={() => setShowMenuModal(true)}
+              style={{ cursor: "pointer" }}
+              class="fa fa-edit"
             ></i>
           </>
         )}
@@ -41,6 +53,7 @@ const Menu = ({ menu }) => {
           picture={food.picture}
           price={food.price}
           discount={food.discount}
+          category={food.category}
           description={food.description}
           available={food.available}
           restaurantId={food.restaurant.id}
@@ -48,10 +61,16 @@ const Menu = ({ menu }) => {
       ))}
       <hr></hr>
       <AddFoodModal
-        show={showModal}
-        handleClose={handleClose}
+        show={showFoodModal}
+        handleClose={handleFoodClose}
         menuId={menu.id}
         restaurantId={menu.restaurant.id}
+      />
+
+      <EditMenuFormModal
+        show={showMenuModal}
+        handleClose={handleMenuClose}
+        menu={menu}
       />
     </>
   );

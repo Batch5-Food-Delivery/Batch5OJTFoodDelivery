@@ -6,6 +6,7 @@ import classes from "./foods.module.css";
 import FoodDetail from "./FoodDetail";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../cart/cartSlice";
+import EditFoodModal from "./EditFoodModal";
 
 const Foods = ({
   id,
@@ -13,6 +14,7 @@ const Foods = ({
   picture,
   price,
   discount,
+  category,
   description,
   available,
   restaurantId,
@@ -35,6 +37,23 @@ const Foods = ({
       restaurantId,
     });
     setShow(true);
+  };
+
+  const [showEdit, setShowEdit] = useState(false);
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => {
+    setSelectedFood({
+      id,
+      name,
+      picture,
+      discount,
+      category,
+      description,
+      price,
+      available,
+      restaurantId,
+    });
+    setShowEdit(true);
   };
 
   const handleAddToCart = () => {
@@ -98,6 +117,12 @@ const Foods = ({
                   <span className={classes.availabilityBadge}>Unavailable</span>
                 )}
               </div>
+
+              <div className={classes.add_to_card}>
+                <Link to="" className={classes.a} onClick={handleShowEdit}>
+                  <i className="bi bi-bag-fill"></i>
+                </Link>
+              </div>
             </div>
           </Card.Body>
         </Card>
@@ -111,6 +136,12 @@ const Foods = ({
           />
         </Modal.Body>
       </Modal>
+
+      <EditFoodModal
+        food={selectedFood}
+        show={showEdit}
+        handleClose={handleCloseEdit}
+      />
     </>
   );
 };

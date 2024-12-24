@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classes from './adminManageRes.module.css';
-import { fetchAllRestaurant, getAllRestaurant, getError, getStatus } from "../../features/restaurant/restaurantSlice";
+import { fetchPendingRestaurant, getAllRestaurant, getError, getStatus } from "../../features/restaurant/restaurantSlice";
 
 const AdminManageRes = () => {
   const restaurants = useSelector(getAllRestaurant);
@@ -15,7 +15,7 @@ const AdminManageRes = () => {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchAllRestaurant());
+      dispatch(fetchPendingRestaurant());
     }
   }, [status, dispatch]);
 

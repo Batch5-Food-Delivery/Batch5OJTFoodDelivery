@@ -22,6 +22,10 @@ export const orderSlice = apiSlice.injectEndpoints({
         { type: "RestaurantOrders", id: restaurantId },
       ],
     }),
+    getCustomerOrders: build.query({
+      query: () => `/order/customer/all`,
+      providesTags: ["UserOrders", "User"],
+    }),
     getAvailableDrivers: build.query({
       query: () => `/user/availableDrivers`,
       keepUnusedDataFor: 10,
@@ -42,6 +46,7 @@ export const {
   useCreateOrderMutation,
   useGetRestaurantOrdersQuery,
   useGetRestaurantOrderHistoryQuery,
+  useGetCustomerOrdersQuery,
   useGetAvailableDriversQuery,
   useCompleteOrderMutation,
 } = orderSlice;

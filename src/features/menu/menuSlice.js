@@ -20,11 +20,11 @@ export const menuSlice = apiSlice.injectEndpoints({
         { restaurant: { id: restaurantId } }
       ) => [{ type: "RestaurantMenus", id: restaurantId }],
     }),
-    createFood: build.mutation({
-      query: (food) => ({
-        url: `/food/create`,
-        method: "POST",
-        body: food.data,
+    updateMenu: build.mutation({
+      query: (updatedMenu) => ({
+        url: `/menu/update`,
+        method: "PUT",
+        body: updatedMenu,
       }),
       invalidatesTags: (
         result,
@@ -32,17 +32,54 @@ export const menuSlice = apiSlice.injectEndpoints({
         { restaurant: { id: restaurantId } }
       ) => [{ type: "RestaurantMenus", id: restaurantId }],
     }),
-    uploadFoodImage: build.mutation({
-      query: ({ image, foodId }) => {
+    createFood: build.mutation({
+      query: (reqBody) => {
+        const { food, image } = reqBody;
+
         const formData = new FormData();
-        formData.append("file", image);
+        formData.append("food", JSON.stringify(food));
+        formData.append("image", image);
 
         return {
-          url: `/food/uploadImage/${foodId}`,
+          url: `/food/create`,
           method: "POST",
           body: formData,
         };
       },
+      invalidatesTags: (
+        result,
+        error,
+        { restaurant: { id: restaurantId } }
+      ) => [{ type: "RestaurantMenus", id: restaurantId }],
+    }),
+    editFood: build.mutation({
+      query: (reqBody) => {
+        const { food, image } = reqBody;
+
+        const formData = new FormData();
+        formData.append("food", JSON.stringify(food));
+        formData.append("image", image);
+
+        return {
+          url: `/food/update`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: (
+        result,
+        error,
+        { restaurant: { id: restaurantId } }
+      ) => [{ type: "RestaurantMenus", id: restaurantId }],
+    }),
+    deleteFood: build.mutation({
+      query: (food) => ({
+        url: `food/${food.id}/delete`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (food) => [
+        { type: "RestaurantMenus", id: food.restaurant.id },
+      ],
     }),
     overrideExisting: false,
   }),
@@ -51,6 +88,8 @@ export const menuSlice = apiSlice.injectEndpoints({
 export const {
   useRestaurantMenusQuery,
   useCreateMenuMutation,
+  useUpdateMenuMutation,
   useCreateFoodMutation,
-  useUploadFoodImageMutation,
+  useEditFoodMutation,
+  useDeleteFoodMutation,
 } = menuSlice;

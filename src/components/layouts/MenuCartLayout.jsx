@@ -9,14 +9,12 @@ import {
   useIsRestaurantOwnerQuery,
   useRestaurantDetailsQuery,
 } from "../../features/restaurant/restaurantDetailsSlice";
-import Menu from "../../features/menu/Menu";
 
 const MenuCartLayout = () => {
   const { restaurantId } = useParams();
   const {
     data: restaurant,
     isFetching,
-    isError,
     isSuccess,
   } = useRestaurantDetailsQuery(restaurantId);
 
@@ -31,6 +29,7 @@ const MenuCartLayout = () => {
   }, [fetchingOwnerSuccess, isOwner]);
 
   let content = "";
+  let picture = `http://localhost:8686/restaurant/image/${restaurant?.profile}`;
 
   if (isFetching) {
     content = (
@@ -53,8 +52,8 @@ const MenuCartLayout = () => {
           <Col md={3}>
             <div>
               <img
-                src={restaurant.profile}
-                alt="Restaurant Logo"
+                src={picture}
+                alt="Mont Zay Tan (MICT) vendor logo"
                 style={{ width: "100%" }}
               />
             </div>
