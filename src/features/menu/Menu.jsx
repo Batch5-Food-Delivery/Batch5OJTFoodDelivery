@@ -3,16 +3,22 @@ import Foods from "../foods/Foods";
 import AddFoodModal from "../foods/AddFoodModal";
 import { useIsRestaurantOwnerQuery } from "../restaurant/restaurantDetailsSlice";
 import EditMenuFormModal from "./EditMenuFormModal";
+import DeleteMenuModal from "./DeleteMenuModal";
 
 const Menu = ({ menu }) => {
   const [showFoodModal, setShowFoodModal] = useState(false);
   const [showMenuModal, setShowMenuModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const handleFoodClose = () => {
     setShowFoodModal(false);
   };
 
   const handleMenuClose = () => {
     setShowMenuModal(false);
+  };
+
+  const handleDeleteClose = () => {
+    setShowDeleteModal(false);
   };
 
   let editable = false;
@@ -39,8 +45,13 @@ const Menu = ({ menu }) => {
 
             <i
               onClick={() => setShowMenuModal(true)}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", "margin-right": "15px" }}
               class="fa fa-edit"
+            ></i>
+            <i
+              onClick={() => setShowDeleteModal(true)}
+              style={{ cursor: "pointer", "margin-right": "15px" }}
+              class="fa fa-trash"
             ></i>
           </>
         )}
@@ -70,6 +81,12 @@ const Menu = ({ menu }) => {
       <EditMenuFormModal
         show={showMenuModal}
         handleClose={handleMenuClose}
+        menu={menu}
+      />
+
+      <DeleteMenuModal
+        show={showDeleteModal}
+        handleClose={handleDeleteClose}
         menu={menu}
       />
     </>

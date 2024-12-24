@@ -20,7 +20,9 @@ const FoodForm = ({ onSubmit, ogFood }) => {
   const [available, setAvailable] = useState(
     ogFood?.available !== undefined ? ogFood.available : false
   );
-  const [previewImage, setPreviewImage] = useState(ogFood?.picture ?? "");
+  const [previewImage, setPreviewImage] = useState(
+    ogFood?.picture ?? "https://placehold.co/400?text=Image"
+  );
 
   const resetModal = () => {
     setPrice("");

@@ -32,6 +32,18 @@ export const menuSlice = apiSlice.injectEndpoints({
         { restaurant: { id: restaurantId } }
       ) => [{ type: "RestaurantMenus", id: restaurantId }],
     }),
+    deleteMenu: build.mutation({
+      query: (menu) => ({
+        url: `/menu/delete`,
+        method: "DELETE",
+        body: menu,
+      }),
+      invalidatesTags: (
+        result,
+        error,
+        { restaurant: { id: restaurantId } }
+      ) => [{ type: "RestaurantMenus", id: restaurantId }],
+    }),
     createFood: build.mutation({
       query: (reqBody) => {
         const { food, image } = reqBody;
@@ -89,6 +101,7 @@ export const {
   useRestaurantMenusQuery,
   useCreateMenuMutation,
   useUpdateMenuMutation,
+  useDeleteMenuMutation,
   useCreateFoodMutation,
   useEditFoodMutation,
   useDeleteFoodMutation,

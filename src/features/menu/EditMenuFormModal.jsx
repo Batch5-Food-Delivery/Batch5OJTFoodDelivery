@@ -42,7 +42,10 @@ const EditMenuFormModal = ({ show, handleClose, menu }) => {
 
   return (
     <Modal className="fade" show={show} onHide={handleClose} role="dialog">
-      <Modal.Header closeButton>
+      <Modal.Header
+        style={{ "background-color": "rgb(245, 189, 7)" }}
+        closeButton
+      >
         <Modal.Title>Edit Menu</Modal.Title>
       </Modal.Header>
       <Modal.Body>

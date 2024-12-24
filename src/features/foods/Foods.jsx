@@ -62,7 +62,10 @@ const Foods = ({
   };
 
   const finalPrice = discount ? price - price * (discount / 100) : price;
-  picture = `http://localhost:8686/food/image/${picture}`;
+  picture =
+    picture !== null
+      ? `http://localhost:8686/food/image/${picture}`
+      : "https://placehold.co/400?text=Food+Item";
 
   return (
     <>
