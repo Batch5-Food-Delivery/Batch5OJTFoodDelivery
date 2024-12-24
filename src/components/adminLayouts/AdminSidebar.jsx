@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaPlusCircle, FaUtensils } from 'react-icons/fa'
+import { FaPlusCircle, FaUtensils, FaStore } from 'react-icons/fa'
 import classes from './adminSidebar.module.css'
 import { Link } from 'react-router-dom'
 
@@ -14,6 +14,10 @@ const AdminSidebar = () => {
         <li>
           <FaPlusCircle size={20} />{' '}
           <Link to="/admin/create">Create Food</Link>
+        </li>
+        <li>
+          <FaStore size={20} />{' '}
+          <Link to="/admin/AdminRestaurant">Manage Restaurant</Link>
         </li>
     </ul>
   </div>

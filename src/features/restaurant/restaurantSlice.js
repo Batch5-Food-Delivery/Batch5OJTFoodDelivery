@@ -6,12 +6,34 @@ const BASE_URL = "http://localhost:8686/restaurant";
 const FETCH_URL = `${BASE_URL}/all`;
 const CREATE_URL = `${BASE_URL}/create`;
 const UPDATE_URL = `${BASE_URL}/update`;
+const PENDING_URL = `${BASE_URL}/pendingRestaurants`;
 
 const initialState = {
   restaurants: [],
   status: "idle",
   error: false,
 };
+
+export const fetchPendingRestaurant = createAsyncThunk(
+  "fetchPendingRestaurant",
+  async () => {
+    try {
+      const response = await axios.get(PENDING_URL, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response.data);
+        return response.data;
+      } else {
+        throw Error("Fetching PENDING RESTAURANT failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 export const deleteRestaurant = createAsyncThunk(
   "deleteRestaurant",
@@ -114,6 +136,18 @@ const restaurantSlice = createSlice({
         state.status = "success";
       })
       .addCase(fetchAllRestaurant.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+
+      .addCase(fetchPendingRestaurant.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPendingRestaurant.fulfilled, (state, action) => {
+        state.restaurants = action.payload;
+        state.status = "success";
+      })
+      .addCase(fetchPendingRestaurant.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       })

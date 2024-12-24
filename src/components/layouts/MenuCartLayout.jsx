@@ -59,6 +59,7 @@ const MenuCartLayout = () => {
             </div>
           </Col>
           <Col md={9}>
+          {/*
             <ul className="main-info__characteristics">
               <li>Italian</li>
               <li>Pizza</li>
@@ -66,13 +67,11 @@ const MenuCartLayout = () => {
               <li>Asian</li>
               <li>Thai</li>
             </ul>
+            */}
             <h2>{restaurant.name}</h2>
 
             <div className="main-info__meta-information">
-              <div className="vendor-rating">
-                <span>4.7/5 (5000+)</span>
-              </div>
-              <p>See reviews</p>
+              
               <p>{restaurant.description}</p>
             </div>
 
