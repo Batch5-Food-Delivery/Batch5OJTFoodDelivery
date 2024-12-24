@@ -6,7 +6,7 @@ const BASE_URL = "http://localhost:8686/restaurant";
 const FETCH_URL = `${BASE_URL}/all`;
 const CREATE_URL = `${BASE_URL}/create`;
 const UPDATE_URL = `${BASE_URL}/update`;
-const PENDING_URL = `${BASE_URL}/pendingRestaurant`;
+const PENDING_URL = `${BASE_URL}/pendingRestaurants`;
 
 const initialState = {
   restaurants: [],
@@ -14,23 +14,26 @@ const initialState = {
   error: false,
 };
 
-export const fetchPendingRestaurant = createAsyncThunk("fetchPendingRestaurant", async () => {
-  try {
-    const response = await axios.get(PENDING_URL, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    if (response.status === 200) {
-      console.log(response.data);
-      return response.data;
-    } else {
-      throw Error("Fetching PENDING RESTAURANT failed");
+export const fetchPendingRestaurant = createAsyncThunk(
+  "fetchPendingRestaurant",
+  async () => {
+    try {
+      const response = await axios.get(PENDING_URL, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response.data);
+        return response.data;
+      } else {
+        throw Error("Fetching PENDING RESTAURANT failed");
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
   }
-});
+);
 
 export const deleteRestaurant = createAsyncThunk(
   "deleteRestaurant",
