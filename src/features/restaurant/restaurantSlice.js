@@ -172,6 +172,7 @@ const restaurantSlice = createSlice({
 });
 
 export default restaurantSlice.reducer;
+export const ACCEPT_URL = `${BASE_URL}/acceptRestaurant`;
 export const getAllRestaurant = (state) => state.restaurants.restaurants;
 export const getStatus = (state) => state.restaurants.status;
 export const getError = (state) => state.restaurants.error;

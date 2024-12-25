@@ -9,6 +9,7 @@ import {
   useIsRestaurantOwnerQuery,
   useRestaurantDetailsQuery,
 } from "../../features/restaurant/restaurantDetailsSlice";
+import RestaurantDetails from "../../features/restaurant/RestaurantDetails";
 
 const MenuCartLayout = () => {
   const { restaurantId } = useParams();
@@ -29,7 +30,6 @@ const MenuCartLayout = () => {
   }, [fetchingOwnerSuccess, isOwner]);
 
   let content = "";
-  let picture = `http://localhost:8686/restaurant/image/${restaurant?.profile}`;
 
   if (isFetching) {
     content = (
@@ -40,41 +40,13 @@ const MenuCartLayout = () => {
   }
 
   if (isSuccess) {
+    console.log(restaurant);
     content = (
       <div style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}>
-        <Row
-          className="mt-3 align-items-center"
-          style={{
-            paddingLeft: "20px",
-            paddingRight: "20px",
-          }}
-        >
-          <Col md={3}>
-            <div>
-              <img
-                src={picture}
-                alt="Mont Zay Tan (MICT) vendor logo"
-                style={{ width: "100%" }}
-              />
-            </div>
-          </Col>
-          <Col md={9}>
-          {/*
-            <ul className="main-info__characteristics">
-              <li>Italian</li>
-              <li>Pizza</li>
-              <li>Chinese</li>
-              <li>Asian</li>
-              <li>Thai</li>
-            </ul>
-            */}
-            <h2>{restaurant.name}</h2>
+        <RestaurantDetails restaurant={restaurant} />
 
-            <div className="main-info__meta-information">
-              
-              <p>{restaurant.description}</p>
-            </div>
-
+        <Row>
+          <Col>
             {showOrders && (
               <button className="btn-btn float-end">
                 <div className="btn-text">Orders</div>
