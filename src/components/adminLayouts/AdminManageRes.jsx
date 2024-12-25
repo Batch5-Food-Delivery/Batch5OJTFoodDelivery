@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Table } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { Accordion, Button, Container, Row, Col } from "react-bootstrap";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classes from "./adminManageRes.module.css";
@@ -12,6 +12,7 @@ import {
   ACCEPT_URL,
 } from "../../features/restaurant/restaurantSlice";
 import { token } from "../../features/auth/getToken";
+import RestaurantDetails from "../../features/restaurant/RestaurantDetails";
 
 const AdminManageRes = () => {
   const restaurants = useSelector(getAllRestaurant);
@@ -50,71 +51,74 @@ const AdminManageRes = () => {
   let content = "";
 
   if (status === "loading") {
-    content = (
-      <tr>
-        <td colSpan="4">Loading...</td>
-      </tr>
-    );
+    content = <p>Loading...</p>;
   }
 
   if (status === "success") {
-    content = restaurants?.map((restaurant) => (
-      <tr key={restaurant.id} className={classes.tableRow}>
-        <td>{restaurant.id}</td>
-        <td>
-          <img
-            src={restaurant.picture}
-            alt={restaurant.name}
-            className={classes.menuImg}
-          />
-        </td>
-        <td>{restaurant.name}</td>
-        <td>
-          <Button
-            variant="success"
-            onClick={() => handleAcceptRestaurant(restaurant.id)}
-          >
-            Success
-          </Button>
-        </td>
-      </tr>
-    ));
+    content = (
+      <>
+        {/* Header Row */}
+        <Row className="bg-light fw-bold py-2">
+          <Col xs={2}>ID</Col>
+          <Col xs={2}>Picture</Col>
+          <Col xs={4}>Name</Col>
+          <Col xs={2}>Actions</Col>
+          <Col xs={2}>Details</Col>
+        </Row>
+
+        {/* Accordion with Restaurant Data */}
+        <Accordion>
+          {restaurants?.map((restaurant, index) => (
+            <Accordion.Item key={restaurant.id} eventKey={index}>
+              <Accordion.Header>
+                <Row className="w-100">
+                  <Col xs={2}>{restaurant.id}</Col>
+                  <Col xs={2}>
+                    <img
+                      src={
+                        restaurant.profile !== null
+                          ? `http://localhost:8686/restaurant/image/${restaurant.profile}`
+                          : "https://placehold.co/400?text=Restaurant+Image"
+                      }
+                      alt={restaurant.name}
+                      className={classes.menuImg}
+                    />
+                  </Col>
+                  <Col xs={4}>{restaurant.name}</Col>
+                  <Col xs={2}>
+                    <Button
+                      variant="success"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent Accordion toggle
+                        handleAcceptRestaurant(restaurant.id);
+                      }}
+                    >
+                      Accept
+                    </Button>
+                  </Col>
+                  <Col xs={2}>View Details</Col>
+                </Row>
+              </Accordion.Header>
+              <Accordion.Body>
+                <RestaurantDetails restaurant={restaurant} />
+              </Accordion.Body>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      </>
+    );
   }
 
   if (status === "failed") {
-    content = (
-      <tr>
-        <td colSpan="4">{error}</td>
-      </tr>
-    );
+    content = <p className="text-danger">{error}</p>;
   }
 
   return (
     <Container className="my-4">
       <div>
-        <h2 className="mb-4">Admin Food List</h2>
-        <Button
-          variant="primary"
-          onClick={() => {
-            navigate("/admin/create");
-          }}
-        >
-          Create
-        </Button>
+        <h2 className="mb-4">Pending Restaurants</h2>
       </div>
-      <div className={classes.tableContainer}>
-        <Table className={classes.table}>
-          <thead className={classes.stickyHeader}>
-            <tr>
-              <th>ID</th>
-              <th>Picture</th>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{content}</tbody>
-        </Table>
-      </div>
+      <div className={classes.tableContainer}>{content}</div>
     </Container>
   );
 };

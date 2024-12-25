@@ -41,10 +41,10 @@ const RestaurantDetails = ({ restaurant }) => {
         <br></br>
         <div>
           <p>
-            {restaurant.address.township}, {restaurant.address.street}
+            {restaurant.address?.township}, {restaurant.address?.street}
           </p>
 
-          <p>{restaurant.address.additionalDetails}</p>
+          <p>{restaurant.address?.additionalDetails}</p>
         </div>
       </Col>
     </Row>
