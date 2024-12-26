@@ -4,7 +4,9 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     restaurantDetails: build.query({
       query: (restaurantId) => `/restaurant/${restaurantId}`,
-      providesTags: ["RestaurantDetails"],
+      providesTags: (result, error, restaurantId) => [
+        { type: "RestaurantDetails", id: restaurantId },
+      ],
     }),
     isRestaurantOwner: build.query({
       query: (restaurantId) => `/restaurant/${restaurantId}/isOwner`,
@@ -24,6 +26,24 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
           body: formData,
         };
       },
+    }),
+    updateRestaurant: build.mutation({
+      query: (reqBody) => {
+        const { restaurant, image } = reqBody;
+
+        const formData = new FormData();
+        formData.append("restaurant", JSON.stringify(restaurant));
+        formData.append("image", image);
+
+        return {
+          url: `/restaurant/update`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+      invalidatesTags: (result, error, reqBody) => [
+        { type: "RestaurantDetails", id: reqBody.restaurant.id },
+      ],
     }),
     uploadRestaurantImage: build.mutation({
       query: ({ image, restaurantId }) => {
@@ -46,5 +66,6 @@ export const {
   useRestaurantDetailsQuery,
   useIsRestaurantOwnerQuery,
   useCreateRestaurantMutation,
+  useUpdateRestaurantMutation,
   useUploadRestaurantImageMutation,
 } = restaurantDetailsSlice;

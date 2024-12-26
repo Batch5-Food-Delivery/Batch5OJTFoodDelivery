@@ -12,5 +12,10 @@ export const apiSlice = createApi({
     },
   }),
   endpoints: (builder) => ({}),
-  tagTypes: ["DriverDeliveries", "Delivery", "RestaurantOrders"],
+  tagTypes: [
+    "DriverDeliveries",
+    "Delivery",
+    "RestaurantOrders",
+    "RestaurantDetails",
+  ],
 });

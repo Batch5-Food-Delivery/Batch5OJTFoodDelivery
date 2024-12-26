@@ -10,6 +10,7 @@ import {
   useRestaurantDetailsQuery,
 } from "../../features/restaurant/restaurantDetailsSlice";
 import RestaurantDetails from "../../features/restaurant/RestaurantDetails";
+import EditRestaurantModal from "../../features/restaurant/EditRestaurantModal";
 
 const MenuCartLayout = () => {
   const { restaurantId } = useParams();
@@ -19,15 +20,20 @@ const MenuCartLayout = () => {
     isSuccess,
   } = useRestaurantDetailsQuery(restaurantId);
 
-  const [showOrders, setShowOrders] = useState(false);
+  const [authorized, setAuthorized] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const { data: isOwner, isSuccess: fetchingOwnerSuccess } =
     useIsRestaurantOwnerQuery(restaurantId);
 
   useEffect(() => {
     if (fetchingOwnerSuccess) {
-      setShowOrders(isOwner);
+      setAuthorized(isOwner);
     }
   }, [fetchingOwnerSuccess, isOwner]);
+
+  const handleEditClose = () => {
+    setShowEditModal(false);
+  };
 
   let content = "";
 
@@ -47,10 +53,18 @@ const MenuCartLayout = () => {
 
         <Row>
           <Col>
-            {showOrders && (
-              <button className="btn-btn float-end">
-                <div className="btn-text">Orders</div>
-              </button>
+            {authorized && (
+              <>
+                <button className="btn-btn float-end">
+                  <div className="btn-text">Orders</div>
+                </button>
+                <button
+                  className="btn-btn float-end"
+                  onClick={() => setShowEditModal(true)}
+                >
+                  <div className="btn-text">Edit</div>
+                </button>
+              </>
             )}
           </Col>
         </Row>
@@ -63,6 +77,12 @@ const MenuCartLayout = () => {
             <Cart restaurantId={restaurant.id} />
           </Col>
         </Row>
+
+        <EditRestaurantModal
+          ogRes={restaurant}
+          show={showEditModal}
+          handleClose={handleEditClose}
+        />
       </div>
     );
   }

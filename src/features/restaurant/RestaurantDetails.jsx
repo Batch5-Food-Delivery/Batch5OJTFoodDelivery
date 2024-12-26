@@ -1,7 +1,11 @@
 import { Row, Col } from "react-bootstrap";
 
 const RestaurantDetails = ({ restaurant }) => {
-  let picture = `http://localhost:8686/restaurant/image/${restaurant?.profile}`;
+  let picture =
+    restaurant?.profile !== null
+      ? `http://localhost:8686/restaurant/image/${restaurant.profile}`
+      : "https://placehold.co/400?text=Restaurant+Image";
+
   return (
     <Row
       className="mt-3 align-items-center"

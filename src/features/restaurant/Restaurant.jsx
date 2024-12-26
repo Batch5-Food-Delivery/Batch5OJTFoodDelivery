@@ -3,7 +3,10 @@ import { Button, Card, Col } from "react-bootstrap";
 import classes from "./restaurant.module.css";
 
 const Restaurant = ({ name, profile, description }) => {
-  let picture = `http://localhost:8686/restaurant/image/${profile}`;
+  let picture =
+    profile !== null
+      ? `http://localhost:8686/restaurant/image/${profile}`
+      : "https://placehold.co/400?text=Restaurant+Image";
 
   return (
     <Col sm={12} md={3} lg={3} xl={4} className="my-4">

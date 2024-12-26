@@ -1,19 +1,37 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Row,
+  Col,
+  Container,
+  Ratio,
+  Image,
+} from "react-bootstrap";
 
-const RestaurantForm = ({ onSubmit }) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+const RestaurantForm = ({ onSubmit, ogRes }) => {
+  const [name, setName] = useState(ogRes?.name ?? "");
+  const [description, setDescription] = useState(ogRes?.description ?? "");
   const [profile, setProfile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(
+    ogRes?.profile !== null
+      ? `http://localhost:8686/restaurant/image/${ogRes.profile}`
+      : "https://placehold.co/400?text=Restaurant+Image"
+  );
   const [address, setAddress] = useState({
-    township: "",
-    street: "",
-    additionalDetails: "",
+    township: ogRes?.address?.township ?? "",
+    street: ogRes?.address?.street ?? "",
+    additionalDetails: ogRes?.address?.additionalDetails ?? "",
   });
 
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setAddress((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = (e) => {
+    setProfile(e.target.files[0]); // Set the selected file
+    setPreviewImage(window.URL.createObjectURL(e.target.files[0]));
   };
 
   const onResDataSubmit = (e) => {
@@ -95,12 +113,15 @@ const RestaurantForm = ({ onSubmit }) => {
 
         <Col md={4}>
           <Form>
+            <Ratio aspectRatio="1x1">
+              <Image src={previewImage} alt="Image of your Restaurant" />
+            </Ratio>
             <Form.Group controlId="formProfile" className="mb-3">
               <Form.Label>Profile</Form.Label>
               <Form.Control
                 type="file"
                 accept="image/*"
-                onChange={(e) => setProfile(e.target.files[0])}
+                onChange={handleImageChange}
               />
             </Form.Group>
           </Form>
