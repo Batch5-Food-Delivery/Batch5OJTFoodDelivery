@@ -124,3 +124,4 @@ export const getLoginStatus = (state) => state.auth.loginStatus;
 export const getRegisterStatus = (state) => state.auth.registerStatus;
 export const getUser = (state) => state.auth.user;
 export const getRoles = (state) => state.auth.roles;
+export const isLoggedIn = (state) => Object.keys(state.auth.user).length > 0;

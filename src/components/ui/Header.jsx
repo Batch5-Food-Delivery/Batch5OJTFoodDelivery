@@ -9,8 +9,8 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { getRoles } from "../../features/auth/authSlice";
-import { useSelector } from "react-redux";
+import { getRoles, isLoggedIn, logout } from "../../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 import {
   FaUserCircle,
   FaHamburger,
@@ -24,6 +24,8 @@ import { useGetCustomerOrdersQuery } from "../../features/order/orderSlice";
 const Header = () => {
   const roles = useSelector(getRoles);
   const orderQuery = useGetCustomerOrdersQuery();
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(isLoggedIn);
 
   return (
     <>
@@ -40,6 +42,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {/* Menus Link */}
+              {/*
               <NavLink
                 to="/menu"
                 className={({ isActive }) =>
@@ -51,7 +54,7 @@ const Header = () => {
                 <FaHamburger /> Menus
               </NavLink>
 
-              {/* Add Menu Link */}
+             
               <NavLink
                 to="/menu/create"
                 className={({ isActive }) =>
@@ -62,9 +65,10 @@ const Header = () => {
               >
                 <FaPlus /> Add
               </NavLink>
+              */}
             </Nav>
 
-            {/* Search Bar */}
+            {/* Search Bar
             <Form className="d-flex mx-auto">
               <FormControl
                 type="search"
@@ -77,14 +81,16 @@ const Header = () => {
                 Search
               </Button>
             </Form>
+             */}
 
-            {/* Cart Icon */}
+            {/* Cart Icon 
             <div className={classes.cartIcon}>
               <FaShoppingCart size={25} />
               <span className={classes.cartCount}>3</span>
             </div>
+*/}
 
-            {/* User Profile Dropdown */}
+            {/* User Profile Dropdown 
             <div className={classes.profileDropdown}>
               <FaUserCircle size={30} />
               <div className={classes.dropdownContent}>
@@ -93,6 +99,7 @@ const Header = () => {
                 <Link to="/logout">Logout</Link>
               </div>
             </div>
+            */}
             <Nav className="ms-auto">
               <Dropdown align="end">
                 <Dropdown.Toggle as="a" className="btn btn-link">
@@ -100,17 +107,26 @@ const Header = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to="/login">
-                    Login
-                  </Dropdown.Item>
+                  {!loggedIn && (
+                    <Dropdown.Item as={Link} to="/login">
+                      Login
+                    </Dropdown.Item>
+                  )}
+                  {loggedIn && (
+                    <Dropdown.Item onClick={() => dispatch(logout())}>
+                      Logout
+                    </Dropdown.Item>
+                  )}
                   <Dropdown.Item as={Link} to="/additionalForms">
                     Additional Forms
                   </Dropdown.Item>
+                  {/* 
                   <Dropdown.Item href="#">Orders</Dropdown.Item>
                   <Dropdown.Item href="#">Deliveries</Dropdown.Item>
+                  */}
                 </Dropdown.Menu>
               </Dropdown>
-              {roles.includes("USER") && (
+              {loggedIn && (
                 <Dropdown align="end">
                   <Dropdown.Toggle as="a" className="btn btn-link">
                     Orders
