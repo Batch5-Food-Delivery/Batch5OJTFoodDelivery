@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../cart/cartSlice";
 import EditFoodModal from "./EditFoodModal";
 import DeleteFoodModal from "./DeleteFoodModal";
+import { useIsRestaurantOwnerQuery } from "../restaurant/restaurantDetailsSlice";
 
 const Foods = ({
   id,
@@ -39,6 +40,14 @@ const Foods = ({
     });
     setShow(true);
   };
+
+  let authorized = false;
+  const { data: isOwner, isSuccess: fetchingOwnerSuccess } =
+    useIsRestaurantOwnerQuery(restaurantId);
+
+  if (fetchingOwnerSuccess) {
+    authorized = isOwner;
+  }
 
   const [showEdit, setShowEdit] = useState(false);
   const handleCloseEdit = () => setShowEdit(false);
@@ -141,16 +150,20 @@ const Foods = ({
 
               <div className={classes.add_to_card}></div>
             </div>
-            <i
-              onClick={handleShowEdit}
-              style={{ cursor: "pointer", "margin-right": "15px" }}
-              class="fa fa-edit float-end"
-            ></i>
-            <i
-              onClick={handleShowDelete}
-              style={{ cursor: "pointer", "margin-right": "15px" }}
-              class="fa fa-trash float-end"
-            ></i>
+            {authorized && (
+              <div>
+                <i
+                  onClick={handleShowEdit}
+                  style={{ cursor: "pointer", "margin-right": "15px" }}
+                  class="fa fa-edit float-end"
+                ></i>
+                <i
+                  onClick={handleShowDelete}
+                  style={{ cursor: "pointer", "margin-right": "15px" }}
+                  class="fa fa-trash float-end"
+                ></i>{" "}
+              </div>
+            )}
           </Card.Body>
         </Card>
       </Col>

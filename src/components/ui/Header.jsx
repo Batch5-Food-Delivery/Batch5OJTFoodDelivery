@@ -7,6 +7,8 @@ import {
   Form,
   FormControl,
   Button,
+  Popover,
+  OverlayTrigger,
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { getRoles, isLoggedIn, logout } from "../../features/auth/authSlice";
@@ -26,6 +28,26 @@ const Header = () => {
   const orderQuery = useGetCustomerOrdersQuery();
   const dispatch = useDispatch();
   const loggedIn = useSelector(isLoggedIn);
+
+  const ordersPopover = (
+    <Popover
+      id="orders-popover"
+      style={{
+        width: "500px",
+        "max-width": "none",
+        "min-height": "100px",
+        "max-height": "85vh",
+        overflowY: "scroll",
+      }}
+    >
+      <Popover.Header as="h3">Your Orders</Popover.Header>
+      <Popover.Body>
+        <Container>
+          <OrderList query={orderQuery} canComplete={false}></OrderList>
+        </Container>
+      </Popover.Body>
+    </Popover>
+  );
 
   return (
     <>
@@ -127,32 +149,20 @@ const Header = () => {
                 </Dropdown.Menu>
               </Dropdown>
               {loggedIn && (
-                <Dropdown align="end">
-                  <Dropdown.Toggle as="a" className="btn btn-link">
-                    Orders
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu
-                    style={{
-                      height: "85vh",
-                      "overflow-y": "scroll",
-                      "background-color": "grey",
-                    }}
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={ordersPopover}
+                  rootClose
+                >
+                  <Nav.Link
+                    as="span"
+                    className="text-primary"
+                    style={{ cursor: "pointer" }}
                   >
-                    <Container
-                      fluid="lg"
-                      style={{
-                        "min-width": "500px",
-                        height: "auto",
-                      }}
-                    >
-                      <OrderList
-                        query={orderQuery}
-                        canComplete={false}
-                      ></OrderList>
-                    </Container>
-                  </Dropdown.Menu>
-                </Dropdown>
+                    Orders
+                  </Nav.Link>
+                </OverlayTrigger>
               )}
               {roles.includes("DRIVER") && (
                 <Nav.Link as={Link} to="/driver" className="text-warning">

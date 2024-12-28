@@ -3,23 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteFood, fetchAllMenus, getAllMenus, getError, getStatus } from "../../features/foods/foodSlice";
-import classes from './adminFoodList.module.css'
-
+import {
+  deleteFood,
+  fetchAllMenus,
+  getAllMenus,
+  getError,
+  getStatus,
+} from "../../features/foods/foodSlice";
+import classes from "./adminFoodList.module.css";
 
 const AdminFoodList = () => {
   const menus = useSelector(getAllMenus);
   const status = useSelector(getStatus);
   const error = useSelector(getError);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
-  
   const onDelete = (id) => {
-      dispatch(deleteFood(id))
-      navigate('/admin/foods')
-  }
+    dispatch(deleteFood(id));
+    navigate("/admin/foods");
+  };
 
   useEffect(() => {
     if (status === "idle") {
@@ -29,37 +32,55 @@ const AdminFoodList = () => {
 
   let content = "";
 
-  if (status === 'loading') {
-    content = <tr><td colSpan="4">Loading...</td></tr>;
+  if (status === "loading") {
+    content = (
+      <tr>
+        <td colSpan="4">Loading...</td>
+      </tr>
+    );
   }
 
   if (status === "success") {
     content = menus?.map((menu) => (
       <tr key={menu.id} className={classes.tableRow}>
         <td>{menu.id}</td>
-        <td><img src={menu.picture} alt={menu.name} className={classes.menuImg}/></td>
+        <td>
+          <img
+            src={
+              menu.picture
+                ? `http://localhost:8686/food/image/${menu.picture}`
+                : "https://placehold.co/100?text=Food+Item"
+            }
+            alt={menu.name}
+            className={classes.menuImg}
+          />
+        </td>
         <td>{menu.name}</td>
         <td>
-        <Button
+          <Button
             className={`${classes.button} ${classes.updateButton}`}
-            onClick={() => handleUpdate(menu.id)}>
-             <i className="bi bi-pencil"></i>
-        </Button>
-        <Button
-            className={`${classes.button} ${classes.deleteButton}`} 
-              onClick={() => onDelete(menu.id)}
-                style={{ marginLeft: '10px' }}
+            onClick={() => handleUpdate(menu.id)}
           >
-                <i className="bi bi-trash"></i> Delete
-         </Button>
-        
+            <i className="bi bi-pencil"></i>
+          </Button>
+          <Button
+            className={`${classes.button} ${classes.deleteButton}`}
+            onClick={() => onDelete(menu.id)}
+            style={{ marginLeft: "10px" }}
+          >
+            <i className="bi bi-trash"></i> Delete
+          </Button>
         </td>
-        </tr>
+      </tr>
     ));
   }
 
   if (status === "failed") {
-    content = <tr><td colSpan="4">{error}</td></tr>;
+    content = (
+      <tr>
+        <td colSpan="4">{error}</td>
+      </tr>
+    );
   }
 
   const handleUpdate = (id) => {
@@ -70,24 +91,29 @@ const AdminFoodList = () => {
   return (
     <Container className="my-4">
       <div>
-      <h2 className="mb-4">Admin Food List</h2>
-      <Button variant="primary" onClick={() => { navigate('/admin/create') }}>Create</Button>
+        <h2 className="mb-4">Admin Food List</h2>
+        <Button
+          variant="primary"
+          onClick={() => {
+            navigate("/admin/create");
+          }}
+        >
+          Create
+        </Button>
       </div>
       <div className={classes.tableContainer}>
         <Table className={classes.table}>
-            <thead className={classes.stickyHeader}>
-                <tr>
-                    <th>ID</th>
-                    <th>Picture</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                    </tr>
-            </thead>
-            <tbody>
-               {content}
-             </tbody>
-                </Table>
-            </div>
+          <thead className={classes.stickyHeader}>
+            <tr>
+              <th>ID</th>
+              <th>Picture</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>{content}</tbody>
+        </Table>
+      </div>
     </Container>
   );
 };

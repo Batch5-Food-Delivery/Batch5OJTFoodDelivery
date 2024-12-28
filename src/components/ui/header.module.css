@@ -2,7 +2,7 @@
 
 /* Navbar container with a clean shadow effect */
 .navbarContainer {
-  background-color: #ffffff;
+  background-color: #e3f2fd;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
 }
@@ -12,7 +12,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   color: #3387f5; /* Primary color */
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   letter-spacing: 1px;
   margin-right: auto;
 }
