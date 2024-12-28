@@ -12,6 +12,9 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
       query: (restaurantId) => `/restaurant/${restaurantId}/isOwner`,
       providesTags: ["RestaurantDetails"],
     }),
+    searchRestaurants: build.query({
+      query: (name) => `/restaurant/search?name=${encodeURIComponent(name)}`,
+    }),
     createRestaurant: build.mutation({
       query: (reqBody) => {
         const { restaurant, image } = reqBody;
@@ -65,6 +68,7 @@ export const restaurantDetailsSlice = apiSlice.injectEndpoints({
 export const {
   useRestaurantDetailsQuery,
   useIsRestaurantOwnerQuery,
+  useSearchRestaurantsQuery,
   useCreateRestaurantMutation,
   useUpdateRestaurantMutation,
   useUploadRestaurantImageMutation,

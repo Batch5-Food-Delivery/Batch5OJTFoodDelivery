@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Nav,
@@ -22,12 +22,16 @@ import {
 import classes from "./header.module.css";
 import OrderList from "../../features/order/OrderList";
 import { useGetCustomerOrdersQuery } from "../../features/order/orderSlice";
+import RestaurantSearchResults from "./RestaurantSearchResults";
+import { useSearchRestaurantsQuery } from "../../features/restaurant/restaurantDetailsSlice";
 
 const Header = () => {
   const roles = useSelector(getRoles);
   const orderQuery = useGetCustomerOrdersQuery();
   const dispatch = useDispatch();
   const loggedIn = useSelector(isLoggedIn);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [enteredSearchTerm, setEnteredSearchTerm] = useState("");
 
   const ordersPopover = (
     <Popover
@@ -45,6 +49,21 @@ const Header = () => {
         <Container>
           <OrderList query={orderQuery} canComplete={false}></OrderList>
         </Container>
+      </Popover.Body>
+    </Popover>
+  );
+
+  const searchPopover = (
+    <Popover
+      id="search-popover"
+      className={classes.searchPopover}
+      style={{ "max-width": "none", width: "400px" }}
+    >
+      <Popover.Header as="h3">Search Results</Popover.Header>
+      <Popover.Body>
+        <RestaurantSearchResults
+          query={useSearchRestaurantsQuery(enteredSearchTerm)}
+        />
       </Popover.Body>
     </Popover>
   );
@@ -123,6 +142,34 @@ const Header = () => {
             </div>
             */}
             <Nav className="ms-auto">
+              <Form
+                className="d-flex mx-auto"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <FormControl
+                  type="search"
+                  placeholder="Search for restaurants"
+                  className="me-2"
+                  aria-label="Search"
+                  style={{ minWidth: "300px" }}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </Form>
+              <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                overlay={searchPopover}
+                rootClose
+              >
+                <Button
+                  variant="light"
+                  onClick={() => setEnteredSearchTerm(searchTerm)}
+                >
+                  Search
+                </Button>
+              </OverlayTrigger>
+
               <Dropdown align="end">
                 <Dropdown.Toggle as="a" className="btn btn-link">
                   <i className="bi bi-person"></i>
