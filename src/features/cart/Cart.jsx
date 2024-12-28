@@ -4,9 +4,11 @@ import classes from "./cart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, removeFromCart, cartItemsByRestaurant } from "./cartSlice";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ restaurantId }) => {
   //const cartItems = useSelector((state) => state.cart.items);
+  const navigate = useNavigate();
   const cartItems = useSelector((state) =>
     cartItemsByRestaurant(state, restaurantId)
   );
@@ -31,7 +33,7 @@ const Cart = ({ restaurantId }) => {
   };
 
   const handleCheckout = async () => {
-    try {
+    /*try {
       const response = await axios.post("http://localhost:8686/order/create", {
         items: cartItems,
       });
@@ -44,7 +46,9 @@ const Cart = ({ restaurantId }) => {
     } catch (error) {
       console.error("Error during checkout:", error);
       alert("An error occurred during checkout.");
-    }
+    }*/
+
+    navigate(`/restaurant/${restaurantId}/orderCheckout`);
   };
   return (
     <div className={classes.cartWrapper}>

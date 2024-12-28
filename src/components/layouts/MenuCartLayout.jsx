@@ -4,7 +4,7 @@ import "./menuCart.css";
 
 import FoodList from "../../features/foods/FoodsList";
 import Cart from "../../features/cart/Cart";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useIsRestaurantOwnerQuery,
   useRestaurantDetailsQuery,
@@ -14,6 +14,7 @@ import EditRestaurantModal from "../../features/restaurant/EditRestaurantModal";
 
 const MenuCartLayout = () => {
   const { restaurantId } = useParams();
+  const navigate = useNavigate();
   const {
     data: restaurant,
     isFetching,
@@ -55,7 +56,10 @@ const MenuCartLayout = () => {
           <Col>
             {authorized && (
               <>
-                <button className="btn-btn float-end">
+                <button
+                  className="btn-btn float-end"
+                  onClick={() => navigate("orders")}
+                >
                   <div className="btn-text">Orders</div>
                 </button>
                 <button

@@ -9,13 +9,18 @@ import {
 } from "../features/address/addressSlice";
 import AddressCard from "../features/address/AddressCard";
 import { Row, Toast, ToastContainer } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRestaurantDetailsQuery } from "../features/restaurant/restaurantDetailsSlice";
-import { cartItemsByRestaurant } from "../features/cart/cartSlice";
+import {
+  cartItemsByRestaurant,
+  removeItemsByRestaurant,
+} from "../features/cart/cartSlice";
 import { useCreateOrderMutation } from "../features/order/orderSlice";
 
 const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isModalShow, setIsModalShow] = useState(false);
 
   function backdropHandler() {
@@ -112,9 +117,11 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
         "Your order is successfully created. Redirecting you back to the shop page"
       );
       setToastBg("");
-      console.log(orderData);
+      dispatch(removeItemsByRestaurant(parseInt(restaurantId)));
+      alert("This is dispatched");
+      navigate(`/restaurant/${restaurantId}`);
     }
-  }, [createOrderError, createOrderSuccess, orderError]);
+  }, [createOrderError, createOrderSuccess, orderError, dispatch]);
 
   function placeOrderHandler() {
     createOrder({

@@ -14,7 +14,7 @@ const RestaurantForm = ({ onSubmit, ogRes }) => {
   const [description, setDescription] = useState(ogRes?.description ?? "");
   const [profile, setProfile] = useState(null);
   const [previewImage, setPreviewImage] = useState(
-    ogRes?.profile !== null
+    ogRes?.profile
       ? `http://localhost:8686/restaurant/image/${ogRes.profile}`
       : "https://placehold.co/400?text=Restaurant+Image"
   );

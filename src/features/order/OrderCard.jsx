@@ -39,7 +39,9 @@ const OrderCard = ({ order, canComplete }) => {
             <div>${order.total.toFixed(2)}</div>
           </div>
           {/* Other order details */}
-          <strong>Destination:</strong> {order.destination.street} <br />
+          <strong>Destination: </strong>
+          {order.destination.township}, {order.destination.street},{" "}
+          {order.destination.additionalDetails} <br />
           <strong>Completed:</strong> {order.completed ? "Yes" : "No"} <br />
           <strong>Started At:</strong>{" "}
           {new Date(order.startedAt).toLocaleString()} <br />

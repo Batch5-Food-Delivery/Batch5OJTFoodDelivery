@@ -46,6 +46,7 @@ const EditRestaurantModal = ({ ogRes, handleClose, show }) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      style={{ padding: "2%" }}
     >
       <Modal.Header
         closeButton
@@ -53,7 +54,9 @@ const EditRestaurantModal = ({ ogRes, handleClose, show }) => {
       >
         <Modal.Title>Edit Restaurant Details</Modal.Title>
       </Modal.Header>
-      <RestaurantForm ogRes={ogRes} onSubmit={onSubmitRes}></RestaurantForm>
+      <Modal.Body>
+        <RestaurantForm ogRes={ogRes} onSubmit={onSubmitRes}></RestaurantForm>
+      </Modal.Body>
       <Modal.Footer>{resUpdateStatus}</Modal.Footer>
     </Modal>
   );

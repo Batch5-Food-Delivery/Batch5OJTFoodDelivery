@@ -84,11 +84,11 @@ const Delivery = ({ delivery, canComplete }) => {
             <p className="card-text m-0 p-0">From:</p>
             <p className="card-text m-0 p-0">{delivery.restaurant.name}</p>
             <p className="card-text m-0 p-0">
-              {delivery.restaurantAddress.township}:{" "}
-              {delivery.restaurantAddress.street}
+              {delivery.restaurantAddress?.township}:{" "}
+              {delivery.restaurantAddress?.street}
             </p>
             <p className="card-text m-0 p-0">
-              {delivery.restaurantAddress.additionalDetails}
+              {delivery.restaurantAddress?.additionalDetails}
             </p>
           </Col>
           <Col md={6} className="p-3">

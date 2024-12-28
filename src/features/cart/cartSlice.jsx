@@ -54,6 +54,14 @@ const cartSlice = createSlice({
       state.items = [];
       localStorage.removeItem("cartItems");
     },
+    removeItemsByRestaurant: (state, action) => {
+      const restaurantId = action.payload;
+
+      state.items = state.items.filter(
+        (item) => item.restaurantId !== restaurantId
+      );
+      saveCartToLocalStorage(state.items);
+    },
   },
 });
 
@@ -61,5 +69,6 @@ export const cartItemsByRestaurant = (state, restaurantId) => {
   return state.cart.items.filter((item) => item.restaurantId === restaurantId);
 };
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, removeItemsByRestaurant } =
+  cartSlice.actions;
 export default cartSlice.reducer;
