@@ -19,15 +19,12 @@ const FoodDetail = ({ food, handleAddToCart }) => {
         </Card.Body>
         <ListGroup className="list-group-flush">
           <ListGroup.Item className={classes.foodDetailItem}>
-            <strong>Price:</strong> {food.price}
+            <strong>Price:</strong> {food.price} Ks
           </ListGroup.Item>
           <ListGroup.Item className={classes.foodDetailItem}>
             <strong>Discount:</strong> {food.discount}%
           </ListGroup.Item>
-          <ListGroup.Item className={classes.foodDetailItem}>
-            <strong>Ingredients:</strong> Pasta, Tomato, Basil, Parmesan Cheese,
-            Olive Oil, Garlic
-          </ListGroup.Item>
+          <ListGroup.Item className={classes.foodDetailItem}></ListGroup.Item>
         </ListGroup>
 
         <Card.Body>

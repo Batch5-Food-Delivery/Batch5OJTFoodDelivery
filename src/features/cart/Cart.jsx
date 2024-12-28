@@ -63,12 +63,11 @@ const Cart = ({ restaurantId }) => {
                     <div>
                       <h6>{item.name}</h6>
                       <p className="mb-0">
-                        $
                         {calculateDiscountedPrice(
                           item.price,
                           item.discount
-                        ).toFixed(2)}{" "}
-                        x {item.quantity}
+                        ).toFixed(2)}
+                        Ks x {item.quantity}
                       </p>
                       {item.discount > 0 && (
                         <p className="mb-0 text-success">
@@ -110,7 +109,7 @@ const Cart = ({ restaurantId }) => {
           </div>
           <div className="d-flex justify-content-between mt-3">
             <h5>Total:</h5>
-            <h5>${calculateTotalPrice().toFixed(2)}</h5>
+            <h5>{calculateTotalPrice().toFixed(2)}Ks</h5>
           </div>
           <Button
             variant="primary"

@@ -24,9 +24,9 @@ const OrderCard = ({ order, canComplete }) => {
           {order.items.map((item) => (
             <div key={item.id} className={classes.orderItemGrid}>
               <div>{item.name}</div>
-              <div>${item.price.toFixed(2)}</div>
+              <div>{item.price.toFixed(2)}</div>
               <div>{item.quantity}</div>
-              <div>${(item.price * item.quantity).toFixed(2)}</div>
+              <div>{(item.price * item.quantity).toFixed(2)}Ks</div>
             </div>
           ))}
           <hr></hr>
@@ -36,7 +36,7 @@ const OrderCard = ({ order, canComplete }) => {
             </div>
             <div></div>
             <div></div>
-            <div>${order.total.toFixed(2)}</div>
+            <div>{order.total.toFixed(2)}Ks</div>
           </div>
           {/* Other order details */}
           <strong>Destination: </strong>

@@ -100,14 +100,14 @@ const Foods = ({
                 {discount ? (
                   <>
                     <small className={classes.originalPrice}>
-                      ${price.toFixed(2)}
+                      {price.toFixed(2)}
                     </small>
                     <h5 className="mb-0 finalPrice">
-                      ${finalPrice.toFixed(2)}
+                      {finalPrice.toFixed(2)}Ks
                     </h5>
                   </>
                 ) : (
-                  <h5 className="mb-0">${price.toFixed(2)}</h5>
+                  <h5 className="mb-0">{price.toFixed(2)}Ks</h5>
                 )}
               </div>
 

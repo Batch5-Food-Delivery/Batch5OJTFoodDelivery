@@ -86,6 +86,13 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
     cartItemsByRestaurant(state, parseInt(restaurantId))
   );
 
+  const calculateTotal = (cartItems) => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
+
   // Post Order
   const [showToast, setShowToast] = useState(false);
   const [toastTitle, setToastTitle] = useState("");
@@ -181,31 +188,31 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
             <div className={classes.orderdetail}>
               <p>{item.name}</p>
               <p>
-                {item.price} x {item.quantity}
+                {item.price}Ks x {item.quantity}
               </p>
-              <p>{item.price * item.quantity}</p>
+              <p>{item.price * item.quantity}Ks</p>
             </div>
           ))}
           <div className={classes.orderdetail}>
             <p>{quantity}</p>
             <p>x</p>
             <p>{itemName}</p>
-            <p>{price * quantity}</p>
+            <p>{price * quantity}Ks</p>
           </div>
           <hr />
           <div className={classes.total}>
-            <p>SubTotal</p>
-            <p>{0}MMK</p>
+            {/* <p>SubTotal</p>
+            <p>{0}MMK</p> */}
           </div>
           <hr />
           <div className={classes.total}>
             <p>Delivery Fee</p>
-            <p>500MMK</p>
+            <p>0Ks</p>
           </div>
           <hr />
           <div className={classes.total}>
             <b>Total</b>
-            <b>{0}MMK</b>
+            <b>{calculateTotal(cartItems)}MMK</b>
           </div>
           <br />
           <button onClick={placeOrderHandler}> Place Order</button>
