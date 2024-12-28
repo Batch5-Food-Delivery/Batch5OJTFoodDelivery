@@ -45,6 +45,20 @@ const cartSlice = createSlice({
       console.log(state.items);
       saveCartToLocalStorage(state.items);
     },
+    reduceFromCart: (state, action) => {
+      const item = action.payload;
+      const existingItem = state.items.find((i) => i.id === item.id);
+      if (existingItem) {
+        existingItem.quantity -= 1;
+        if (existingItem.quantity <= 0) {
+          state.items = state.items.filter(
+            (item) => item.id !== existingItem.id
+          );
+        }
+      }
+
+      saveCartToLocalStorage(state.items);
+    },
     removeFromCart: (state, action) => {
       const itemId = action.payload;
       state.items = state.items.filter((item) => item.id !== itemId);
@@ -69,6 +83,11 @@ export const cartItemsByRestaurant = (state, restaurantId) => {
   return state.cart.items.filter((item) => item.restaurantId === restaurantId);
 };
 
-export const { addToCart, removeFromCart, clearCart, removeItemsByRestaurant } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  reduceFromCart,
+  clearCart,
+  removeItemsByRestaurant,
+} = cartSlice.actions;
 export default cartSlice.reducer;

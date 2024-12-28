@@ -7,6 +7,7 @@ import FoodDetail from "./FoodDetail";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../cart/cartSlice";
 import EditFoodModal from "./EditFoodModal";
+import DeleteFoodModal from "./DeleteFoodModal";
 
 const Foods = ({
   id,
@@ -54,6 +55,23 @@ const Foods = ({
       restaurantId,
     });
     setShowEdit(true);
+  };
+
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => {
+    setSelectedFood({
+      id,
+      name,
+      picture,
+      discount,
+      category,
+      description,
+      price,
+      available,
+      restaurantId,
+    });
+    setShowDelete(true);
   };
 
   const handleAddToCart = () => {
@@ -121,12 +139,18 @@ const Foods = ({
                 )}
               </div>
 
-              <div className={classes.add_to_card}>
-                <Link to="" className={classes.a} onClick={handleShowEdit}>
-                  <i className="bi bi-bag-fill"></i>
-                </Link>
-              </div>
+              <div className={classes.add_to_card}></div>
             </div>
+            <i
+              onClick={handleShowEdit}
+              style={{ cursor: "pointer", "margin-right": "15px" }}
+              class="fa fa-edit float-end"
+            ></i>
+            <i
+              onClick={handleShowDelete}
+              style={{ cursor: "pointer", "margin-right": "15px" }}
+              class="fa fa-trash float-end"
+            ></i>
           </Card.Body>
         </Card>
       </Col>
@@ -144,6 +168,11 @@ const Foods = ({
         food={selectedFood}
         show={showEdit}
         handleClose={handleCloseEdit}
+      />
+      <DeleteFoodModal
+        food={selectedFood}
+        show={showDelete}
+        handleClose={handleCloseDelete}
       />
     </>
   );

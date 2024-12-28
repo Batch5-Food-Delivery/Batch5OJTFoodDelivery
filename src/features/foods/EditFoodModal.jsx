@@ -20,15 +20,6 @@ const EditFoodModal = ({ show, handleClose, food }) => {
     },
   ] = useEditFoodMutation();
 
-  const [
-    deleteFood,
-    {
-      isSuccess: foodDeleteSuccess,
-      isLoading: foodDeleting,
-      isError: foodDeleteFailed,
-    },
-  ] = useDeleteFoodMutation();
-
   let foodUploadStatus = "";
 
   if (foodUploading) {
@@ -44,22 +35,6 @@ const EditFoodModal = ({ show, handleClose, food }) => {
       <Container variant="success">Food Update Success</Container>
     );
     setTimeout(() => refetch(), 3000);
-    handleClose();
-  }
-
-  if (foodDeleting) {
-    foodUploadStatus = <Container variant="primary">Deleting food</Container>;
-  }
-  if (foodDeleteFailed) {
-    foodUploadStatus = (
-      <Container variant="danger">Food Delete failed</Container>
-    );
-  }
-  if (foodDeleteSuccess) {
-    foodUploadStatus = (
-      <Container variant="success">Food Delete Success</Container>
-    );
-    refetch();
     handleClose();
   }
 
@@ -98,7 +73,6 @@ const EditFoodModal = ({ show, handleClose, food }) => {
         <Modal.Title>Edit Food Item</Modal.Title>
       </Modal.Header>
       <FoodForm onSubmit={onSubmitFood} ogFood={food}></FoodForm>
-      <Button onClick={() => deleteFood(food)}>Delete</Button>
       <Modal.Footer>{foodUploadStatus}</Modal.Footer>
     </Modal>
   );

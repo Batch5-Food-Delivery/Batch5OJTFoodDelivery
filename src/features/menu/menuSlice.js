@@ -89,8 +89,8 @@ export const menuSlice = apiSlice.injectEndpoints({
         url: `food/${food.id}/delete`,
         method: "DELETE",
       }),
-      invalidatesTags: (food) => [
-        { type: "RestaurantMenus", id: food.restaurant.id },
+      invalidatesTags: (result, error, food) => [
+        { type: "RestaurantMenus", id: food.restaurantId },
       ],
     }),
     overrideExisting: false,

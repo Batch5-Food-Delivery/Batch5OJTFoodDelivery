@@ -2,7 +2,13 @@ import React from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
 import classes from "./cart.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, removeFromCart, cartItemsByRestaurant } from "./cartSlice";
+import {
+  clearCart,
+  removeFromCart,
+  cartItemsByRestaurant,
+  reduceFromCart,
+  addToCart,
+} from "./cartSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -81,6 +87,7 @@ const Cart = ({ restaurantId }) => {
                         variant="outline-danger"
                         size="sm"
                         className={classes.button}
+                        onClick={() => dispatch(reduceFromCart(item))}
                       >
                         -
                       </Button>
@@ -88,6 +95,7 @@ const Cart = ({ restaurantId }) => {
                         variant="outline-primary"
                         size="sm"
                         className={classes.button}
+                        onClick={() => dispatch(addToCart(item))}
                       >
                         +
                       </Button>
