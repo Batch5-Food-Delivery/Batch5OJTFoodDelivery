@@ -17,7 +17,7 @@ const AdminLayout = () => {
       <div className={classes.dashboard}>
         <AdminSidebar />
         {loggedIn ? (
-          roles.includes("ADMIN") ? (
+          roles.includes("ROLE_ADMIN") ? (
             <div className={classes.content}>
               <Outlet />
             </div>

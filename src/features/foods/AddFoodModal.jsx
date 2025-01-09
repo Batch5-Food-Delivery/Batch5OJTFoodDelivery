@@ -33,7 +33,7 @@ const MyModal = ({ show, handleClose, menuId, restaurantId }) => {
       <Container variant="success">Food upload Success</Container>
     );
     foodUploadReset();
-    setTimeout(() => refetch(), 3000);
+    setTimeout(() => refetch(), 4000);
     handleClose();
   }
 

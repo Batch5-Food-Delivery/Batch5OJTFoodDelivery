@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getRegisterStatus, register } from "../auth/authSlice";
@@ -11,7 +11,6 @@ const RegisterForm = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const registerStatus = useSelector(getRegisterStatus);
-  const changeState = props.changeState;
   const dispatch = useDispatch();
 
   const onFirstNameInputChange = (e) => {
@@ -132,8 +131,8 @@ const RegisterForm = (props) => {
         )}
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
+      <Button style={{ width: "100%" }} variant="primary" type="submit">
+        Create
       </Button>
     </Form>
   );

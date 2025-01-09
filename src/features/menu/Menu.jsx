@@ -52,6 +52,7 @@ const Menu = ({ menu }) => {
               onClick={() => setShowDeleteModal(true)}
               style={{ cursor: "pointer", "margin-right": "15px" }}
               class="fa fa-trash"
+              hidden={menu.foods.length > 0}
             ></i>
           </>
         )}

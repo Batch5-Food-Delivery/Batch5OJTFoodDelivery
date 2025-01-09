@@ -11,7 +11,7 @@ const DriverForm = () => {
     useApplyDriverMutation();
   let message = <></>;
 
-  if (roles.includes("DRIVER")) {
+  if (roles.includes("ROLE_DRIVER")) {
     message = (
       <Container className={`bg-success ${classes.messagebox}`}>
         Congratulations!! You have become a driver for Dreamland Food Delivery
@@ -71,7 +71,9 @@ const DriverForm = () => {
         <Row>
           <Col sm={10}></Col>
           <Col sm={2}>
-            {!roles.includes("DRIVER") && <Button onClick={() => onSubmit()}>Apply</Button>}
+            {!roles.includes("ROLE_DRIVER") && (
+              <Button onClick={() => onSubmit()}>Apply</Button>
+            )}
           </Col>
         </Row>
       </Container>

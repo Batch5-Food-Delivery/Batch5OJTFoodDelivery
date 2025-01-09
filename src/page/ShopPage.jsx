@@ -10,14 +10,7 @@ const ShopPage = () => {
     <>
       <CarouselComponent />
       <div className={classes.searchContainer}>
-        <form className={classes.searchForm}>
-          <input
-            type="text"
-            className={classes.searchInput}
-            placeholder="Search for food or restaurants"
-          />
-          <button className={classes.searchButton}>Search</button>
-        </form>
+        <form className={classes.searchForm}></form>
       </div>
 
       <RestaurantList></RestaurantList>

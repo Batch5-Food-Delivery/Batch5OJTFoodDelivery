@@ -145,7 +145,7 @@ const FoodForm = ({ onSubmit, ogFood }) => {
             </Form.Group>
             <div className="d-flex justify-content-end mt-3">
               <Button variant="primary" type="submit">
-                Create
+                Upload
               </Button>
             </div>
           </Form>

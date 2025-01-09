@@ -1,8 +1,7 @@
-import { Modal, Container, Button } from "react-bootstrap";
+import { Modal, Container } from "react-bootstrap";
 import {
   useRestaurantMenusQuery,
   useEditFoodMutation,
-  useDeleteFoodMutation,
 } from "../menu/menuSlice";
 import FoodForm from "./FoodForm";
 
@@ -12,11 +11,9 @@ const EditFoodModal = ({ show, handleClose, food }) => {
   const [
     editFood,
     {
-      data: foodData,
       isSuccess: foodUploadSuccess,
       isLoading: foodUploading,
       isError: foodUploadFailed,
-      reset: foodUploadReset,
     },
   ] = useEditFoodMutation();
 
@@ -34,7 +31,7 @@ const EditFoodModal = ({ show, handleClose, food }) => {
     foodUploadStatus = (
       <Container variant="success">Food Update Success</Container>
     );
-    setTimeout(() => refetch(), 3000);
+    setTimeout(() => refetch(), 4000);
     handleClose();
   }
 
@@ -55,7 +52,6 @@ const EditFoodModal = ({ show, handleClose, food }) => {
       image: newFood.foodImage,
     };
     editFood(reqBody);
-    alert(food.id);
   };
 
   return (

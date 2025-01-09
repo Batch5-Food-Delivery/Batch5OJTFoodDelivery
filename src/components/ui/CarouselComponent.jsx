@@ -1,6 +1,6 @@
-import React from 'react'
-import { Carousel } from 'react-bootstrap';
-import classes from'./carousel.module.css'
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import classes from "./carousel.module.css";
 
 const CarouselComponent = () => {
   return (
@@ -19,7 +19,7 @@ const CarouselComponent = () => {
       <Carousel.Item>
         <img
           className={`d-block w-100 ${classes.carouselImage}`}
-          src="/images/food-delivery.jpg"
+          src="/images/BurmeseFoods.jpg"
           alt="Second slide"
         />
         <Carousel.Caption className={classes.carouselItem}>
@@ -28,8 +28,7 @@ const CarouselComponent = () => {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-);
-  
-}
+  );
+};
 
-export default CarouselComponent
+export default CarouselComponent;

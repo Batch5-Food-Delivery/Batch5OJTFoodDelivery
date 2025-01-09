@@ -123,6 +123,7 @@ const Cart = ({ restaurantId }) => {
             variant="primary"
             className="mt-3 w-100"
             onClick={handleCheckout}
+            disabled={cartItems.length < 1}
           >
             Checkout
           </Button>

@@ -11,6 +11,8 @@ import {
   getStatus,
 } from "../../features/foods/foodSlice";
 import classes from "./adminFoodList.module.css";
+import { useEditFoodMutation } from "../../features/menu/menuSlice";
+import EditFoodModal from "../../features/foods/EditFoodModal";
 
 const AdminFoodList = () => {
   const menus = useSelector(getAllMenus);
@@ -18,6 +20,21 @@ const AdminFoodList = () => {
   const error = useSelector(getError);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showEdit, setShowEdit] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState();
+  const handleOpenEdit = (menu) => {
+    const selected = {
+      ...menu,
+      picture: menu.picture
+        ? `http://localhost:8686/food/image/${menu.picture}`
+        : "https://placehold.co/100?text=Food+Item",
+    };
+    setSelectedMenu(selected);
+    setShowEdit(true);
+  };
+  const handleCloseEdit = () => {
+    setShowEdit(false);
+  };
 
   const onDelete = (id) => {
     dispatch(deleteFood(id));
@@ -59,7 +76,7 @@ const AdminFoodList = () => {
         <td>
           <Button
             className={`${classes.button} ${classes.updateButton}`}
-            onClick={() => handleUpdate(menu.id)}
+            onClick={() => handleOpenEdit(menu)}
           >
             <i className="bi bi-pencil"></i>
           </Button>
@@ -89,32 +106,39 @@ const AdminFoodList = () => {
   };
 
   return (
-    <Container className="my-4">
-      <div>
-        <h2 className="mb-4">Admin Food List</h2>
-        <Button
-          variant="primary"
-          onClick={() => {
-            navigate("/admin/create");
-          }}
-        >
-          Create
-        </Button>
-      </div>
-      <div className={classes.tableContainer}>
-        <Table className={classes.table}>
-          <thead className={classes.stickyHeader}>
-            <tr>
-              <th>ID</th>
-              <th>Picture</th>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{content}</tbody>
-        </Table>
-      </div>
-    </Container>
+    <>
+      <Container className="my-4">
+        <div>
+          <h2 className="mb-4">Admin Food List</h2>
+          <Button
+            variant="primary"
+            onClick={() => {
+              navigate("/admin/create");
+            }}
+          >
+            Create
+          </Button>
+        </div>
+        <div className={classes.tableContainer}>
+          <Table className={classes.table}>
+            <thead className={classes.stickyHeader}>
+              <tr>
+                <th>ID</th>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>{content}</tbody>
+          </Table>
+        </div>
+      </Container>
+      <EditFoodModal
+        show={showEdit}
+        food={selectedMenu}
+        handleClose={handleCloseEdit}
+      />
+    </>
   );
 };
 

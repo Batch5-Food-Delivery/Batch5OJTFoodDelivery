@@ -103,9 +103,7 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
     {
       isSuccess: createOrderSuccess,
       isError: createOrderError,
-      isLoading: orderCreating,
       error: orderError,
-      data: orderData,
     },
   ] = useCreateOrderMutation();
 
@@ -125,7 +123,6 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
       );
       setToastBg("");
       dispatch(removeItemsByRestaurant(parseInt(restaurantId)));
-      alert("This is dispatched");
       navigate(`/restaurant/${restaurantId}`);
     }
   }, [createOrderError, createOrderSuccess, orderError, dispatch]);
@@ -146,6 +143,7 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
       <div className={classes.placeorder}>
         <form className={classes.placeorderleft} onSubmit={onAddressSubmit}>
           <p className={classes.title}>Delivery Information</p>
+          <p className={classes.title}>Please choose an address</p>
           <Row xs={1} md={2} className="g-4">
             {addressCardDataList?.map((address) => (
               <AddressCard
@@ -193,12 +191,12 @@ const OrderPage = ({ restaurantName, itemName, quantity, price }) => {
               <p>{item.price * item.quantity}Ks</p>
             </div>
           ))}
-          <div className={classes.orderdetail}>
+          {/*<div className={classes.orderdetail}>
             <p>{quantity}</p>
             <p>x</p>
             <p>{itemName}</p>
             <p>{price * quantity}Ks</p>
-          </div>
+          </div> */}
           <hr />
           <div className={classes.total}>
             {/* <p>SubTotal</p>

@@ -211,9 +211,14 @@ const Header = () => {
                   </Nav.Link>
                 </OverlayTrigger>
               )}
-              {roles.includes("DRIVER") && (
+              {roles.includes("ROLE_DRIVER") && (
                 <Nav.Link as={Link} to="/driver" className="text-warning">
                   <i class="bi bi-car-front"></i>
+                </Nav.Link>
+              )}
+              {roles.includes("ROLE_ADMIN") && (
+                <Nav.Link as={Link} to="/admin/foods" className="text-warning">
+                  <i>Admin</i>
                 </Nav.Link>
               )}
             </Nav>

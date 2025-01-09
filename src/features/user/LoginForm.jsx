@@ -77,7 +77,7 @@ const LoginForm = (props) => {
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
       <Button style={{ width: "100%" }} variant="primary" type="submit">
-        Submit
+        Login
       </Button>
     </Form>
   );
