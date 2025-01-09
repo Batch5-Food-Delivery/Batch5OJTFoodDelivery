@@ -1,0 +1,21 @@
+.carouselContainer {
+    margin-bottom: 2rem;
+  }
+  
+  .carouselImage {
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  .carouselItem h3 {
+    font-size: 2.5rem;
+    background: none;
+    color: #FFFFFF;
+  }
+  
+  .carouselItem p {
+    font-size: 1.2rem;
+    background: none;
+    color: #FFFFFF;
+  }
+  

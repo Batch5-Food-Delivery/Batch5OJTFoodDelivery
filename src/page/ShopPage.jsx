@@ -1,16 +1,21 @@
-import React from 'react'
-import RegionList from '../features/region/RegionList'
-import RestaurantList from '../features/restaurant/RestaurantList'
+import React from "react";
+import RegionList from "../features/region/RegionList";
+import RestaurantList from "../features/restaurant/RestaurantList";
+import classes from "./shopPage.module.css";
+import { Card } from "react-bootstrap";
+import CarouselComponent from "../components/ui/CarouselComponent";
 
 const ShopPage = () => {
   return (
     <>
-       
-        <RegionList></RegionList>
-        <RestaurantList></RestaurantList>
-        
-    </>
-  )
-}
+      <CarouselComponent />
+      <div className={classes.searchContainer}>
+        <form className={classes.searchForm}></form>
+      </div>
 
-export default ShopPage
+      <RestaurantList></RestaurantList>
+    </>
+  );
+};
+
+export default ShopPage;

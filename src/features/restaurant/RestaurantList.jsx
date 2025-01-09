@@ -43,6 +43,8 @@ const RestaurantList = () => {
      <h4 className='text-dark text-center mt-5'> Browse Food From Hot Restaurants </h4>
      <Row className='w-100' >
      {content}
+     {console.log(content)}
+     
      </Row>
    </Container>
  </Container>

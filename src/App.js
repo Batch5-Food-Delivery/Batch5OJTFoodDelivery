@@ -10,34 +10,63 @@ import Update from "./features/restaurant/Update";
 import RegionRecords from "./features/region/RegionRecords";
 import CreateRegion from "./features/region/Create";
 import UpdateRegion from "./features/region/UpdateRegion";
-
+import DriverPage from "./page/DriverPage";
 import AddFoods from "./features/foods/AddFoods";
 import FoodDetail from "./features/foods/FoodDetail";
 import UpdateFoods from "./features/foods/UpdateFoods";
+import AdminFoodList from "./components/adminLayouts/AdminFoodList";
+import OrderPage from "./page/OrderPage";
+import RestaurantOrdersPage from "./page/RestaurantOrdersPage";
+import RestaurantList from "./features/restaurant/RestaurantList";
+import AdditionalFormsPage from "./page/AdditionalFormsPage";
+import AdminManageRes from "./components/adminLayouts/AdminManageRes";
 
 function App() {
   return (
     <Routes>
+      {/* Public routes */}
       <Route path="/" element={<Layout />}>
         <Route index element={<ShopPage />} />
         <Route path="login" element={<LoginPage />} />
-        <Route path="menu" element={<MenuCartLayout />} />
+        <Route path="restaurant/:restaurantId" element={<MenuCartLayout />} />
+        <Route path="driver" element={<DriverPage />} />
+        <Route
+          path="restaurant/:restaurantId/orderCheckout"
+          element={<OrderPage />}
+        />
+        <Route path="additionalForms" element={<AdditionalFormsPage />} />
+        <Route
+          path="restaurant/:restaurantId/orders"
+          element={<RestaurantOrdersPage />}
+        />
+        {/* Admin food list for public view */}
+        <Route path="foods" element={<AdminFoodList />} />
+        <Route path="RestaurantList" element={<RestaurantList />} />
       </Route>
+
+      {/* Admin routes */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="restaurant">
           <Route index element={<RestaurantRecords />} />
           <Route path="create" element={<Create />} />
           <Route path="update/:restaurantId" element={<Update />} />
         </Route>
+
         <Route path="region">
           <Route index element={<RegionRecords />} />
           <Route path="create" element={<CreateRegion />} />
           <Route path="update/:regionId" element={<UpdateRegion />} />
         </Route>
-        <Route path="/menu/create" element={<AddFoods />} />
-        <Route path="/menu-detail/:menuId" element={<FoodDetail />} />
-        <Route path="/menu-update" element={<UpdateFoods />} />
+
+        {/* Menu management */}
+        <Route path="foods" element={<AdminFoodList />} />
+        <Route path="AdminRestaurant" element={<AdminManageRes />} />
+        <Route path="create" element={<AddFoods />} />
+        <Route path="menu-detail/:menuId" element={<FoodDetail />} />
+        <Route path="menu-update/:menuId" element={<UpdateFoods />} />
       </Route>
+
+      {/* Driver route */}
     </Routes>
   );
 }

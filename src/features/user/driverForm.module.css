@@ -1,0 +1,35 @@
+.banner {
+  min-height: 150px;
+  background-image: linear-gradient(to bottom right, blue, yellow);
+  padding-top: 2rem;
+}
+
+.banner h2 {
+  text-shadow: 2px 2px black;
+  color: white;
+  font-family: Roboto;
+}
+
+.job_description {
+  background-color: rgba(255, 255, 255, 0.85);
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.job_requirements {
+  padding-left: 2%;
+}
+
+.job_requirements li {
+  list-style-type: circle;
+  padding: 0;
+  margin-left: 2rem;
+  margin-bottom: 0;
+}
+
+.messagebox {
+  color: white;
+  margin-top: 10px;
+  padding: 3rem;
+  border-radius: 2rem;
+}
