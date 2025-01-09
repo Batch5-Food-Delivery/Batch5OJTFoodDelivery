@@ -13,8 +13,9 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
+
     </Container>
   );
 };
 
-export default Layout;
+export default Layout
