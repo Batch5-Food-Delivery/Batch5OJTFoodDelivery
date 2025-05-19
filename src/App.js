@@ -21,6 +21,8 @@ import RestaurantList from "./features/restaurant/RestaurantList";
 import AdditionalFormsPage from "./page/AdditionalFormsPage";
 import AdminManageRes from "./components/adminLayouts/AdminManageRes";
 
+
+// Disable CI commit
 function App() {
   return (
     <Routes>
